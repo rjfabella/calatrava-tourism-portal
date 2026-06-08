@@ -570,7 +570,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <h4>Plan Your Visit</h4>
       <ul>
         <li><a href="getting-here.html">Getting Here</a></li>
-        <li><a href="#accommodation">Accommodation</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
         <li><a href="#map">Services Map</a></li>
         <li><a href="#activities">Tour Operators</a></li>
       </ul>
@@ -587,6 +587,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   <div class="footer-bottom">
     <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
     <p>Republic of the Philippines</p>
+    <a href="admin.html" style="color:rgba(255,255,255,.12);font-size:10px;letter-spacing:.08em;text-decoration:none;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.12)'">Staff Portal</a>
   </div>
 </footer>
 
@@ -643,77 +644,112 @@ function buildMap() {
   mapOffline.style.display = 'none';
   gMapEl.style.display = 'block';
 
-  const map = new google.maps.Map(gMapEl, {
-    center: {lat: 12.574, lng: 122.187},
-    zoom: 13,
-    mapTypeControl: false,
+  // ── MAP INIT ──
+  // If a Cloud-based mapId is configured in contact.json, it controls styling
+  // via Google Cloud Console → Map Styles. Otherwise falls back to inline styles.
+  const mapConfig = {
+    center: {lat: window._mapCenter?.lat || 12.574, lng: window._mapCenter?.lng || 122.187},
+    zoom:   window._mapCenter?.zoom || 13,
+    mapTypeControl:   false,
     streetViewControl: false,
     fullscreenControl: true,
-    styles: [
+  };
+
+  if (window._mapId) {
+    // Cloud-based styling: edit visually at console.cloud.google.com → Map Styles
+    mapConfig.mapId = window._mapId;
+  } else {
+    // Inline fallback styles (used when no mapId is configured)
+    mapConfig.styles = [
       {featureType:'water',    elementType:'geometry',stylers:[{color:'#1A5C7A'}]},
       {featureType:'landscape',elementType:'geometry',stylers:[{color:'#F0E9DD'}]},
       {featureType:'road',     elementType:'geometry',stylers:[{color:'#FFFFFF'}]},
       {featureType:'poi.park', elementType:'geometry',stylers:[{color:'#C8E6C9'}]},
       {featureType:'all',      elementType:'labels.text.fill',stylers:[{color:'#0C2233'}]}
-    ]
-  });
+    ];
+  }
 
+  const map = new google.maps.Map(gMapEl, mapConfig);
   const infoWindow = new google.maps.InfoWindow();
 
-  // Use destinations data if available, otherwise built-in fallback
+  // ── MARKER DATA ──
   const points = mapDestinations.length ? mapDestinations : [
-    {name:'Tinagong Dagat',  type:'Saltwater Lake',  fee:'₱25',category:'beach',lat:12.595,lng:122.205},
-    {name:'Lapus-Lapus',     type:'Beach',            fee:'₱25',category:'beach',lat:12.592,lng:122.200},
-    {name:'Guindawahan Island',type:'Island',         fee:'₱20',category:'beach',lat:12.598,lng:122.208},
-    {name:'Cove Aurelio',    type:'Beach Resort',     fee:'₱25',category:'beach',lat:12.580,lng:122.195},
-    {name:'Turtle Cove',     type:'Beach Resort',     fee:'On-site',category:'beach',lat:12.578,lng:122.193},
-    {name:'Ngak-Ngak Beach', type:'Beach Resort',     fee:'On-site',category:'beach',lat:12.576,lng:122.191},
-    {name:'Balai Azinan',    type:'Full Beach Resort',fee:'On-site',category:'beach',lat:12.560,lng:122.180},
-    {name:'Tago Falls',      type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.545,lng:122.170},
-    {name:'Cawa-Cawa Falls', type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.548,lng:122.172},
-    {name:'Hidden Falls',    type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.550,lng:122.175},
-    {name:'Caw-i Falls',     type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.555,lng:122.165},
-    {name:'Oray Falls',      type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.558,lng:122.168},
-    {name:'Pangulo Falls',   type:'Waterfall',        fee:'Guide fee',category:'falls',lat:12.535,lng:122.160}
+    {name:'Tinagong Dagat',    type:'Saltwater Lake',   fee:'₱25',     category:'beach',lat:12.595,lng:122.205},
+    {name:'Lapus-Lapus',       type:'Beach',             fee:'₱25',     category:'beach',lat:12.592,lng:122.200},
+    {name:'Guindawahan Island',type:'Island',            fee:'₱20',     category:'beach',lat:12.598,lng:122.208},
+    {name:'Cove Aurelio',      type:'Beach Resort',      fee:'₱25',     category:'beach',lat:12.580,lng:122.195},
+    {name:'Turtle Cove',       type:'Beach Resort',      fee:'On-site', category:'beach',lat:12.578,lng:122.193},
+    {name:'Ngak-Ngak Beach',   type:'Beach Resort',      fee:'On-site', category:'beach',lat:12.576,lng:122.191},
+    {name:'Balai Azinan',      type:'Full Beach Resort', fee:'On-site', category:'resort',lat:12.560,lng:122.180},
+    {name:'Tago Falls',        type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.545,lng:122.170},
+    {name:'Cawa-Cawa Falls',   type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.548,lng:122.172},
+    {name:'Hidden Falls',      type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.550,lng:122.175},
+    {name:'Caw-i Falls',       type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.555,lng:122.165},
+    {name:'Oray Falls',        type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.558,lng:122.168},
+    {name:'Pangulo Falls',     type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.535,lng:122.160}
   ];
 
   const colors = {beach:'#B88A45', falls:'#D4A86A', resort:'#1E8B72'};
 
+  // ── MARKERS ──
+  // Uses AdvancedMarkerElement (requires mapId for Cloud Styling + libraries=marker)
+  // Falls back to legacy Marker if AdvancedMarkerElement isn't available
+  const useAdvanced = !!(window._mapId && google.maps.marker?.AdvancedMarkerElement);
+
   points.forEach(d => {
     if (!d.lat || !d.lng) return;
-    const color = colors[d.category] || colors[d.badge] || '#B88A45';
-    const marker = new google.maps.Marker({
-      position: {lat: +d.lat, lng: +d.lng},
-      map,
-      title: d.name,
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 9,
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: '#FFFFFF',
-        strokeWeight: 2
-      }
-    });
+    const color  = colors[d.category] || colors[d.badge] || '#B88A45';
+    const mapsUrl = `https://www.google.com/maps?q=${d.lat},${d.lng}`;
 
-    marker.addListener('click', () => {
-      const mapsUrl = `https://www.google.com/maps?q=${d.lat},${d.lng}`;
+    const onInfoClick = (anchor) => {
       infoWindow.setContent(`
-        <div style="font-family:'Jost',sans-serif;padding:4px 2px;min-width:160px">
+        <div style="font-family:'Jost',sans-serif;padding:4px 2px;min-width:170px">
           <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B88A45;margin-bottom:3px">${d.type || d.category}</div>
           <div style="font-size:15px;font-weight:500;color:#0C2233;margin-bottom:4px">${d.name}</div>
           <div style="font-size:12px;color:#717B7B;margin-bottom:8px">Brgy. ${d.barangay || ''} &nbsp;·&nbsp; ${d.fee || ''}</div>
           <a href="${mapsUrl}" target="_blank" style="font-size:11px;color:#1A5C7A;text-decoration:none;font-weight:500">Open in Google Maps →</a>
         </div>`);
-      infoWindow.open(map, marker);
-    });
+      infoWindow.open({anchor, map});
+    };
+
+    if (useAdvanced) {
+      // AdvancedMarkerElement with PinElement — styled, accessible, recommended
+      const pin = new google.maps.marker.PinElement({
+        background:  color,
+        borderColor: '#FFFFFF',
+        glyphColor:  '#FFFFFF',
+        scale: 1.1
+      });
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        position: {lat: +d.lat, lng: +d.lng},
+        map,
+        title: d.name,
+        content: pin.element
+      });
+      marker.addListener('click', () => onInfoClick(marker));
+    } else {
+      // Legacy Marker fallback (no mapId set, or marker library not loaded)
+      const marker = new google.maps.Marker({
+        position: {lat: +d.lat, lng: +d.lng},
+        map,
+        title: d.name,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 9,
+          fillColor: color, fillOpacity: 1,
+          strokeColor: '#FFFFFF', strokeWeight: 2
+        }
+      });
+      marker.addListener('click', () => onInfoClick(marker));
+    }
   });
 }
 
 function loadMaps(apiKey) {
   if (!apiKey) return;
   const s = document.createElement('script');
-  s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly`;
+  // libraries=marker loads AdvancedMarkerElement support
+  s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
   s.async = true;
   s.defer = true;
   s.onerror = () => console.warn('Google Maps failed to load — check API key and billing.');
@@ -784,8 +820,8 @@ function renderAccommodation(accommodation) {
   if (!el) return;
   const placeholderGrads = ['linear-gradient(160deg,#1E8B72,#0C2233)','linear-gradient(160deg,#1A5C7A,#0C2233)','linear-gradient(160deg,#2A8B7A,#1A5C7A)'];
   el.innerHTML = accommodation.map((a, i) => {
-    const imgHtml = a.image
-      ? `<img src="${a.image}" alt="${a.name}" class="accom-img" loading="lazy">`
+    const imgHtml = (a.images?.[0] || a.image)
+      ? `<img src="${a.images?.[0] || a.image}" alt="${a.name}" class="accom-img" loading="lazy">`
       : `<div class="accom-ph" style="background:${placeholderGrads[i % 3]}"></div>`;
     return `<div class="accom-card reveal">
       <div class="accom-img-wrap">${imgHtml}</div>
@@ -824,10 +860,11 @@ function renderContactCards(contact) {
 
   if (destinations) {
     mapDestinations = destinations;
-    // If Maps SDK already fired initMap() while waiting for data, build now
     if (mapInitPending) { buildMap(); mapInitPending = false; }
   }
-  if (contact?.mapsApiKey) { window._mapsKey = contact.mapsApiKey; }
+  if (contact?.mapsApiKey)  { window._mapsKey    = contact.mapsApiKey; }
+  if (contact?.mapId)       { window._mapId      = contact.mapId; }
+  if (contact?.mapCenter)   { window._mapCenter  = contact.mapCenter; }
 
   if (contact)      renderEnvNotice(contact);
   if (about)        renderAbout(about);
