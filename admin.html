@@ -172,6 +172,10 @@ textarea{resize:vertical;min-height:80px}
       </div>
     </div>
     <div class="topbar-actions">
+      <button class="btn btn-primary" onclick="exportAll()" title="Download every JSON file at once">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export All
+      </button>
       <a href="index.html" target="_blank" class="btn btn-ghost">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         View Site
@@ -393,19 +397,42 @@ function doLogout() {
 // ══ INIT ══
 async function initApp() {
   const files = ['destinations','activities','accommodation','contact','about','getting-here'];
+  const isArrayFile = f => ['destinations','activities','accommodation'].includes(f);
+  const failed = [];
+
   for (const f of files) {
+    // 1. Prefer the on-disk JSON so newly-pulled content always shows.
+    let disk = null;
     try {
-      // Try fetching from server; fall back to localStorage
+      const res = await fetch('data/' + f + '.json', {cache: 'no-store'});
+      if (res.ok) disk = await res.json();
+    } catch(e) { /* fetch unavailable (e.g. file:// protocol) */ }
+
+    // 2. Fall back to localStorage drafts only when disk is unreachable.
+    let local = null;
+    try {
       const stored = localStorage.getItem('admin_' + f);
-      if (stored) { data[f] = JSON.parse(stored); continue; }
-      const res = await fetch('data/' + f + '.json');
-      if (res.ok) { data[f] = await res.json(); }
-    } catch(e) {
-      console.warn('Could not load', f, e);
-      data[f] = f === 'destinations' ? [] : f === 'activities' ? [] : f === 'accommodation' ? [] : {};
-    }
+      if (stored) local = JSON.parse(stored);
+    } catch(e) { /* corrupt localStorage entry */ }
+
+    if (disk !== null)       data[f] = disk;
+    else if (local !== null) data[f] = local;
+    else { data[f] = isArrayFile(f) ? [] : {}; failed.push(f); }
   }
+
+  if (failed.length) showLoadError(failed);
   renderAll();
+}
+
+function showLoadError(failed) {
+  const isFile = location.protocol === 'file:';
+  const msg = isFile
+    ? `Couldn't load ${failed.join(', ')}.json — browsers block fetch() on file:// URLs. Serve this folder over HTTP (e.g. <code>python -m http.server</code> or <code>npx serve</code>) and open via http://localhost.`
+    : `Couldn't load ${failed.join(', ')}.json from the server. Check that the files exist under <code>data/</code>.`;
+  const banner = document.createElement('div');
+  banner.style.cssText = 'background:#FEF3C7;border-bottom:1px solid #FCD34D;color:#92400E;padding:.75rem 1.25rem;font-size:13px;line-height:1.5';
+  banner.innerHTML = `<strong>Data not loaded.</strong> ${msg}`;
+  document.querySelector('.topbar')?.after(banner);
 }
 
 function renderAll() {
@@ -431,8 +458,8 @@ function updateBadges() {
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelector(`.nav-item[onclick*="'${id}'"]`)?.classList.add('active');
 }
 
 // ══ TOAST ══
@@ -928,7 +955,24 @@ function exportJSON(key) {
   a.href = URL.createObjectURL(blob);
   a.download = key + '.json';
   a.click();
+  URL.revokeObjectURL(a.href);
   toast('Downloaded ' + key + '.json');
+}
+
+function exportAll() {
+  const keys = Object.keys(data);
+  if (!keys.length) { toast('Nothing to export yet','error'); return; }
+  keys.forEach((key, i) => {
+    setTimeout(() => {
+      const blob = new Blob([JSON.stringify(data[key], null, 2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = key + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }, i * 150);
+  });
+  toast('Downloading all ' + keys.length + ' JSON files…','success');
 }
 
 function importJSON(key) {

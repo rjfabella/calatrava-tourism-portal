@@ -1,0 +1,3 @@
+# Local Claude Code settings (per-developer, not shared)
+.claude/settings.local.json
+.claude/tmp-*/
