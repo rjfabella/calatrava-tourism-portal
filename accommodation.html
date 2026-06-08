@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where to Stay — Calatrava, Romblon</title>
+<meta name="description" content="Accommodation in Calatrava, Romblon — beach resorts, farm resorts, and overnight stays.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --sand:#F0E9DD;--cream:#FAF7F2;--gold:#B88A45;--gl:#D4A86A;
+  --white:#fff;--text:#1C1C1C;--muted:#717B7B;--border:rgba(12,34,51,.1);
+  --fd:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --fb:'Jost','Segoe UI',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;background:rgba(250,247,242,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-seal{width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.nav-seal img{width:100%;height:100%;object-fit:cover}
+.nav-name{font-family:var(--fd);font-size:16px;font-weight:500;color:var(--deep);letter-spacing:.03em;line-height:1.15}
+.nav-name small{display:block;font-size:10px;font-family:var(--fb);font-weight:300;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--deep)}
+.nav-cta{background:var(--deep);color:var(--white)!important;padding:8px 20px;border-radius:2px;transition:background .3s}
+.nav-cta:hover{background:var(--gold)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--deep)}
+
+/* ── MOBILE NAV ── */
+.mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+.mob-nav a:hover{color:var(--gl)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close:hover{color:var(--white)}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:9rem 2.5rem 5rem;background:var(--deep);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('assets/destinations/Destinations_CoveAurelio2_web.jpg') center/cover no-repeat;opacity:.18}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.breadcrumb a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .3s}
+.breadcrumb a:hover{color:var(--gl)}
+.breadcrumb span{font-size:11px;color:rgba(255,255,255,.25)}
+.page-hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,6rem);font-weight:300;color:var(--white);line-height:.95;margin-bottom:1rem}
+.page-hero h1 em{font-style:italic;color:var(--gl)}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.6);max-width:520px;line-height:1.8}
+.page-hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.ph-stat{display:flex;flex-direction:column}
+.ph-stat strong{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);line-height:1}
+.ph-stat span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.3rem}
+
+/* ── MAIN SECTION ── */
+.accom-section{padding:3.5rem 2.5rem 5rem}
+.accom-container{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:3px;background:rgba(12,34,51,.05)}
+#accom-list{display:flex;flex-direction:column;gap:3px;background:rgba(12,34,51,.05)}
+
+/* ── RESORT CARD ── */
+.resort-card{background:var(--white);display:grid;grid-template-columns:420px 1fr;min-height:340px;transition:box-shadow .3s}
+.resort-card:hover{box-shadow:0 12px 40px rgba(12,34,51,.12)}
+
+/* Image panel */
+.resort-img-panel{position:relative;overflow:hidden;background:var(--sand)}
+.resort-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.resort-card:hover .resort-img{transform:scale(1.04)}
+.resort-img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;min-height:340px}
+.img-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+.img-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:background .2s;border:none;padding:0}
+.img-dot.active{background:var(--white)}
+.resort-badge{position:absolute;top:1rem;left:1rem;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:4px 12px;border-radius:2px;background:rgba(12,34,51,.75);color:var(--white);backdrop-filter:blur(6px)}
+
+/* Info panel */
+.resort-info{padding:2.25rem 2.5rem;display:flex;flex-direction:column;gap:0}
+.resort-type{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.resort-name{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;color:var(--deep);line-height:1.1;margin-bottom:.4rem}
+.resort-loc{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);margin-bottom:1.1rem}
+.resort-desc{font-size:14px;line-height:1.82;color:var(--muted);margin-bottom:1.25rem;flex:1}
+.resort-amenities{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.5rem}
+.amenity-tag{font-size:10.5px;font-weight:500;letter-spacing:.05em;color:var(--deep);background:var(--sand);padding:4px 12px;border-radius:2px}
+.resort-price{font-size:12px;font-weight:500;color:var(--gold);letter-spacing:.06em;margin-bottom:1.6rem}
+.resort-price span{font-weight:400;color:var(--muted)}
+
+/* Action buttons */
+.resort-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.res-btn{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-decoration:none;padding:9px 16px;border-radius:3px;transition:all .2s;border:1.5px solid transparent;white-space:nowrap}
+.res-btn svg{width:13px;height:13px;flex-shrink:0}
+.res-btn-call{background:var(--deep);color:var(--white);border-color:var(--deep)}
+.res-btn-call:hover{background:var(--ocean);border-color:var(--ocean)}
+.res-btn-fb{background:transparent;color:#1877F2;border-color:#1877F2}
+.res-btn-fb:hover{background:#1877F2;color:var(--white)}
+.res-btn-map{background:transparent;color:var(--ocean);border-color:var(--ocean)}
+.res-btn-map:hover{background:var(--ocean);color:var(--white)}
+
+.resort-booking-note{font-size:12px;color:var(--muted);line-height:1.7;padding-top:1rem;border-top:1px solid var(--border)}
+
+/* ── BOOKING STRIP ── */
+.booking-strip{background:var(--deep);padding:4rem 2.5rem}
+.booking-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+.booking-text h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:.5rem}
+.booking-text h2 em{font-style:italic;color:var(--gl)}
+.booking-text p{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.75}
+.booking-cards{display:flex;gap:.75rem;flex-wrap:wrap}
+.booking-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:1.1rem 1.5rem;text-decoration:none;border-radius:3px;transition:border-color .3s,background .3s;min-width:180px}
+.booking-card:hover{border-color:var(--gl);background:rgba(255,255,255,.1)}
+.bc-label{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem}
+.bc-name{font-size:14px;font-weight:500;color:var(--white);margin-bottom:.2rem}
+.bc-contact{font-size:12px;color:var(--gl)}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
+.f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:1.5rem}
+.f-logos{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.f-logos img{width:36px;height:36px;object-fit:contain;opacity:.7;border-radius:50%}
+.f-social{display:flex;gap:10px}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a:hover{border-color:var(--gold);color:var(--gold)}
+.f-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.f-col ul a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s}
+.f-col ul a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.28)}
+
+/* ── QUICK BAR ── */
+.quick-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--deep);box-shadow:0 -1px 0 rgba(255,255,255,.08)}
+.quick-bar-inner{display:grid;grid-template-columns:1fr 1fr}
+.quick-bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--white);transition:background .2s}
+.quick-bar a:first-child{background:var(--ocean);border-right:1px solid rgba(255,255,255,.1)}
+.quick-bar a:first-child:hover{background:var(--teal)}
+.q-ico{width:15px;height:15px;flex-shrink:0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .resort-card{grid-template-columns:340px 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .f-brand{grid-column:1/-1}
+  .booking-inner{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .quick-bar{display:block}
+  body{padding-bottom:54px}
+  .resort-card{grid-template-columns:1fr;min-height:auto}
+  .resort-img-panel{height:260px}
+  .resort-img-ph{min-height:260px}
+  .accom-section{padding:2.5rem 1.5rem 4rem}
+  .page-hero{padding:7rem 1.5rem 3.5rem}
+  .booking-strip{padding:3rem 1.5rem}
+}
+@media(max-width:580px){
+  .footer-grid{grid-template-columns:1fr}
+  .resort-info{padding:1.5rem}
+  .booking-cards{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-seal">
+      <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="nav-name">Calatrava<small>Romblon, Philippines</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="accommodation.html" class="active">Stay</a></li>
+    <li><a href="index.html#map">Map</a></li>
+    <li><a href="getting-here.html">Getting Here</a></li>
+    <li><a href="tel:09193350314" class="nav-cta">Call Tourism</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">&times;</button>
+  <a href="destinations.html" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
+  <a href="index.html#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
+  <a href="accommodation.html" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="index.html#map" onclick="document.getElementById('mobNav').classList.remove('open')">Map</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
+</nav>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="accommodation.html">Stay</a>
+    </nav>
+    <h1>Where to <em>Stay</em></h1>
+    <p>Beach resorts, farm retreats, and overnight stays across Calatrava's barangays — from beachfront cottages to hillside farm escapes.</p>
+    <div class="page-hero-stats">
+      <div class="ph-stat"><strong id="stat-resorts">3</strong><span>Resorts</span></div>
+      <div class="ph-stat"><strong>3</strong><span>Barangays</span></div>
+      <div class="ph-stat"><strong>₱20</strong><span>Env. Fee</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- RESORT LISTING -->
+<section class="accom-section">
+  <div id="accom-list">
+    <!-- rendered from data/accommodation.json -->
+  </div>
+</section>
+
+<!-- BOOKING STRIP -->
+<section class="booking-strip">
+  <div class="booking-inner">
+    <div class="booking-text reveal">
+      <h2>Need help <em>booking your stay?</em></h2>
+      <p>The Tourism Council can assist with availability, rates, and directions to any resort in Calatrava.</p>
+    </div>
+    <div class="booking-cards reveal">
+      <a href="tel:09193350314" class="booking-card">
+        <div class="bc-label">Tourism Council</div>
+        <div class="bc-name">Calatrava, Romblon</div>
+        <div class="bc-contact">0919 335 0314</div>
+      </a>
+      <a href="tel:09399154193" class="booking-card">
+        <div class="bc-label">Tour Operator</div>
+        <div class="bc-name">Sinagtala Tours</div>
+        <div class="bc-contact">0939 915 4193</div>
+      </a>
+      <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" class="booking-card">
+        <div class="bc-label">Facebook</div>
+        <div class="bc-name">Calatrava Tourism</div>
+        <div class="bc-contact">Message us</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="f-logos">
+        <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal">
+        <img src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Seal">
+      </div>
+      <h3>Calatrava, Romblon</h3>
+      <p>Official tourism portal of the Municipality of Calatrava, Province of Romblon, Philippines. Managed by the Calatrava Tourism Council.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="destinations.html">All Destinations</a></li>
+        <li><a href="destinations.html#group-talisay">Brgy. Talisay</a></li>
+        <li><a href="destinations.html#group-linao">Brgy. Linao</a></li>
+        <li><a href="destinations.html#group-pagsangahan">Brgy. Pagsangahan</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Plan Your Visit</h4>
+      <ul>
+        <li><a href="getting-here.html">Getting Here</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="index.html#map">Services Map</a></li>
+        <li><a href="index.html#activities">Tour Operators</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09193350314">0919 335 0314</a></li>
+        <li><a href="tel:09399154193">0939 915 4193</a></li>
+        <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
+    <p>Republic of the Philippines</p>
+  </div>
+</footer>
+
+<!-- MOBILE QUICK BAR -->
+<div class="quick-bar">
+  <div class="quick-bar-inner">
+    <a href="tel:09193350314">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Tourism Office
+    </a>
+    <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook Page
+    </a>
+  </div>
+</div>
+
+<script>
+// ── INLINE FALLBACK ──
+const ACCOM_FALLBACK = [{"id":"cove-aurelio","name":"Cove Aurelio","type":"Beach Resort","barangay":"Linao","address":"Brgy. Linao, Calatrava, Romblon","description":"A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.","amenities":["Cottages","Paluto Service","Swimming","Rock Formations","Day Use","Picnic Area"],"priceRange":"₱25 entrance · ₱200+ cottage rental","images":["assets/destinations/Destinations_CoveAurelio1_web.jpg","assets/destinations/Destinations_CoveAurelio2_web.jpg","assets/destinations/Destinations_CoveAurelio3_web.jpg","assets/destinations/Destinations_CoveAurelio4_web.jpg"],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.580,"lng":122.195,"bookingNote":"Contact the Tourism Council to arrange visits and cottage reservations."},{"id":"balai-azinan","name":"Balai Azinan","type":"Full-Facility Beach Resort","barangay":"Balogo","address":"Brgy. Balogo, Calatrava, Romblon","description":"The largest resort in Calatrava, Balai Azinan offers a complete beach experience. Features a swimming pool, beachfront cottages, and fully equipped function rooms — ideal for group events, family reunions, and overnight stays. The resort's wide beachfront is perfect for both relaxation and celebrations.","amenities":["Swimming Pool","Beach Cottages","Function Rooms","Overnight Stay","Events Venue","Beachfront","Day Use"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.560,"lng":122.180,"bookingNote":"Contact the Tourism Council for current rates and availability."},{"id":"bulawan-farm-resort","name":"Bulawan Farm Resort","type":"Farm Resort","barangay":"Pagsangahan","address":"Brgy. Pagsangahan, Calatrava, Romblon","description":"A nature-immersed farm resort tucked in the hills of Pagsangahan. Bulawan offers a peaceful escape from the coast, surrounded by lush farm landscapes. Perfect for visitors seeking a quieter, countryside experience alongside Calatrava's natural scenery.","amenities":["Farm Setting","Nature Views","Accommodation","Peaceful Environment"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.548,"lng":122.170,"bookingNote":"Contact the Tourism Council for directions and current rates."}];
+
+// ── REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i*100); io.unobserve(e.target); }
+  });
+},{threshold:.08});
+function observeReveal(){ document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el)); }
+
+// ── PLACEHOLDER ──
+function makePlaceholder(resort) {
+  const isFarm = resort.type.toLowerCase().includes('farm');
+  const bg1 = isFarm ? '#1E8B72' : '#1A5C7A';
+  const bg2 = isFarm ? '#0C4A30' : '#0C2233';
+  const icon = isFarm
+    ? `<path d="M12 3 L20 9 L20 21 L4 21 L4 9 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+       <rect x="9" y="14" width="6" height="7" rx="0.5" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+       <path d="M7 9 Q12 4 17 9" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+       <circle cx="8" cy="17" r="2" fill="rgba(255,255,255,0.3)"/>
+       <circle cx="16" cy="17" r="2" fill="rgba(255,255,255,0.3)"/>`
+    : `<path d="M4 16 Q7 12 10 16 Q13 20 16 16 Q19 12 22 16" stroke="rgba(255,255,255,0.7)" stroke-width="2" fill="none" stroke-linecap="round"/>
+       <path d="M4 20 Q7 16 10 20 Q13 24 16 20 Q19 16 22 20" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+       <path d="M12 3 L20 9 L20 15 L4 15 L4 9 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+       <rect x="10" y="10" width="4" height="5" rx="0.5" fill="rgba(255,255,255,0.25)"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 420 340" preserveAspectRatio="xMidYMid slice">
+    <defs><linearGradient id="bg-${resort.id}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:${bg1}"/>
+      <stop offset="100%" style="stop-color:${bg2}"/>
+    </linearGradient></defs>
+    <rect width="420" height="340" fill="url(#bg-${resort.id})"/>
+    <g transform="translate(198,134)">${icon}</g>
+    <text x="210" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="rgba(255,255,255,0.85)">${resort.name}</text>
+    <text x="210" y="262" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="rgba(255,255,255,0.4)" letter-spacing="2">PHOTO COMING SOON</text>
+  </svg>`;
+}
+
+// ── CARD RENDERER ──
+const locSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const callSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+const fbSvg = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`;
+const mapSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`;
+
+function renderCard(r, idx) {
+  const hasImgs = r.images && r.images.length > 0;
+  const imgId = 'ri-' + r.id;
+  const galleryData = hasImgs ? JSON.stringify(r.images).replace(/'/g,"&#39;") : '[]';
+
+  const imgPanel = hasImgs
+    ? `<div class="resort-img-panel">
+        <img src="${r.images[0]}" alt="${r.name}" class="resort-img" id="${imgId}" data-gallery='${galleryData}' loading="lazy">
+        <span class="resort-badge">${r.type}</span>
+        ${r.images.length > 1 ? `<div class="img-dots">${r.images.map((_,i)=>`<button class="img-dot${i===0?' active':''}" onclick="switchImg('${imgId}',${i},this)" aria-label="Image ${i+1}"></button>`).join('')}</div>` : ''}
+      </div>`
+    : `<div class="resort-img-panel">
+        <div class="resort-img-ph">${makePlaceholder(r)}</div>
+        <span class="resort-badge">${r.type}</span>
+      </div>`;
+
+  const amenities = (r.amenities||[]).map(a=>`<span class="amenity-tag">${a}</span>`).join('');
+  const mapUrl = r.lat && r.lng ? `https://www.google.com/maps?q=${r.lat},${r.lng}` : '#';
+  const phoneHref = r.phone ? 'tel:' + r.phone.replace(/\s/g,'') : '#';
+
+  return `<div class="resort-card reveal" id="${r.id}">
+    ${imgPanel}
+    <div class="resort-info">
+      <div class="resort-type">${r.type}</div>
+      <div class="resort-name">${r.name}</div>
+      <div class="resort-loc">${locSvg} ${r.address || 'Brgy. ' + r.barangay + ', Calatrava, Romblon'}</div>
+      <p class="resort-desc">${r.description}</p>
+      ${amenities ? `<div class="resort-amenities">${amenities}</div>` : ''}
+      <div class="resort-price">${r.priceRange}<span> — day use &amp; overnight</span></div>
+      <div class="resort-actions">
+        ${r.phone ? `<a href="${phoneHref}" class="res-btn res-btn-call">${callSvg} Call: ${r.phone}</a>` : ''}
+        ${r.facebook ? `<a href="${r.facebook}" target="_blank" rel="noopener" class="res-btn res-btn-fb">${fbSvg} ${r.facebookLabel || 'Facebook'}</a>` : ''}
+        <a href="${mapUrl}" target="_blank" rel="noopener" class="res-btn res-btn-map">${mapSvg} View on Map</a>
+      </div>
+      ${r.bookingNote ? `<div class="resort-booking-note">${r.bookingNote}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+// ── GALLERY ──
+function switchImg(imgId, idx, dot) {
+  const img = document.getElementById(imgId);
+  if (!img || img.tagName !== 'IMG') return;
+  const gallery = JSON.parse(img.dataset.gallery||'[]');
+  if (gallery[idx]) img.src = gallery[idx];
+  dot.parentElement.querySelectorAll('.img-dot').forEach(d=>d.classList.remove('active'));
+  dot.classList.add('active');
+}
+
+// ── INIT ──
+(async function init() {
+  let data = null;
+  try {
+    const res = await fetch('data/accommodation.json');
+    if (res.ok) data = await res.json();
+  } catch(_){}
+  if (!data || !data.length) data = ACCOM_FALLBACK;
+
+  document.getElementById('accom-list').innerHTML = data.map(renderCard).join('');
+  const statEl = document.getElementById('stat-resorts');
+  if (statEl) statEl.textContent = data.length;
+  observeReveal();
+})();
+</script>
+</body>
+</html>

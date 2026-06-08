@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Calatrava Tourism Portal</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --gold:#B88A45;--cream:#FAF7F2;--sand:#F0E9DD;
+  --white:#fff;--muted:#6B7280;--border:#E5E7EB;
+  --danger:#DC2626;--success:#16A34A;--warn:#D97706;
+  --bg:#F3F4F6;--surface:#fff;
+  --fd:'Georgia',serif;--fb:'system-ui',sans-serif;
+}
+body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min-height:100vh}
+
+/* ── AUTH SCREEN ── */
+#authScreen{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:999}
+.auth-box{background:var(--white);padding:2.5rem;border-radius:8px;width:340px}
+.auth-box h1{font-family:var(--fd);font-size:1.6rem;color:var(--deep);margin-bottom:.25rem}
+.auth-box p{font-size:12px;color:var(--muted);margin-bottom:1.75rem}
+.auth-box input{width:100%;border:1px solid var(--border);padding:.6rem .85rem;border-radius:4px;font-size:14px;margin-bottom:1rem;outline:none;transition:border-color .2s}
+.auth-box input:focus{border-color:var(--ocean)}
+.auth-box button{width:100%;background:var(--deep);color:#fff;border:none;padding:.7rem;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s}
+.auth-box button:hover{background:var(--ocean)}
+.auth-error{font-size:12px;color:var(--danger);margin-top:.5rem;display:none}
+
+/* ── LAYOUT ── */
+#app{display:none;min-height:100vh}
+.topbar{background:var(--deep);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:90}
+.topbar-brand{display:flex;align-items:center;gap:.75rem}
+.topbar-brand span{font-family:var(--fd);font-size:1.1rem;color:var(--white)}
+.topbar-brand small{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block}
+.topbar-actions{display:flex;align-items:center;gap:.75rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:4px;font-size:12px;font-weight:500;border:none;cursor:pointer;transition:all .2s;letter-spacing:.03em;text-decoration:none}
+.btn-sm{padding:.3rem .65rem;font-size:11px}
+.btn-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.btn-ghost:hover{background:rgba(255,255,255,.2)}
+.btn-primary{background:var(--gold);color:var(--white)}
+.btn-primary:hover{background:#a07a3a}
+.btn-danger{background:var(--danger);color:var(--white)}
+.btn-danger:hover{background:#b91c1c}
+.btn-success{background:var(--success);color:var(--white)}
+.btn-success:hover{background:#15803d}
+.btn-outline{background:transparent;color:var(--deep);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--deep)}
+
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 52px)}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--white);border-right:1px solid var(--border);padding:1.25rem 0}
+.sidebar-section{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1.25rem .4rem;margin-top:.5rem}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.25rem;font-size:13px;color:#374151;cursor:pointer;transition:background .15s;border-left:3px solid transparent}
+.nav-item:hover{background:var(--bg)}
+.nav-item.active{background:#EFF6FF;color:var(--ocean);border-left-color:var(--ocean);font-weight:500}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6}
+.nav-item.active svg{opacity:1}
+.nav-badge{margin-left:auto;font-size:10px;background:var(--sand);color:var(--muted);padding:1px 7px;border-radius:10px;font-weight:400}
+.nav-item.active .nav-badge{background:var(--ocean);color:var(--white)}
+
+/* ── MAIN CONTENT ── */
+.main{padding:1.75rem;overflow-y:auto}
+.page{display:none}
+.page.active{display:block}
+
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.page-header h2{font-size:1.25rem;font-weight:600;color:var(--deep)}
+.page-header p{font-size:13px;color:var(--muted);margin-top:.2rem}
+.page-header-actions{display:flex;gap:.5rem;flex-shrink:0}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--deep);color:#fff;padding:.65rem 1.1rem;border-radius:6px;font-size:13px;z-index:999;display:none;gap:.5rem;align-items:center}
+#toast.show{display:flex}
+#toast.error{background:var(--danger)}
+#toast.success{background:var(--success)}
+
+/* ── CARDS / TABLE ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.card-header h3{font-size:.9rem;font-weight:600;color:var(--deep)}
+.card-body{padding:1.25rem}
+
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .85rem;text-align:left;background:#F9FAFB;border-bottom:1px solid var(--border)}
+.data-table td{padding:.7rem .85rem;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:#FAFAFA}
+.td-img{width:44px;height:36px;object-fit:cover;border-radius:3px;background:var(--sand)}
+.td-img-ph{width:44px;height:36px;background:linear-gradient(135deg,var(--sand),#ddd);border-radius:3px;flex-shrink:0;display:inline-block}
+.badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.badge-beach{background:#DBEAFE;color:#1E40AF}
+.badge-falls{background:#D1FAE5;color:#065F46}
+.badge-resort{background:#FEF3C7;color:#92400E}
+.badge-yes{background:#D1FAE5;color:#065F46}
+.badge-no{background:#F3F4F6;color:var(--muted)}
+
+/* ── MODAL ── */
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+#modal.open{display:flex}
+.modal-box{background:var(--white);border-radius:8px;width:100%;max-width:640px;max-height:90vh;display:flex;flex-direction:column;margin:auto}
+.modal-head{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-head h3{font-size:1rem;font-weight:600;color:var(--deep)}
+.modal-close{background:none;border:none;font-size:1.4rem;color:var(--muted);cursor:pointer;line-height:1;padding:.1rem .3rem}
+.modal-body{padding:1.5rem;overflow-y:auto}
+.modal-foot{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem;flex-shrink:0}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-grid.single{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:.3rem}
+.form-group.full{grid-column:1/-1}
+label{font-size:12px;font-weight:500;color:#374151}
+input,select,textarea{font-family:var(--fb);font-size:13px;border:1px solid var(--border);border-radius:4px;padding:.5rem .75rem;width:100%;outline:none;transition:border-color .2s;background:var(--white)}
+input:focus,select:focus,textarea:focus{border-color:var(--ocean)}
+textarea{resize:vertical;min-height:80px}
+.hint{font-size:11px;color:var(--muted)}
+.form-check{display:flex;align-items:center;gap:.5rem}
+.form-check input{width:auto}
+.img-preview{width:80px;height:60px;object-fit:cover;border-radius:3px;border:1px solid var(--border);margin-top:.5rem;display:none}
+.tag-list{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.tag-item{font-size:11px;background:var(--sand);padding:2px 8px;border-radius:3px;display:flex;align-items:center;gap:.3rem}
+.tag-item button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:12px;line-height:1;padding:0}
+
+/* ── IMPORT / EXPORT SECTION ── */
+.io-strip{background:var(--deep);border-radius:6px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.io-strip p{font-size:12.5px;color:rgba(255,255,255,.7)}
+.io-strip strong{color:var(--white)}
+.io-strip-actions{display:flex;gap:.5rem}
+
+/* ── STATS PAGE ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.25rem}
+.stat-card-num{font-family:var(--fd);font-size:2rem;color:var(--deep);margin-bottom:.2rem}
+.stat-card-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat-card-input{margin-top:.75rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="authScreen">
+  <div class="auth-box">
+    <h1>Admin Portal</h1>
+    <p>Calatrava, Romblon Tourism — Content Management</p>
+    <input type="password" id="pwInput" placeholder="Enter admin password" autocomplete="current-password">
+    <button onclick="doLogin()">Sign In</button>
+    <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- APP -->
+<div id="app">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <div>
+        <span>Calatrava Admin</span>
+        <small>Content Management</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="index.html" target="_blank" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Site
+      </a>
+      <button class="btn btn-ghost" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">Content</div>
+      <div class="nav-item active" onclick="showPage('destinations')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        Destinations
+        <span class="nav-badge" id="badge-destinations">13</span>
+      </div>
+      <div class="nav-item" onclick="showPage('activities')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Activities
+        <span class="nav-badge" id="badge-activities">3</span>
+      </div>
+      <div class="nav-item" onclick="showPage('accommodation')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Accommodation
+        <span class="nav-badge" id="badge-accommodation">3</span>
+      </div>
+      <div class="nav-item" onclick="showPage('getting-here')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.7 5.9L2.3 7.3c-.4.4-.2 1 .3 1.3L10 12l-2 3H5l-1 1 3 2 2 3 1-1v-3l3-2 3.5 7.3c.3.5.9.7 1.3.3l1.4-1.4c.5-.3.8-.7.6-1.2z"/></svg>
+        Getting Here
+      </div>
+      <div class="nav-item" onclick="showPage('about')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        About & Stats
+      </div>
+      <div class="nav-item" onclick="showPage('contact')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact Info
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ══ DESTINATIONS ══ -->
+      <div class="page active" id="page-destinations">
+        <div class="page-header">
+          <div>
+            <h2>Destinations</h2>
+            <p>Manage all 13 destinations across Calatrava's barangays.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('destinations')">↑ Import JSON</button>
+            <button class="btn btn-outline btn-sm" onclick="exportJSON('destinations')">↓ Export JSON</button>
+            <button class="btn btn-primary" onclick="openDestModal(null)">+ Add Destination</button>
+          </div>
+        </div>
+        <div class="io-strip">
+          <p><strong>How it works:</strong> Edit here → Export JSON → replace <code>data/destinations.json</code> on your server.</p>
+          <div class="io-strip-actions">
+            <button class="btn btn-success btn-sm" onclick="exportJSON('destinations')">↓ Download destinations.json</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>All Destinations</h3>
+            <div style="display:flex;gap:.5rem;align-items:center">
+              <select id="destFilter" onchange="renderDestTable()" style="width:auto;padding:.3rem .65rem;font-size:12px">
+                <option value="all">All categories</option>
+                <option value="beach">Beach / Island</option>
+                <option value="falls">Waterfalls</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table" id="destTable">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Barangay</th>
+                  <th>Fee</th>
+                  <th>Featured</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="destBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ACTIVITIES ══ -->
+      <div class="page" id="page-activities">
+        <div class="page-header">
+          <div>
+            <h2>Activities</h2>
+            <p>The three experience cards shown on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('activities')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('activities')">↓ Download activities.json</button>
+            <button class="btn btn-primary" onclick="openActivityModal(null)">+ Add Activity</button>
+          </div>
+        </div>
+        <div id="activitiesList"></div>
+      </div>
+
+      <!-- ══ ACCOMMODATION ══ -->
+      <div class="page" id="page-accommodation">
+        <div class="page-header">
+          <div>
+            <h2>Accommodation</h2>
+            <p>Featured resorts and stays shown on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('accommodation')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('accommodation')">↓ Download accommodation.json</button>
+            <button class="btn btn-primary" onclick="openAccomModal(null)">+ Add Resort</button>
+          </div>
+        </div>
+        <div id="accommodationList"></div>
+      </div>
+
+      <!-- ══ GETTING HERE ══ -->
+      <div class="page" id="page-getting-here">
+        <div class="page-header">
+          <div>
+            <h2>Getting Here</h2>
+            <p>Transport routes, info boxes, and travel tips for the Getting Here page.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('getting-here')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('getting-here')">↓ Download getting-here.json</button>
+          </div>
+        </div>
+        <div id="gettingHereContent"></div>
+      </div>
+
+      <!-- ══ ABOUT ══ -->
+      <div class="page" id="page-about">
+        <div class="page-header">
+          <div>
+            <h2>About & Stats</h2>
+            <p>Homepage hero text, intro paragraph, and stat numbers.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('about')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('about')">↓ Download about.json</button>
+          </div>
+        </div>
+        <div id="aboutContent"></div>
+      </div>
+
+      <!-- ══ CONTACT ══ -->
+      <div class="page" id="page-contact">
+        <div class="page-header">
+          <div>
+            <h2>Contact Info</h2>
+            <p>Phone numbers, social links, and the environmental fee notice.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('contact')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('contact')">↓ Download contact.json</button>
+          </div>
+        </div>
+        <div id="contactContent"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Edit</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN FILE INPUT -->
+<input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
+
+<script>
+// ══ STATE ══
+const ADMIN_PW = 'calatrava2026';
+let data = {};
+let currentModalType = null;
+let currentModalIdx = null;
+let importTarget = null;
+
+// ══ AUTH ══
+function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  if (pw === ADMIN_PW) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('authErr').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+function doLogout() {
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+// ══ INIT ══
+async function initApp() {
+  const files = ['destinations','activities','accommodation','contact','about','getting-here'];
+  for (const f of files) {
+    try {
+      // Try fetching from server; fall back to localStorage
+      const stored = localStorage.getItem('admin_' + f);
+      if (stored) { data[f] = JSON.parse(stored); continue; }
+      const res = await fetch('data/' + f + '.json');
+      if (res.ok) { data[f] = await res.json(); }
+    } catch(e) {
+      console.warn('Could not load', f, e);
+      data[f] = f === 'destinations' ? [] : f === 'activities' ? [] : f === 'accommodation' ? [] : {};
+    }
+  }
+  renderAll();
+}
+
+function renderAll() {
+  renderDestTable();
+  renderActivities();
+  renderAccommodation();
+  renderGettingHere();
+  renderAbout();
+  renderContact();
+  updateBadges();
+}
+
+function updateBadges() {
+  const d = data.destinations || [];
+  const a = data.activities || [];
+  const ac = data.accommodation || [];
+  document.getElementById('badge-destinations').textContent = d.length;
+  document.getElementById('badge-activities').textContent = a.length;
+  document.getElementById('badge-accommodation').textContent = ac.length;
+}
+
+// ══ NAVIGATION ══
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ══ TOAST ══
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 2500);
+}
+
+// ══ PERSIST ══
+function persist(key) {
+  localStorage.setItem('admin_' + key, JSON.stringify(data[key]));
+}
+
+// ══════════════════════════════════
+// DESTINATIONS
+// ══════════════════════════════════
+function renderDestTable() {
+  const filter = document.getElementById('destFilter')?.value || 'all';
+  const items = (data.destinations || []).filter(d => filter === 'all' || d.category === filter);
+  const tbody = document.getElementById('destBody');
+  if (!tbody) return;
+  tbody.innerHTML = items.map((d, i) => {
+    const realIdx = data.destinations.indexOf(d);
+    const img = d.images && d.images[0]
+      ? `<img class="td-img" src="${d.images[0]}" alt="${d.name}" onerror="this.style.display='none'">`
+      : `<span class="td-img-ph"></span>`;
+    return `<tr>
+      <td>${img}</td>
+      <td><strong>${d.name}</strong></td>
+      <td><span class="badge badge-${d.badge}">${d.category}</span></td>
+      <td>${d.barangay}</td>
+      <td style="font-size:12px">${d.fee}</td>
+      <td><span class="badge ${d.featured ? 'badge-yes' : 'badge-no'}">${d.featured ? 'Yes' : 'No'}</span></td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="openDestModal(${realIdx})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteDest(${realIdx})" style="margin-left:.3rem">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteDest(idx) {
+  if (!confirm(`Delete "${data.destinations[idx].name}"?`)) return;
+  data.destinations.splice(idx, 1);
+  persist('destinations');
+  renderDestTable();
+  updateBadges();
+  toast('Destination deleted');
+}
+
+function openDestModal(idx) {
+  currentModalType = 'destination';
+  currentModalIdx = idx;
+  const d = idx !== null ? data.destinations[idx] : {id:'',name:'',type:'',category:'beach',barangay:'',description:'',fee:'',feeNote:'',badge:'beach',featured:false,featuredOrder:null,images:[],thumbnail:null,lat:'',lng:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Destination' : 'Add Destination';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group"><label>Name *</label><input id="f_name" value="${d.name}"></div>
+      <div class="form-group"><label>ID / Slug *</label><input id="f_id" value="${d.id}" placeholder="tinagong-dagat"></div>
+      <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${d.type}" placeholder="Saltwater Lake — Hidden Sea"></div>
+      <div class="form-group"><label>Category</label>
+        <select id="f_category">
+          <option value="beach" ${d.category==='beach'?'selected':''}>Beach / Island</option>
+          <option value="falls" ${d.category==='falls'?'selected':''}>Waterfall</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Badge style</label>
+        <select id="f_badge">
+          <option value="beach" ${d.badge==='beach'?'selected':''}>beach (blue)</option>
+          <option value="falls" ${d.badge==='falls'?'selected':''}>falls (green)</option>
+          <option value="resort" ${d.badge==='resort'?'selected':''}>resort (amber)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${d.barangay}"></div>
+      <div class="form-group full"><label>Description</label><textarea id="f_desc">${d.description}</textarea></div>
+      <div class="form-group"><label>Entrance Fee</label><input id="f_fee" value="${d.fee}" placeholder="₱25 entrance fee"></div>
+      <div class="form-group"><label>Fee Note</label><input id="f_feeNote" value="${d.feeNote||''}" placeholder="Boat via Tourism Council"></div>
+      <div class="form-group"><label>Latitude</label><input id="f_lat" value="${d.lat||''}" placeholder="12.595"></div>
+      <div class="form-group"><label>Longitude</label><input id="f_lng" value="${d.lng||''}" placeholder="122.205"></div>
+      <div class="form-group full"><label>Images (one URL per line)</label>
+        <textarea id="f_images" style="min-height:70px">${(d.images||[]).join('\n')}</textarea>
+        <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code></span>
+      </div>
+      <div class="form-group"><label>Thumbnail path</label><input id="f_thumb" value="${d.thumbnail||''}" placeholder="assets/thumbnails/..."></div>
+      <div class="form-group">
+        <label>Featured on homepage?</label>
+        <div class="form-check" style="margin-top:.4rem">
+          <input type="checkbox" id="f_featured" ${d.featured?'checked':''}>
+          <label for="f_featured" style="font-weight:400">Show as featured destination</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Featured order (1–3)</label><input id="f_featuredOrder" type="number" min="1" max="3" value="${d.featuredOrder||''}"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ACTIVITIES
+// ══════════════════════════════════
+function renderActivities() {
+  const items = data.activities || [];
+  document.getElementById('activitiesList').innerHTML = items.map((a, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${a.number}. ${a.title}</h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openActivityModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteActivity(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:.5rem">${a.description}</p>
+        <p style="font-size:12px;color:var(--gold);font-weight:500">${a.rate}</p>
+      </div>
+    </div>`).join('');
+}
+
+function deleteActivity(i) {
+  if (!confirm(`Delete "${data.activities[i].title}"?`)) return;
+  data.activities.splice(i, 1);
+  persist('activities');
+  renderActivities();
+  updateBadges();
+  toast('Activity deleted');
+}
+
+function openActivityModal(idx) {
+  currentModalType = 'activity';
+  currentModalIdx = idx;
+  const a = idx !== null ? data.activities[idx] : {id:'',number:'04',title:'',description:'',rate:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Activity' : 'Add Activity';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Number label</label><input id="f_number" value="${a.number}" placeholder="04"></div>
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${a.title}"></div>
+      <div class="form-group"><label>Description</label><textarea id="f_desc">${a.description}</textarea></div>
+      <div class="form-group"><label>Rate / Price note</label><input id="f_rate" value="${a.rate}" placeholder="From ₱3,000 for 10 persons"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ACCOMMODATION
+// ══════════════════════════════════
+function renderAccommodation() {
+  const items = data.accommodation || [];
+  document.getElementById('accommodationList').innerHTML = items.map((a, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${a.name} <span style="font-size:11px;color:var(--gold);font-weight:400;margin-left:.5rem">${a.type}</span></h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openAccomModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteAccom(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        ${a.image ? `<img src="${a.image}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        <div>
+          <p style="font-size:12px;color:var(--muted)">Brgy. ${a.barangay}</p>
+          <p style="font-size:13px;margin-top:.25rem">${a.description}</p>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function deleteAccom(i) {
+  if (!confirm(`Delete "${data.accommodation[i].name}"?`)) return;
+  data.accommodation.splice(i, 1);
+  persist('accommodation');
+  renderAccommodation();
+  updateBadges();
+  toast('Resort deleted');
+}
+
+function openAccomModal(idx) {
+  currentModalType = 'accommodation';
+  currentModalIdx = idx;
+  const a = idx !== null ? data.accommodation[idx] : {id:'',name:'',type:'Beach Resort',barangay:'',description:'',image:null,detailsUrl:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Resort' : 'Add Resort';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Name *</label><input id="f_name" value="${a.name}"></div>
+      <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${a.type}" placeholder="Beach Resort"></div>
+      <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${a.barangay}"></div>
+      <div class="form-group"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
+      <div class="form-group"><label>Image path</label><input id="f_image" value="${a.image||''}" placeholder="assets/destinations/MyPhoto.jpg"></div>
+      <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="destinations.html#cove-aurelio"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// GETTING HERE
+// ══════════════════════════════════
+function renderGettingHere() {
+  const gh = data['getting-here'] || {};
+  const tips = (gh.tips || []);
+  const infoBoxes = (gh.infoBoxes || []);
+  document.getElementById('gettingHereContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Travel Tips</h3><button class="btn btn-primary btn-sm" onclick="openTipModal(null)">+ Add Tip</button></div>
+      <div class="card-body">
+        ${tips.map((t,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
+            <div><strong style="font-size:13px">${t.title}</strong><p style="font-size:12.5px;color:var(--muted);margin-top:.25rem">${t.text}</p></div>
+            <div style="display:flex;gap:.35rem;flex-shrink:0">
+              <button class="btn btn-outline btn-sm" onclick="openTipModal(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteTip(${i})">×</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Info Boxes</h3><button class="btn btn-primary btn-sm" onclick="openInfoBoxModal(null)">+ Add Box</button></div>
+      <div class="card-body">
+        ${infoBoxes.map((b,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+              <strong>${b.title}</strong>
+              <div style="display:flex;gap:.35rem">
+                <button class="btn btn-outline btn-sm" onclick="openInfoBoxModal(${i})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteInfoBox(${i})">×</button>
+              </div>
+            </div>
+            <ul style="padding-left:1rem;font-size:12px;color:var(--muted)">${b.items.map(it=>`<li>${it}</li>`).join('')}</ul>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function deleteTip(i) {
+  data['getting-here'].tips.splice(i,1);
+  persist('getting-here');
+  renderGettingHere();
+  toast('Tip deleted');
+}
+
+function openTipModal(idx) {
+  currentModalType = 'tip';
+  currentModalIdx = idx;
+  const t = idx !== null ? data['getting-here'].tips[idx] : {id:'',title:'',text:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Tip' : 'Add Tip';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${t.title}"></div>
+      <div class="form-group"><label>Text *</label><textarea id="f_text">${t.text}</textarea></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+function deleteInfoBox(i) {
+  data['getting-here'].infoBoxes.splice(i,1);
+  persist('getting-here');
+  renderGettingHere();
+  toast('Info box deleted');
+}
+
+function openInfoBoxModal(idx) {
+  currentModalType = 'infobox';
+  currentModalIdx = idx;
+  const b = idx !== null ? data['getting-here'].infoBoxes[idx] : {id:'',title:'',intro:'',items:[]};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Info Box' : 'Add Info Box';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${b.title}"></div>
+      <div class="form-group"><label>Intro sentence</label><input id="f_intro" value="${b.intro||''}"></div>
+      <div class="form-group"><label>List items (one per line)</label>
+        <textarea id="f_items" style="min-height:100px">${(b.items||[]).join('\n')}</textarea>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// ABOUT
+// ══════════════════════════════════
+function renderAbout() {
+  const ab = data.about || {};
+  const stats = ab.stats || [];
+  document.getElementById('aboutContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Hero Text</h3></div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Hero Eyebrow</label><input id="ab_eyebrow" value="${ab.heroEyebrow||''}" oninput="updateAboutField('heroEyebrow',this.value)"></div>
+          <div class="form-group"><label>Hero Title</label><input id="ab_title" value="${ab.heroTitle||''}" oninput="updateAboutField('heroTitle',this.value)"></div>
+          <div class="form-group"><label>Hero Subtitle</label><input id="ab_sub" value="${ab.heroSub||''}" oninput="updateAboutField('heroSub',this.value)"></div>
+          <div class="form-group"><label>Tagline</label><input id="ab_tagline" value="${ab.tagline||''}" oninput="updateAboutField('tagline',this.value)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>About Section</h3></div>
+      <div class="card-body">
+        <div class="form-grid single">
+          <div class="form-group"><label>Section label</label><input value="${ab.intro?.label||''}" oninput="updateAboutIntro('label',this.value)"></div>
+          <div class="form-group"><label>Title</label><input value="${ab.intro?.title||''}" oninput="updateAboutIntro('title',this.value)"></div>
+          <div class="form-group"><label>Body paragraph</label><textarea oninput="updateAboutIntro('body',this.value)">${ab.intro?.body||''}</textarea></div>
+          <div class="form-group"><label>CTA Button label</label><input value="${ab.intro?.ctaLabel||''}" oninput="updateAboutIntro('ctaLabel',this.value)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Stats</h3></div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">
+          ${stats.map((s,i)=>`
+            <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem">
+              <div style="font-family:var(--fd);font-size:1.75rem;margin-bottom:.35rem">${s.value}<sup style="font-size:.8rem">${s.suffix}</sup></div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:.5rem">${s.label}</div>
+              <div class="form-group" style="margin-bottom:.4rem"><label>Value</label><input value="${s.value}" oninput="updateStat(${i},'value',this.value)"></div>
+              <div class="form-group" style="margin-bottom:.4rem"><label>Suffix</label><input value="${s.suffix}" oninput="updateStat(${i},'suffix',this.value)" placeholder="hrs"></div>
+              <div class="form-group"><label>Label</label><input value="${s.label}" oninput="updateStat(${i},'label',this.value)"></div>
+            </div>`).join('')}
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:1rem" onclick="saveAbout()">Save About & Stats</button>
+      </div>
+    </div>`;
+}
+
+function updateAboutField(key, val) { if (!data.about) data.about={}; data.about[key]=val; }
+function updateAboutIntro(key, val) { if (!data.about.intro) data.about.intro={}; data.about.intro[key]=val; }
+function updateStat(i, key, val) { data.about.stats[i][key]=val; }
+function saveAbout() { persist('about'); toast('About saved'); }
+
+// ══════════════════════════════════
+// CONTACT
+// ══════════════════════════════════
+function renderContact() {
+  const c = data.contact || {};
+  const contacts = c.contacts || [];
+  document.getElementById('contactContent').innerHTML = `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Environmental Fee Notice</h3></div>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group"><label>Fee Amount</label><input id="ct_envFee" value="${c.envFee||'₱20'}" oninput="updateContactField('envFee',this.value)"></div>
+          <div class="form-group full"><label>Notice Message</label><input id="ct_envMsg" value="${c.envFeeMessage||''}" oninput="updateContactField('envFeeMessage',this.value)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Contact Cards</h3><button class="btn btn-primary btn-sm" onclick="openContactModal(null)">+ Add Contact</button></div>
+      <div class="card-body">
+        ${contacts.map((ct,i)=>`
+          <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <span style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em">${ct.label}</span>
+              <p style="font-size:15px;font-weight:500;margin:.2rem 0">${ct.value}</p>
+              <p style="font-size:11px;color:var(--muted)">${ct.href}</p>
+            </div>
+            <div style="display:flex;gap:.35rem;flex-shrink:0">
+              <button class="btn btn-outline btn-sm" onclick="openContactModal(${i})">Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteContact(${i})">×</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Google Maps API</h3></div>
+      <div class="card-body">
+        <div class="form-group"><label>API Key</label><input type="text" value="${c.mapsApiKey||''}" oninput="updateContactField('mapsApiKey',this.value)"></div>
+        <p class="hint" style="margin-top:.4rem">⚠️ Restrict this key in Google Cloud Console → APIs & Services → Credentials → HTTP referrers.</p>
+        <button class="btn btn-success btn-sm" style="margin-top:.85rem" onclick="saveContact()">Save Contact Info</button>
+      </div>
+    </div>`;
+}
+
+function updateContactField(key, val) { if(!data.contact) data.contact={}; data.contact[key]=val; }
+function saveContact() { persist('contact'); toast('Contact info saved'); }
+
+function deleteContact(i) {
+  data.contact.contacts.splice(i,1);
+  persist('contact');
+  renderContact();
+  toast('Contact deleted');
+}
+
+function openContactModal(idx) {
+  currentModalType = 'contact';
+  currentModalIdx = idx;
+  const ct = idx !== null ? data.contact.contacts[idx] : {id:'',label:'',value:'',href:'',sub:'',type:'phone'};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Contact' : 'Add Contact';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>Label</label><input id="f_label" value="${ct.label}" placeholder="Calatrava Tourism Council"></div>
+      <div class="form-group"><label>Display Value</label><input id="f_value" value="${ct.value}" placeholder="0919 335 0314"></div>
+      <div class="form-group"><label>Link (href)</label><input id="f_href" value="${ct.href}" placeholder="tel:09193350314"></div>
+      <div class="form-group"><label>Sub-text</label><input id="f_sub" value="${ct.sub||''}" placeholder="Tap to call"></div>
+      <div class="form-group"><label>Type</label>
+        <select id="f_type">
+          <option value="phone" ${ct.type==='phone'?'selected':''}>Phone</option>
+          <option value="social" ${ct.type==='social'?'selected':''}>Social</option>
+          <option value="email" ${ct.type==='email'?'selected':''}>Email</option>
+        </select>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// MODAL SAVE HANDLER
+// ══════════════════════════════════
+function saveModal() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const gb = id => { const el = document.getElementById(id); return el ? el.checked : false; };
+
+  if (currentModalType === 'destination') {
+    const item = {
+      id: g('f_id') || g('f_name').toLowerCase().replace(/\s+/g,'-'),
+      name: g('f_name'), type: g('f_type'), category: g('f_category'),
+      barangay: g('f_barangay'), description: g('f_desc'),
+      fee: g('f_fee'), feeNote: g('f_feeNote'), badge: g('f_badge'),
+      featured: gb('f_featured'),
+      featuredOrder: g('f_featuredOrder') ? parseInt(g('f_featuredOrder')) : null,
+      images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean),
+      thumbnail: g('f_thumb') || null,
+      lat: parseFloat(g('f_lat')) || null,
+      lng: parseFloat(g('f_lng')) || null
+    };
+    if (!item.name) { toast('Name is required','error'); return; }
+    if (currentModalIdx !== null) data.destinations[currentModalIdx] = item;
+    else data.destinations.push(item);
+    persist('destinations');
+    renderDestTable();
+    updateBadges();
+
+  } else if (currentModalType === 'activity') {
+    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), number: g('f_number'), title: g('f_title'), description: g('f_desc'), rate: g('f_rate') };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (currentModalIdx !== null) data.activities[currentModalIdx] = item;
+    else data.activities.push(item);
+    persist('activities');
+    renderActivities();
+    updateBadges();
+
+  } else if (currentModalType === 'accommodation') {
+    const item = { id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), image: g('f_image')||null, detailsUrl: g('f_detailsUrl')||'' };
+    if (!item.name) { toast('Name is required','error'); return; }
+    if (currentModalIdx !== null) data.accommodation[currentModalIdx] = item;
+    else data.accommodation.push(item);
+    persist('accommodation');
+    renderAccommodation();
+    updateBadges();
+
+  } else if (currentModalType === 'tip') {
+    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), title: g('f_title'), text: g('f_text') };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data['getting-here'].tips) data['getting-here'].tips = [];
+    if (currentModalIdx !== null) data['getting-here'].tips[currentModalIdx] = item;
+    else data['getting-here'].tips.push(item);
+    persist('getting-here');
+    renderGettingHere();
+
+  } else if (currentModalType === 'infobox') {
+    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), title: g('f_title'), intro: g('f_intro'), items: g('f_items').split('\n').map(s=>s.trim()).filter(Boolean) };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data['getting-here'].infoBoxes) data['getting-here'].infoBoxes = [];
+    if (currentModalIdx !== null) data['getting-here'].infoBoxes[currentModalIdx] = item;
+    else data['getting-here'].infoBoxes.push(item);
+    persist('getting-here');
+    renderGettingHere();
+
+  } else if (currentModalType === 'contact') {
+    const item = { id: g('f_label').toLowerCase().replace(/\s+/g,'-'), label: g('f_label'), value: g('f_value'), href: g('f_href'), sub: g('f_sub'), type: g('f_type') };
+    if (!item.label) { toast('Label is required','error'); return; }
+    if (!data.contact.contacts) data.contact.contacts = [];
+    if (currentModalIdx !== null) data.contact.contacts[currentModalIdx] = item;
+    else data.contact.contacts.push(item);
+    persist('contact');
+    renderContact();
+  }
+
+  closeModal();
+  toast('Saved successfully');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  currentModalType = null;
+  currentModalIdx = null;
+}
+document.getElementById('modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+
+// ══════════════════════════════════
+// IMPORT / EXPORT
+// ══════════════════════════════════
+function exportJSON(key) {
+  const blob = new Blob([JSON.stringify(data[key], null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = key + '.json';
+  a.click();
+  toast('Downloaded ' + key + '.json');
+}
+
+function importJSON(key) {
+  importTarget = key;
+  document.getElementById('importFileInput').click();
+}
+
+function handleImportFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      data[importTarget] = JSON.parse(ev.target.result);
+      persist(importTarget);
+      renderAll();
+      toast('Imported ' + importTarget + '.json');
+    } catch(err) {
+      toast('Invalid JSON file','error');
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+}
+</script>
+</body>
+</html>

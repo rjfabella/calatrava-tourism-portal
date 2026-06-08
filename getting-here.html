@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Here — Calatrava, Romblon</title>
+<meta name="description" content="How to get to Calatrava, Romblon. Travel by air via Tugdan Airport or by sea from Batangas Port.">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --sand:#F0E9DD;--cream:#FAF7F2;--gold:#B88A45;--gl:#D4A86A;
+  --white:#fff;--text:#1C1C1C;--muted:#717B7B;--border:rgba(12,34,51,.1);
+  --fd:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --fb:'Jost','Segoe UI',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;background:rgba(250,247,242,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-seal{width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.nav-seal img{width:100%;height:100%;object-fit:cover}
+.nav-name{font-family:var(--fd);font-size:16px;font-weight:500;color:var(--deep);letter-spacing:.03em;line-height:1.15}
+.nav-name small{display:block;font-size:10px;font-family:var(--fb);font-weight:300;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--deep)}
+.nav-cta{color:var(--white)!important;background:var(--deep);padding:8px 20px;border-radius:2px;transition:background .3s}
+.nav-cta:hover{background:var(--gold)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--deep)}
+
+/* ── MOBILE NAV ── */
+.mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+.mob-nav a:hover{color:var(--gl)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close:hover{color:var(--white)}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  padding:9rem 2.5rem 5rem;
+  background:var(--deep);
+  position:relative;
+  overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url('assets/destinations/Destinations_Generic1_web.jpg') center/cover no-repeat;
+  opacity:.15;
+}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.breadcrumb a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .3s}
+.breadcrumb a:hover{color:var(--gl)}
+.breadcrumb span{font-size:11px;color:rgba(255,255,255,.25)}
+.page-hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,6rem);font-weight:300;color:var(--white);line-height:.95;margin-bottom:1rem}
+.page-hero h1 em{font-style:italic;color:var(--gl)}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.6);max-width:520px;line-height:1.8}
+
+/* ── ROUTE SUMMARY STRIP ── */
+.route-strip{background:var(--ocean);padding:1.5rem 2.5rem}
+.route-strip-inner{max-width:1200px;margin:0 auto;display:flex;gap:3rem;align-items:center;flex-wrap:wrap}
+.route-item{display:flex;align-items:center;gap:.75rem;color:rgba(255,255,255,.9);font-size:13px}
+.route-item svg{opacity:.7;flex-shrink:0}
+.route-divider{width:1px;height:28px;background:rgba(255,255,255,.2)}
+
+/* ── CONTENT ── */
+.content{max-width:1200px;margin:0 auto;padding:5rem 2.5rem}
+
+/* ── ROUTE SECTION ── */
+.route-section{margin-bottom:4rem}
+.route-header{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.route-number{font-family:var(--fd);font-size:5rem;font-weight:300;color:rgba(12,34,51,.08);line-height:1;flex-shrink:0}
+.route-title-block .s-label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+.route-title{font-family:var(--fd);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:var(--deep);line-height:1.1}
+.route-title em{font-style:italic;color:var(--ocean)}
+.route-subtitle{font-size:14px;color:var(--muted);margin-top:.4rem}
+
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:1.5rem;align-items:start;position:relative;padding-bottom:2rem}
+.step:last-child{padding-bottom:0}
+.step-connector{display:flex;flex-direction:column;align-items:center;gap:0}
+.step-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
+.step-line{width:1px;flex:1;background:linear-gradient(to bottom,var(--gold),transparent);margin-top:6px;min-height:40px}
+.step:last-child .step-line{display:none}
+.step-body{}
+.step-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.step-name{font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--deep);margin-bottom:.35rem}
+.step-desc{font-size:14px;line-height:1.78;color:var(--muted)}
+.step-meta{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap}
+.step-tag{font-size:10.5px;font-weight:500;letter-spacing:.06em;color:var(--deep);background:var(--sand);padding:4px 12px;border-radius:2px}
+.step-tag.highlight{background:var(--deep);color:var(--white)}
+
+/* ── INFO BOXES ── */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(12,34,51,.06);margin-top:4rem}
+.info-box{background:var(--white);padding:2.5rem 2rem}
+.info-box-icon{width:36px;height:36px;margin-bottom:1.25rem;color:var(--gold)}
+.info-box h3{font-family:var(--fd);font-size:1.4rem;font-weight:400;color:var(--deep);margin-bottom:.75rem}
+.info-box p{font-size:13.5px;line-height:1.75;color:var(--muted)}
+.info-box ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem}
+.info-box ul li{font-size:13.5px;color:var(--muted);padding-left:1rem;position:relative}
+.info-box ul li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:11px;top:2px}
+
+/* ── TIPS SECTION ── */
+.tips{background:var(--deep);padding:4rem 2.5rem;margin-top:0}
+.tips-inner{max-width:1200px;margin:0 auto}
+.tips-inner .s-label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.tips-inner h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:2.5rem}
+.tips-inner h2 em{font-style:italic;color:var(--gl)}
+.tips-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.tip{border:1px solid rgba(255,255,255,.1);padding:1.5rem}
+.tip-title{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gl);margin-bottom:.6rem}
+.tip-text{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.6)}
+
+/* ── CONTACT STRIP ── */
+.contact-strip{background:var(--sand);padding:4rem 2.5rem}
+.contact-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
+.contact-text h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--deep);margin-bottom:.5rem}
+.contact-text h2 em{font-style:italic;color:var(--ocean)}
+.contact-text p{font-size:14px;color:var(--muted);line-height:1.7}
+.contact-cards{display:flex;gap:1rem;flex-wrap:wrap}
+.contact-card{background:var(--white);border:0.5px solid var(--border);border-radius:3px;padding:1.25rem 1.5rem;text-decoration:none;transition:box-shadow .3s,border-color .3s;min-width:200px}
+.contact-card:hover{box-shadow:0 4px 20px rgba(12,34,51,.1);border-color:rgba(12,34,51,.2)}
+.cc-label{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.cc-value{font-size:15px;font-weight:500;color:var(--deep)}
+.cc-sub{font-size:11px;color:var(--muted);margin-top:.25rem}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
+.f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:1.5rem}
+.f-logos{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.f-logos img{width:36px;height:36px;object-fit:contain;opacity:.7;border-radius:50%}
+.f-social{display:flex;gap:10px}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a:hover{border-color:var(--gold);color:var(--gold)}
+.f-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.f-col ul a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s}
+.f-col ul a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.28)}
+
+/* ── MOBILE QUICK BAR ── */
+.quick-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--deep);box-shadow:0 -1px 0 rgba(255,255,255,.08)}
+.quick-bar-inner{display:grid;grid-template-columns:1fr 1fr}
+.quick-bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--white);transition:background .2s}
+.quick-bar a:first-child{background:var(--ocean);border-right:1px solid rgba(255,255,255,.1)}
+.quick-bar a:first-child:hover{background:var(--teal)}
+.q-ico{width:15px;height:15px;flex-shrink:0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .f-brand{grid-column:1/-1}
+  .info-grid{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .quick-bar{display:block}
+  body{padding-bottom:54px}
+  .page-hero{padding:7rem 1.5rem 3.5rem}
+  .content{padding:3.5rem 1.5rem}
+  .route-strip{padding:1.25rem 1.5rem}
+  .route-strip-inner{gap:1.5rem}
+  .route-divider{display:none}
+  .tips{padding:3rem 1.5rem}
+  .tips-grid{grid-template-columns:1fr}
+  .contact-strip{padding:3rem 1.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:580px){
+  .footer-grid{grid-template-columns:1fr}
+  .contact-cards{flex-direction:column}
+  .route-number{font-size:3.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-seal">
+      <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="nav-name">
+      Calatrava
+      <small>Romblon, Philippines</small>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#destinations">Destinations</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="index.html#accommodation">Stay</a></li>
+    <li><a href="index.html#map">Map</a></li>
+    <li><a href="getting-here.html" class="active">Getting Here</a></li>
+    <li><a href="tel:09193350314" class="nav-cta">Call Tourism</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mobNav" aria-label="Mobile navigation">
+  <button class="mob-close" aria-label="Close menu" onclick="document.getElementById('mobNav').classList.remove('open')">&times;</button>
+  <a href="index.html#destinations" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
+  <a href="index.html#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
+  <a href="index.html#accommodation" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="index.html#map" onclick="document.getElementById('mobNav').classList.remove('open')">Map</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="getting-here.html">Getting Here</a>
+    </div>
+    <h1>Getting to <em>Calatrava</em></h1>
+    <p>Calatrava sits on the northernmost tip of Tablas Island — the largest island in Romblon. Getting here is part of the adventure.</p>
+  </div>
+</section>
+
+<!-- ROUTE SUMMARY STRIP -->
+<div class="route-strip">
+  <div class="route-strip-inner">
+    <div class="route-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.7 5.9L2.3 7.3c-.4.4-.2 1 .3 1.3L10 12l-2 3H5l-1 1 3 2 2 3 1-1v-3l3-2 3.5 7.3c.3.5.9.7 1.3.3l1.4-1.4c.5-.3.8-.7.6-1.2z"/></svg>
+      <span><strong>By Air:</strong> Manila → Tugdan Airport (Tablas) — 55 min flight</span>
+    </div>
+    <div class="route-divider"></div>
+    <div class="route-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12l4-4M2 12l4 4M12 2v20M12 2l-4 4M12 2l4 4"/></svg>
+      <span><strong>By Sea:</strong> Batangas Port → Romblon/Odiongan — 8–12 hrs</span>
+    </div>
+    <div class="route-divider"></div>
+    <div class="route-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span><strong>From Tugdan Airport to Calatrava:</strong> ~2 hours by road</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="gh-content" class="content">
+  <!-- rendered from data/getting-here.json -->
+</div>
+
+<section id="gh-contact" class="contact-strip">
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <h2>Need help <em>planning your trip?</em></h2>
+      <p>The Tourism Council can assist with transport arrangements, guide bookings, and local information.</p>
+    </div>
+    <div id="gh-contact-cards" class="contact-cards reveal">
+      <!-- rendered from data/contact.json -->
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="f-logos">
+        <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal">
+        <img src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Seal">
+      </div>
+      <h3>Calatrava, Romblon</h3>
+      <p>Official tourism portal of the Municipality of Calatrava, Province of Romblon, Philippines. Managed by the Calatrava Tourism Council.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" aria-label="Facebook page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Destinations</h4>
+      <ul>
+        <li><a href="destinations.html#lapus-lapus">Beaches &amp; Islands</a></li>
+        <li><a href="destinations.html#tago-falls">Waterfalls</a></li>
+        <li><a href="index.html#activities">Island Hopping</a></li>
+        <li><a href="destinations.html">View All</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Plan Your Visit</h4>
+      <ul>
+        <li><a href="getting-here.html">Getting Here</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="index.html#map">Services Map</a></li>
+        <li><a href="index.html#activities">Tour Operators</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09193350314">0919 335 0314</a></li>
+        <li><a href="tel:09399154193">0939 915 4193</a></li>
+        <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
+    <p>Republic of the Philippines</p>
+  </div>
+</footer>
+
+<!-- MOBILE QUICK BAR -->
+<div class="quick-bar" aria-label="Quick contact">
+  <div class="quick-bar-inner">
+    <a href="tel:09193350314">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Tourism Office
+    </a>
+    <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook Page
+    </a>
+  </div>
+</div>
+
+<script>
+// ── REVEAL OBSERVER ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 90); io.unobserve(e.target); }
+  });
+}, {threshold: .12});
+function observeReveal() { document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el)); }
+observeReveal();
+
+// ── RENDERERS ──
+function renderStep(step, isLast) {
+  const tags = (step.tags || []).map(t =>
+    `<span class="step-tag${t === step.highlightTag ? ' highlight' : ''}">${t}</span>`).join('');
+  return `<div class="step">
+    <div class="step-connector">
+      <div class="step-dot"></div>
+      ${isLast ? '' : '<div class="step-line"></div>'}
+    </div>
+    <div class="step-body">
+      <div class="step-label">${step.label}</div>
+      <div class="step-name">${step.name}</div>
+      <p class="step-desc">${step.description}</p>
+      ${tags ? `<div class="step-meta">${tags}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderRoute(route) {
+  const steps = route.steps || [];
+  return `<div class="route-section reveal">
+    <div class="route-header">
+      <div class="route-number">${route.number}</div>
+      <div class="route-title-block">
+        <span class="s-label">${route.label}</span>
+        <h2 class="route-title">${route.title.replace(route.titleEmphasis, `<em>${route.titleEmphasis}</em>`)}</h2>
+        <p class="route-subtitle">${route.subtitle}</p>
+      </div>
+    </div>
+    <div class="steps">${steps.map((s, i) => renderStep(s, i === steps.length - 1)).join('')}</div>
+  </div>`;
+}
+
+const infoIcons = [
+  `<svg class="info-box-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  `<svg class="info-box-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+  `<svg class="info-box-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`
+];
+
+function renderInfoBox(box, i) {
+  return `<div class="info-box">
+    ${infoIcons[i % infoIcons.length]}
+    <h3>${box.title}</h3>
+    <p>${box.intro}</p>
+    <ul>${(box.items || []).map(it => `<li>${it}</li>`).join('')}</ul>
+  </div>`;
+}
+
+function renderTips(tips) {
+  return `<section class="tips">
+    <div class="tips-inner">
+      <span class="s-label">Travel Tips</span>
+      <h2>Make the most of <em>your journey</em></h2>
+      <div class="tips-grid">
+        ${tips.map(t => `<div class="tip reveal"><div class="tip-title">${t.title}</div><p class="tip-text">${t.text}</p></div>`).join('')}
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderContactCards(contacts) {
+  const el = document.getElementById('gh-contact-cards');
+  if (!el) return;
+  el.innerHTML = contacts.map(c =>
+    `<a href="${c.href}" class="contact-card"${c.type === 'social' ? ' target="_blank" rel="noopener"' : ''}>
+      <div class="cc-label">${c.label}</div>
+      <div class="cc-value">${c.value}</div>
+      <div class="cc-sub">${c.sub || ''}</div>
+    </a>`).join('');
+}
+
+// ── INIT ──
+(async function init() {
+  try {
+    const [gh, contact] = await Promise.all([
+      fetch('data/getting-here.json').then(r => r.json()),
+      fetch('data/contact.json').then(r => r.json())
+    ]);
+
+    const contentEl = document.getElementById('gh-content');
+    const routeHtml = (gh.routes || []).map(renderRoute).join('');
+    const infoHtml = `<div class="info-grid reveal">${(gh.infoBoxes || []).map(renderInfoBox).join('')}</div>`;
+    contentEl.innerHTML = routeHtml + infoHtml;
+
+    // Insert tips section between content div and contact strip
+    const tipsHtml = renderTips(gh.tips || []);
+    contentEl.insertAdjacentHTML('afterend', tipsHtml);
+
+    renderContactCards(contact.contacts || []);
+    observeReveal();
+  } catch(err) {
+    console.error('Failed to load getting-here data:', err);
+    document.getElementById('gh-content').innerHTML = '<p style="padding:3rem;color:var(--muted)">Could not load content. Please ensure the site is served from a web server.</p>';
+  }
+})();
+</script>
+</body>
+</html>
