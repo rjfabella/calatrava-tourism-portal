@@ -56,7 +56,8 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .hero-media video,.hero-media img.hero-fallback{width:100%;height:100%;object-fit:cover}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,34,51,.38) 0%,rgba(12,34,51,.28) 45%,rgba(12,34,51,.72) 100%);z-index:1}
 .hero-content{position:relative;z-index:2;text-align:center;color:var(--white);padding:0 2rem;max-width:900px}
-.hero-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;margin-bottom:1.25rem;animation:fadeUp 1s ease both}
+.hero-logo{width:clamp(120px,18vw,200px);height:auto;margin:0 auto 1.5rem;display:block;filter:drop-shadow(0 6px 24px rgba(0,0,0,.45));animation:fadeUp 1s ease both}
+.hero-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;margin-bottom:1.25rem;animation:fadeUp 1s ease .1s both}
 .hero-title{font-family:var(--fd);font-size:clamp(5rem,14vw,11rem);font-weight:300;letter-spacing:-.02em;line-height:.9;margin-bottom:.75rem;animation:fadeUp 1s ease .15s both}
 .hero-sub{font-family:var(--fd);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;font-style:italic;opacity:.82;margin-bottom:.5rem;animation:fadeUp 1s ease .25s both}
 .hero-tagline{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.58;margin-bottom:2.5rem;animation:fadeUp 1s ease .35s both}
@@ -277,6 +278,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
+    <img src="assets/logos/CalatravaTourismLogo.png" alt="Experience Calatrava — Tourism Logo" class="hero-logo" onerror="this.style.display='none'">
     <p class="hero-eyebrow">Municipality of</p>
     <h1 class="hero-title">Calatrava</h1>
     <p class="hero-sub">Romblon, Philippines</p>
@@ -548,6 +550,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <div class="f-logos">
         <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal">
         <img src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Seal">
+        <img src="assets/logos/DOT_PH_web.svg" alt="Philippines Department of Tourism">
       </div>
       <h3>Calatrava, Romblon</h3>
       <p>Official tourism portal of the Municipality of Calatrava, Province of Romblon, Philippines. Managed by the Calatrava Tourism Council.</p>
