@@ -1,0 +1,26 @@
+[
+  {
+    "id": "island-hopping",
+    "number": "01",
+    "title": "Island Hopping",
+    "description": "Explore limestone caves, hidden coves, and crystal-clear waters around Guindawahan Island and Tinagong Dagat. Book through our accredited operators at the Calatrava Port Terminal.",
+    "rate": "From ₱3,000 for 10 persons",
+    "icon": null
+  },
+  {
+    "id": "waterfall-trekking",
+    "number": "02",
+    "title": "Waterfall Trekking",
+    "description": "Six waterfalls across four barangays — from the dramatic Tago Falls, the highest in Calatrava at 7 to 9 meters, to the secluded Hidden Falls deep in Pagsangahan.",
+    "rate": "Guide fees apply",
+    "icon": null
+  },
+  {
+    "id": "snorkeling-diving",
+    "number": "03",
+    "title": "Snorkeling & Diving",
+    "description": "LGU-accredited dive groups offer guided snorkeling and diving around vibrant reef ecosystems and rich marine life in the municipality's protected coastal waters.",
+    "rate": "Rates vary by operator",
+    "icon": null
+  }
+]

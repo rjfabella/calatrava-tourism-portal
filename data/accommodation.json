@@ -1,0 +1,61 @@
+[
+  {
+    "id": "cove-aurelio",
+    "name": "Cove Aurelio",
+    "type": "Beach Resort",
+    "barangay": "Linao",
+    "address": "Brgy. Linao, Calatrava, Romblon",
+    "description": "A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.",
+    "amenities": ["Cottages", "Paluto Service", "Swimming", "Rock Formations", "Day Use", "Picnic Area"],
+    "priceRange": "₱25 entrance · ₱200+ cottage rental",
+    "images": [
+      "assets/destinations/Destinations_CoveAurelio1_web.jpg",
+      "assets/destinations/Destinations_CoveAurelio2_web.jpg",
+      "assets/destinations/Destinations_CoveAurelio3_web.jpg",
+      "assets/destinations/Destinations_CoveAurelio4_web.jpg"
+    ],
+    "phone": "0919 335 0314",
+    "phoneLabel": "Calatrava Tourism Council",
+    "facebook": "https://www.facebook.com/calatravatourismcouncil",
+    "facebookLabel": "Calatrava Tourism",
+    "lat": 12.580,
+    "lng": 122.195,
+    "bookingNote": "Contact the Tourism Council to arrange visits and cottage reservations."
+  },
+  {
+    "id": "balai-azinan",
+    "name": "Balai Azinan",
+    "type": "Full-Facility Beach Resort",
+    "barangay": "Balogo",
+    "address": "Brgy. Balogo, Calatrava, Romblon",
+    "description": "The largest resort in Calatrava, Balai Azinan offers a complete beach experience. Features a swimming pool, beachfront cottages, and fully equipped function rooms — ideal for group events, family reunions, and overnight stays. The resort's wide beachfront is perfect for both relaxation and celebrations.",
+    "amenities": ["Swimming Pool", "Beach Cottages", "Function Rooms", "Overnight Stay", "Events Venue", "Beachfront", "Day Use"],
+    "priceRange": "Rates available on-site",
+    "images": [],
+    "phone": "0919 335 0314",
+    "phoneLabel": "Calatrava Tourism Council",
+    "facebook": "https://www.facebook.com/calatravatourismcouncil",
+    "facebookLabel": "Calatrava Tourism",
+    "lat": 12.560,
+    "lng": 122.180,
+    "bookingNote": "Contact the Tourism Council for current rates and availability."
+  },
+  {
+    "id": "bulawan-farm-resort",
+    "name": "Bulawan Farm Resort",
+    "type": "Farm Resort",
+    "barangay": "Pagsangahan",
+    "address": "Brgy. Pagsangahan, Calatrava, Romblon",
+    "description": "A nature-immersed farm resort tucked in the hills of Pagsangahan. Bulawan offers a peaceful escape from the coast, surrounded by lush farm landscapes. Perfect for visitors seeking a quieter, countryside experience alongside Calatrava's natural scenery.",
+    "amenities": ["Farm Setting", "Nature Views", "Accommodation", "Peaceful Environment"],
+    "priceRange": "Rates available on-site",
+    "images": [],
+    "phone": "0919 335 0314",
+    "phoneLabel": "Calatrava Tourism Council",
+    "facebook": "https://www.facebook.com/calatravatourismcouncil",
+    "facebookLabel": "Calatrava Tourism",
+    "lat": 12.548,
+    "lng": 122.170,
+    "bookingNote": "Contact the Tourism Council for directions and current rates."
+  }
+]

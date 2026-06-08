@@ -1,0 +1,20 @@
+{
+  "tagline": "Where island life meets untouched nature",
+  "heroEyebrow": "Municipality of",
+  "heroTitle": "Calatrava",
+  "heroSub": "Romblon, Philippines",
+  "intro": {
+    "label": "About Calatrava",
+    "title": "A hidden gem on the northern tip of Tablas Island",
+    "titleEmphasis": "northern tip",
+    "body": "Nestled on the northernmost coast of Tablas — the largest island in Romblon — Calatrava is a municipality of unspoiled beaches, dramatic waterfalls, and warm island hospitality. Budget-friendly and uncrowded, it offers what few destinations still can: genuine island life.",
+    "ctaLabel": "Plan your visit",
+    "ctaUrl": "getting-here.html"
+  },
+  "stats": [
+    { "id": "waterfalls", "value": "6", "suffix": "", "label": "Waterfalls" },
+    { "id": "beaches", "value": "7", "suffix": "", "label": "Beaches & Islands" },
+    { "id": "envfee", "value": "₱20", "suffix": "", "label": "Env. Fee" },
+    { "id": "travel", "value": "2", "suffix": "hrs", "label": "from Tablas Airport" }
+  ]
+}
