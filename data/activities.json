@@ -6,6 +6,7 @@
     "description": "Explore limestone caves, hidden coves, and crystal-clear waters around Guindawahan Island and Tinagong Dagat. Book through our accredited operators at the Calatrava Port Terminal.",
     "rate": "From ₱3,000 for 10 persons",
     "image": "assets/activities/act-island-hopping.jpg",
+    "credit": "RJ Fabella",
     "details": {
       "highlights": ["Tinagong Dagat (Hidden Sea)", "Guindawahan Island", "Limestone sea caves", "Crystal-clear lagoons", "Snorkeling stops"],
       "whatToBring": ["Sunscreen", "1L+ water", "Change of clothes", "Waterproof bag", "Cash for fees"],
@@ -34,6 +35,7 @@
     "description": "Six waterfalls across four barangays — from the dramatic Tago Falls, the highest in Calatrava at 7 to 9 meters, to the secluded Hidden Falls deep in Pagsangahan.",
     "rate": "Guide fees apply",
     "image": "assets/activities/act-waterfall-trekking.jpg",
+    "credit": "Calatrava Tourism Council",
     "details": {
       "highlights": ["Tago Falls (7–9 m)", "Hidden Falls", "Cawa-Cawa Falls", "Oray Falls", "Natural pool swimming"],
       "whatToBring": ["Trekking shoes", "2L+ water", "Light snacks", "Insect repellent", "Dry bag"],
@@ -56,6 +58,7 @@
     "description": "LGU-accredited dive groups offer guided snorkeling and diving around vibrant reef ecosystems and rich marine life in the municipality's protected coastal waters.",
     "rate": "Rates vary by operator",
     "image": "assets/activities/act-snorkeling-diving.jpg",
+    "credit": "Sisira PH",
     "details": {
       "highlights": ["Coral reef ecosystems", "Sea turtles", "Tropical fish schools", "High water visibility", "Protected marine areas"],
       "whatToBring": ["Rash guard", "Waterproof camera", "Reef-safe sunscreen", "Snorkel gear (or rent on-site)"],

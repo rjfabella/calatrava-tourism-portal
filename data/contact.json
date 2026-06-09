@@ -27,6 +27,8 @@
       "type": "social"
     }
   ],
+  "mapMode": "iframe",
+  "mapIframeUrl": "https://storage.googleapis.com/maps-solutions-6kvpxep2a7/neighborhood-discovery/vqpx/neighborhood-discovery.html",
   "mapCenter": {
     "lat": 12.619,
     "lng": 122.071,

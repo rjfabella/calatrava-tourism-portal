@@ -593,7 +593,7 @@ function deleteActivity(i) {
 function openActivityModal(idx) {
   currentModalType = 'activity';
   currentModalIdx = idx;
-  const a = idx !== null ? data.activities[idx] : {id:'',number:'04',title:'',description:'',rate:''};
+  const a = idx !== null ? data.activities[idx] : {id:'',number:'04',title:'',description:'',rate:'',credit:''};
   document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Activity' : 'Add Activity';
   document.getElementById('modalBody').innerHTML = `
     <div class="form-grid single">
@@ -601,6 +601,7 @@ function openActivityModal(idx) {
       <div class="form-group"><label>Title *</label><input id="f_title" value="${a.title}"></div>
       <div class="form-group"><label>Description</label><textarea id="f_desc">${a.description}</textarea></div>
       <div class="form-group"><label>Rate / Price note</label><input id="f_rate" value="${a.rate}" placeholder="From ₱3,000 for 10 persons"></div>
+      <div class="form-group"><label>Photo credit</label><input id="f_credit" value="${a.credit || ''}" placeholder="e.g. RJ Fabella"></div>
     </div>`;
   document.getElementById('modal').classList.add('open');
 }
@@ -828,11 +829,29 @@ function renderContact() {
           </div>`).join('')}
       </div>
     </div>
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header"><h3>Map Display</h3></div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Mode</label>
+          <select oninput="updateContactField('mapMode',this.value)">
+            <option value="iframe" ${(c.mapMode||'iframe')==='iframe'?'selected':''}>Iframe widget (Neighborhood Discovery / My Maps)</option>
+            <option value="pins"   ${c.mapMode==='pins'?'selected':''}>Custom pins (from destinations &amp; accommodation)</option>
+          </select>
+          <p class="hint" style="margin-top:.4rem">Iframe = sealed Google widget, no editable pins. Pins = our JSON-driven markers, needs API key below.</p>
+        </div>
+        <div class="form-group">
+          <label>Iframe URL</label>
+          <input type="text" value="${c.mapIframeUrl||''}" oninput="updateContactField('mapIframeUrl',this.value)" placeholder="https://storage.googleapis.com/maps-solutions-.../neighborhood-discovery.html">
+          <p class="hint" style="margin-top:.4rem">Paste the <code>src</code> from a Google Maps Solutions widget or a Google My Maps embed. Only used when Mode = Iframe.</p>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <div class="card-header"><h3>Google Maps API</h3></div>
       <div class="card-body">
         <div class="form-group"><label>API Key</label><input type="text" value="${c.mapsApiKey||''}" oninput="updateContactField('mapsApiKey',this.value)"></div>
-        <p class="hint" style="margin-top:.4rem">⚠️ Restrict this key in Google Cloud Console → APIs & Services → Credentials → HTTP referrers.</p>
+        <p class="hint" style="margin-top:.4rem">⚠️ Only used in <strong>Pins</strong> mode. Restrict this key in Google Cloud Console → APIs &amp; Services → Credentials → HTTP referrers.</p>
         <button class="btn btn-success btn-sm" style="margin-top:.85rem" onclick="saveContact()">Save Contact Info</button>
       </div>
     </div>`;
@@ -898,7 +917,16 @@ function saveModal() {
     updateBadges();
 
   } else if (currentModalType === 'activity') {
-    const item = { id: g('f_title').toLowerCase().replace(/\s+/g,'-'), number: g('f_number'), title: g('f_title'), description: g('f_desc'), rate: g('f_rate') };
+    const existing = currentModalIdx !== null ? data.activities[currentModalIdx] : {};
+    const item = {
+      ...existing,
+      id: g('f_title').toLowerCase().replace(/\s+/g,'-'),
+      number: g('f_number'),
+      title: g('f_title'),
+      description: g('f_desc'),
+      rate: g('f_rate'),
+      credit: g('f_credit')
+    };
     if (!item.title) { toast('Title is required','error'); return; }
     if (currentModalIdx !== null) data.activities[currentModalIdx] = item;
     else data.activities.push(item);
