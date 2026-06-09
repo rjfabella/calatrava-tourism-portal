@@ -259,6 +259,7 @@ textarea{resize:vertical;min-height:80px}
                   <th>Type</th>
                   <th>Barangay</th>
                   <th>Fee</th>
+                  <th>Pin</th>
                   <th>Featured</th>
                   <th>Actions</th>
                 </tr>
@@ -494,6 +495,7 @@ function renderDestTable() {
       <td><span class="badge badge-${d.badge}">${d.category}</span></td>
       <td>${d.barangay}</td>
       <td style="font-size:12px">${d.fee}</td>
+      <td><span class="badge ${d.lat && d.lng ? 'badge-yes' : 'badge-no'}" title="${d.lat && d.lng ? `${d.lat}, ${d.lng}` : 'No coordinates set'}">${d.lat && d.lng ? '📍 Set' : '—'}</span></td>
       <td><span class="badge ${d.featured ? 'badge-yes' : 'badge-no'}">${d.featured ? 'Yes' : 'No'}</span></td>
       <td>
         <button class="btn btn-outline btn-sm" onclick="openDestModal(${realIdx})">Edit</button>
@@ -618,10 +620,11 @@ function renderAccommodation() {
         </div>
       </div>
       <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
-        ${a.image ? `<img src="${a.image}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        ${a.images?.[0] ? `<img src="${a.images[0]}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
         <div>
           <p style="font-size:12px;color:var(--muted)">Brgy. ${a.barangay}</p>
           <p style="font-size:13px;margin-top:.25rem">${a.description}</p>
+          <p style="font-size:11px;margin-top:.4rem;color:${a.lat && a.lng ? 'var(--success)' : 'var(--muted)'}">${a.lat && a.lng ? `📍 ${a.lat}, ${a.lng}` : '📍 No coordinates set'}</p>
         </div>
       </div>
     </div>`).join('');
@@ -639,16 +642,21 @@ function deleteAccom(i) {
 function openAccomModal(idx) {
   currentModalType = 'accommodation';
   currentModalIdx = idx;
-  const a = idx !== null ? data.accommodation[idx] : {id:'',name:'',type:'Beach Resort',barangay:'',description:'',image:null,detailsUrl:''};
+  const a = idx !== null ? data.accommodation[idx] : {id:'',name:'',type:'Beach Resort',barangay:'',description:'',image:null,detailsUrl:'',lat:'',lng:''};
   document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Resort' : 'Add Resort';
   document.getElementById('modalBody').innerHTML = `
-    <div class="form-grid single">
-      <div class="form-group"><label>Name *</label><input id="f_name" value="${a.name}"></div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Name *</label><input id="f_name" value="${a.name}"></div>
       <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${a.type}" placeholder="Beach Resort"></div>
       <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${a.barangay}"></div>
-      <div class="form-group"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
-      <div class="form-group"><label>Image path</label><input id="f_image" value="${a.image||''}" placeholder="assets/destinations/MyPhoto.jpg"></div>
-      <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="destinations.html#cove-aurelio"></div>
+      <div class="form-group full"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
+      <div class="form-group"><label>Latitude</label><input id="f_lat" value="${a.lat||''}" placeholder="12.619"></div>
+      <div class="form-group"><label>Longitude</label><input id="f_lng" value="${a.lng||''}" placeholder="122.071"></div>
+      <div class="form-group full"><label>Images (one path per line)</label>
+        <textarea id="f_images" style="min-height:70px">${(a.images||[]).join('\n')}</textarea>
+        <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code>. First image shown as cover.</span>
+      </div>
+      <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="accommodation.html#cove-aurelio"></div>
     </div>`;
   document.getElementById('modal').classList.add('open');
 }
@@ -899,7 +907,7 @@ function saveModal() {
     updateBadges();
 
   } else if (currentModalType === 'accommodation') {
-    const item = { id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), image: g('f_image')||null, detailsUrl: g('f_detailsUrl')||'' };
+    const item = { id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), lat: parseFloat(g('f_lat')) || null, lng: parseFloat(g('f_lng')) || null, images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean), detailsUrl: g('f_detailsUrl')||'' };
     if (!item.name) { toast('Name is required','error'); return; }
     if (currentModalIdx !== null) data.accommodation[currentModalIdx] = item;
     else data.accommodation.push(item);

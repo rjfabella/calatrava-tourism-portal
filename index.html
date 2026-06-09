@@ -89,11 +89,23 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .intro-text p{font-size:15px;line-height:1.85;color:rgba(255,255,255,.65);margin:1.5rem 0 2rem}
 .intro-link{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);text-decoration:none;border-bottom:1px solid rgba(212,168,106,.4);padding-bottom:2px;transition:color .3s,border-color .3s}
 .intro-link:hover{color:var(--white);border-color:var(--white)}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.06)}
-.stat{background:rgba(255,255,255,.04);padding:2.5rem 2rem}
-.stat-num{font-family:var(--fd);font-size:3.5rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.5rem}
-.stat-num sup{font-size:1.4rem;color:var(--gl)}
-.stat-lbl{font-size:10.5px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+/* ── ABOUT TABS ── */
+.intro-tabs{display:flex;flex-direction:column;min-height:260px}
+.tab-nav{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:1.5rem}
+.tab-btn{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.38);background:none;border:none;border-bottom:2px solid transparent;padding:.55rem 1.1rem .55rem 0;cursor:pointer;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap}
+.tab-btn:hover{color:rgba(255,255,255,.75)}
+.tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:tabIn .22s ease}
+.tab-panel p{font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:.85rem}
+.tab-panel p:last-child{margin-bottom:0}
+@keyframes tabIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* ── STATS STRIP ── */
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);max-width:1200px;margin:3.5rem auto 0}
+.stat{background:rgba(255,255,255,.04);padding:2rem 1.75rem}
+.stat-num{font-family:var(--fd);font-size:3rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.45rem}
+.stat-num sup{font-size:1.2rem;color:var(--gl)}
+.stat-lbl{font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 
 /* ── DESTINATIONS ── */
 .dest-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
@@ -126,8 +138,14 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .map-info .s-title{color:var(--white);font-size:clamp(1.8rem,3vw,2.8rem)}
 .map-info .s-title em{color:var(--gl)}
 .map-info p{font-size:14px;line-height:1.82;color:rgba(255,255,255,.62);margin:1.25rem 0 1.75rem}
-.map-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem}
-.map-tag{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:2px}
+.map-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.map-tag{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:2px;cursor:pointer;background:transparent;transition:color .2s,border-color .2s,background .2s}
+.map-tag:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.4)}
+.map-tag.active{color:#fff;border-color:var(--gold);background:rgba(184,138,69,.18)}
+.map-legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2rem}
+.map-legend-item{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.map-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.map-no-data{display:none;font-size:13px;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:1.5rem}
 .map-btn{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--gold);padding:14px 32px;border-radius:2px;transition:background .3s}
 .map-btn:hover{background:var(--gl)}
 /* map container — Google Maps replaces the SVG when online */
@@ -222,7 +240,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   .map-info{padding:3rem 2rem}
 }
 @media(max-width:580px){
-  .stats-grid{grid-template-columns:1fr 1fr}
+  .stats-strip{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr}
   .hero-actions{flex-direction:column;align-items:center}
   .contact-cards{flex-direction:column}
@@ -308,12 +326,26 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <p>Nestled on the northernmost coast of Tablas — the largest island in Romblon — Calatrava is a municipality of unspoiled beaches, dramatic waterfalls, and warm island hospitality. Budget-friendly and uncrowded, it offers what few destinations still can: genuine island life.</p>
       <a href="getting-here.html" class="intro-link">Plan your visit</a>
     </div>
-    <div id="stats-grid" class="stats-grid reveal">
-      <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Waterfalls</div></div>
-      <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Beaches &amp; Islands</div></div>
-      <div class="stat"><div class="stat-num">₱20</div><div class="stat-lbl">Env. Fee</div></div>
-      <div class="stat"><div class="stat-num">2<sup>hrs</sup></div><div class="stat-lbl">from Tablas Airport</div></div>
+    <div id="intro-tabs" class="intro-tabs reveal">
+      <div class="tab-nav" id="tab-nav">
+        <button class="tab-btn active" data-tab="geography">Geography</button>
+        <button class="tab-btn" data-tab="history">History</button>
+        <button class="tab-btn" data-tab="culture">Culture &amp; Language</button>
+        <button class="tab-btn" data-tab="trivia">Did You Know?</button>
+      </div>
+      <div id="tab-panels">
+        <div class="tab-panel active" id="tab-geography"><p>Loading…</p></div>
+        <div class="tab-panel" id="tab-history"></div>
+        <div class="tab-panel" id="tab-culture"></div>
+        <div class="tab-panel" id="tab-trivia"></div>
+      </div>
     </div>
+  </div>
+  <div id="stats-strip" class="stats-strip">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Waterfalls</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Beaches &amp; Islands</div></div>
+    <div class="stat"><div class="stat-num">₱20</div><div class="stat-lbl">Env. Fee</div></div>
+    <div class="stat"><div class="stat-num">2<sup>hrs</sup></div><div class="stat-lbl">from Tablas Airport</div></div>
   </div>
 </section>
 
@@ -397,13 +429,18 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <h2 class="s-title">Find every service, <em>in one place</em></h2>
       <p>Browse all destinations, accommodations, restaurants, health services, and transport points — with updated information, photos, and contact details.</p>
       <div class="map-tags">
-        <span class="map-tag">Destinations</span>
-        <span class="map-tag">Accommodation</span>
-        <span class="map-tag">Restaurants</span>
-        <span class="map-tag">Health</span>
-        <span class="map-tag">Transport</span>
+        <button class="map-tag active" data-filter="all">All</button>
+        <button class="map-tag" data-filter="destinations">Destinations</button>
+        <button class="map-tag" data-filter="accommodation">Accommodation</button>
+        <button class="map-tag" data-filter="establishments">Establishments</button>
       </div>
-      <a href="https://www.google.com/maps/place/Calatrava,+Romblon/@12.574,122.187,13z" target="_blank" rel="noopener" class="map-btn">Open in Google Maps</a>
+      <div class="map-legend">
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#B88A45"></span>Destinations</div>
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#2A7FA8"></span>Accommodation</div>
+        <div class="map-legend-item"><span class="map-legend-dot" style="background:#5E8B6E"></span>Establishments</div>
+      </div>
+      <p class="map-no-data" id="map-no-data">No pins available for this category yet.</p>
+      <a href="https://www.google.com/maps/place/Calatrava,+Romblon/@12.619,122.071,12z" target="_blank" rel="noopener" class="map-btn">Open in Google Maps</a>
     </div>
     <div id="map-container">
       <!-- Offline SVG map — replaced by Google Maps when online -->
@@ -628,41 +665,45 @@ function observeReveal() {
 observeReveal();
 
 // ── GOOGLE MAPS ──
-let mapDestinations = [];
-let mapInitPending = false; // flag: data arrived but Maps not ready yet
-let mapsReady = false;     // flag: Maps SDK loaded but data not ready yet
+const MAP_COLORS = {
+  destinations:   '#B88A45',
+  accommodation:  '#2A7FA8',
+  establishments: '#5E8B6E',
+};
+
+let mapData        = { destinations: [], accommodation: [] };
+let markerGroups   = { destinations: [], accommodation: [], establishments: [] };
+let mapInstance    = null;
+let mapInfoWindow  = null;
+let currentFilter  = 'all';
+let mapInitPending = false;
+let mapsReady      = false;
 
 function initMap() {
   mapsReady = true;
-  // If destinations data hasn't arrived yet, wait for it
-  if (!mapDestinations.length) { mapInitPending = true; return; }
+  if (!mapData.destinations.length) { mapInitPending = true; return; }
   buildMap();
 }
 
 function buildMap() {
   const mapOffline = document.getElementById('mapOffline');
-  const gMapEl    = document.getElementById('gMap');
+  const gMapEl     = document.getElementById('gMap');
   if (!mapOffline || !gMapEl) return;
 
   mapOffline.style.display = 'none';
   gMapEl.style.display = 'block';
 
-  // ── MAP INIT ──
-  // If a Cloud-based mapId is configured in contact.json, it controls styling
-  // via Google Cloud Console → Map Styles. Otherwise falls back to inline styles.
   const mapConfig = {
     center: {lat: window._mapCenter?.lat || 12.619, lng: window._mapCenter?.lng || 122.071},
-    zoom:   window._mapCenter?.zoom || 13,
-    mapTypeControl:   false,
+    zoom:   window._mapCenter?.zoom || 12,
+    mapTypeControl:    false,
     streetViewControl: false,
     fullscreenControl: true,
   };
 
   if (window._mapId) {
-    // Cloud-based styling: edit visually at console.cloud.google.com → Map Styles
     mapConfig.mapId = window._mapId;
   } else {
-    // Inline fallback styles (used when no mapId is configured)
     mapConfig.styles = [
       {featureType:'water',    elementType:'geometry',stylers:[{color:'#1A5C7A'}]},
       {featureType:'landscape',elementType:'geometry',stylers:[{color:'#F0E9DD'}]},
@@ -672,69 +713,46 @@ function buildMap() {
     ];
   }
 
-  const map = new google.maps.Map(gMapEl, mapConfig);
-  const infoWindow = new google.maps.InfoWindow();
+  mapInstance   = new google.maps.Map(gMapEl, mapConfig);
+  mapInfoWindow = new google.maps.InfoWindow();
 
-  // ── MARKER DATA ──
-  const points = mapDestinations.length ? mapDestinations : [
-    {name:'Tinagong Dagat',    type:'Saltwater Lake',   fee:'₱25',     category:'beach',lat:12.595,lng:122.205},
-    {name:'Lapus-Lapus',       type:'Beach',             fee:'₱25',     category:'beach',lat:12.592,lng:122.200},
-    {name:'Guindawahan Island',type:'Island',            fee:'₱20',     category:'beach',lat:12.598,lng:122.208},
-    {name:'Cove Aurelio',      type:'Beach Resort',      fee:'₱25',     category:'beach',lat:12.580,lng:122.195},
-    {name:'Turtle Cove',       type:'Beach Resort',      fee:'On-site', category:'beach',lat:12.578,lng:122.193},
-    {name:'Ngak-Ngak Beach',   type:'Beach Resort',      fee:'On-site', category:'beach',lat:12.576,lng:122.191},
-    {name:'Balai Azinan',      type:'Full Beach Resort', fee:'On-site', category:'resort',lat:12.560,lng:122.180},
-    {name:'Tago Falls',        type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.58953,lng:122.091959},
-    {name:'Cawa-Cawa Falls',   type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.548,lng:122.172},
-    {name:'Hidden Falls',      type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.550,lng:122.175},
-    {name:'Caw-i Falls',       type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.555,lng:122.165},
-    {name:'Oray Falls',        type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.558,lng:122.168},
-    {name:'Pangulo Falls',     type:'Waterfall',         fee:'Guide fee',category:'falls',lat:12.535,lng:122.160}
-  ];
-
-  const colors = {beach:'#B88A45', falls:'#D4A86A', resort:'#1E8B72'};
-
-  // ── MARKERS ──
-  // Uses AdvancedMarkerElement (requires mapId for Cloud Styling + libraries=marker)
-  // Falls back to legacy Marker if AdvancedMarkerElement isn't available
   const useAdvanced = !!(window._mapId && google.maps.marker?.AdvancedMarkerElement);
 
-  points.forEach(d => {
+  function placeMarker(d, filterKey) {
     if (!d.lat || !d.lng) return;
-    const color  = colors[d.category] || colors[d.badge] || '#B88A45';
+    const color   = MAP_COLORS[filterKey] || MAP_COLORS.destinations;
     const mapsUrl = `https://www.google.com/maps?q=${d.lat},${d.lng}`;
 
     const onInfoClick = (anchor) => {
-      infoWindow.setContent(`
+      mapInfoWindow.setContent(`
         <div style="font-family:'Jost',sans-serif;padding:4px 2px;min-width:170px">
-          <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#B88A45;margin-bottom:3px">${d.type || d.category}</div>
+          <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:${color};margin-bottom:3px">${d.type || d.category || filterKey}</div>
           <div style="font-size:15px;font-weight:500;color:#0C2233;margin-bottom:4px">${d.name}</div>
-          <div style="font-size:12px;color:#717B7B;margin-bottom:8px">Brgy. ${d.barangay || ''} &nbsp;·&nbsp; ${d.fee || ''}</div>
+          <div style="font-size:12px;color:#717B7B;margin-bottom:8px">${d.barangay ? `Brgy. ${d.barangay} &nbsp;·&nbsp; ` : ''}${d.fee || d.priceRange || ''}</div>
           <a href="${mapsUrl}" target="_blank" style="font-size:11px;color:#1A5C7A;text-decoration:none;font-weight:500">Open in Google Maps →</a>
         </div>`);
-      infoWindow.open({anchor, map});
+      mapInfoWindow.open({anchor, map: mapInstance});
     };
 
+    let marker;
     if (useAdvanced) {
-      // AdvancedMarkerElement with PinElement — styled, accessible, recommended
       const pin = new google.maps.marker.PinElement({
         background:  color,
         borderColor: '#FFFFFF',
         glyphColor:  '#FFFFFF',
         scale: 1.1
       });
-      const marker = new google.maps.marker.AdvancedMarkerElement({
+      marker = new google.maps.marker.AdvancedMarkerElement({
         position: {lat: +d.lat, lng: +d.lng},
-        map,
+        map: mapInstance,
         title: d.name,
         content: pin.element
       });
       marker.addListener('click', () => onInfoClick(marker));
     } else {
-      // Legacy Marker fallback (no mapId set, or marker library not loaded)
-      const marker = new google.maps.Marker({
+      marker = new google.maps.Marker({
         position: {lat: +d.lat, lng: +d.lng},
-        map,
+        map: mapInstance,
         title: d.name,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
@@ -745,13 +763,63 @@ function buildMap() {
       });
       marker.addListener('click', () => onInfoClick(marker));
     }
+    markerGroups[filterKey].push(marker);
+  }
+
+  // Fallback destination data if JSON failed to load
+  const destFallback = [
+    {name:'Tinagong Dagat',    type:'Saltwater Lake',  fee:'₱25',      category:'beach', lat:12.673,   lng:122.112},
+    {name:'Lapus-Lapus',       type:'Beach',            fee:'₱25',      category:'beach', lat:12.654,   lng:122.112},
+    {name:'Guindawahan Island',type:'Island',           fee:'₱20',      category:'beach', lat:12.668,   lng:122.118},
+    {name:'Cove Aurelio',      type:'Beach',            fee:'₱25',      category:'beach', lat:12.638,   lng:122.100},
+    {name:'Turtle Cove',       type:'Beach Resort',     fee:'On-site',  category:'beach', lat:12.635,   lng:122.098},
+    {name:'Ngak-Ngak Beach',   type:'Beach Resort',     fee:'On-site',  category:'beach', lat:12.632,   lng:122.096},
+    {name:'Balai Azinan',      type:'Beach Resort',     fee:'On-site',  category:'resort',lat:12.610,   lng:122.080},
+    {name:'Tago Falls',        type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.58953, lng:122.091959},
+    {name:'Cawa-Cawa Falls',   type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.592,   lng:122.067},
+    {name:'Hidden Falls',      type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.595,   lng:122.072},
+    {name:'Caw-i Falls',       type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.600,   lng:122.068},
+    {name:'Oray Falls',        type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.603,   lng:122.072},
+    {name:'Pangulo Falls',     type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.576,   lng:122.058}
+  ];
+
+  (mapData.destinations.length ? mapData.destinations : destFallback)
+    .forEach(d => placeMarker(d, 'destinations'));
+  mapData.accommodation.forEach(d => placeMarker(d, 'accommodation'));
+
+  // Wire filter buttons
+  document.querySelectorAll('.map-tag[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.map-tag[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.dataset.filter);
+    });
   });
+
+  applyFilter(currentFilter);
+}
+
+function applyFilter(filter) {
+  currentFilter = filter;
+  const notice  = document.getElementById('map-no-data');
+
+  Object.entries(markerGroups).forEach(([cat, markers]) => {
+    const visible = filter === 'all' || filter === cat;
+    markers.forEach(m => {
+      if (typeof m.setMap === 'function') m.setMap(visible ? mapInstance : null);
+      else m.map = visible ? mapInstance : null;
+    });
+  });
+
+  if (notice) {
+    const isEmpty = filter !== 'all' && !markerGroups[filter]?.length;
+    notice.style.display = isEmpty ? 'block' : 'none';
+  }
 }
 
 function loadMaps(apiKey) {
   if (!apiKey) return;
   const s = document.createElement('script');
-  // libraries=marker loads AdvancedMarkerElement support
   s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
   s.async = true;
   s.defer = true;
@@ -770,14 +838,41 @@ function renderEnvNotice(contact) {
 function renderAbout(about) {
   const intro = about.intro || {};
   const stats = about.stats || [];
+  const tabs  = about.tabs  || [];
+
   const itEl = document.getElementById('intro-text');
   if (itEl) itEl.innerHTML = `
     <span class="s-label">${intro.label || 'About Calatrava'}</span>
     <h2 class="s-title">${(intro.title||'').replace(intro.titleEmphasis||'__', `<em>${intro.titleEmphasis||''}</em>`)}</h2>
     <p>${intro.body || ''}</p>
     <a href="${intro.ctaUrl || 'getting-here.html'}" class="intro-link">${intro.ctaLabel || 'Plan your visit'}</a>`;
-  const sgEl = document.getElementById('stats-grid');
-  if (sgEl && stats.length) sgEl.innerHTML = stats.map(s =>
+
+  if (tabs.length) {
+    const navEl    = document.getElementById('tab-nav');
+    const panelsEl = document.getElementById('tab-panels');
+    if (navEl && panelsEl) {
+      navEl.innerHTML = tabs.map((t, i) =>
+        `<button class="tab-btn${i===0?' active':''}" data-tab="${t.id}">${t.label}</button>`
+      ).join('');
+      panelsEl.innerHTML = tabs.map((t, i) =>
+        `<div class="tab-panel${i===0?' active':''}" id="tab-${t.id}">${
+          (t.content || []).map(p => `<p>${p}</p>`).join('')
+        }</div>`
+      ).join('');
+      navEl.addEventListener('click', e => {
+        const btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        navEl.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        panelsEl.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('tab-' + btn.dataset.tab);
+        if (panel) panel.classList.add('active');
+      });
+    }
+  }
+
+  const ssEl = document.getElementById('stats-strip');
+  if (ssEl && stats.length) ssEl.innerHTML = stats.map(s =>
     `<div class="stat">
       <div class="stat-num">${s.value}${s.suffix ? `<sup>${s.suffix}</sup>` : ''}</div>
       <div class="stat-lbl">${s.label}</div>
@@ -861,13 +956,13 @@ function renderContactCards(contact) {
     safe('data/contact.json')
   ]);
 
-  if (destinations) {
-    mapDestinations = destinations;
-    if (mapInitPending) { buildMap(); mapInitPending = false; }
-  }
+  if (destinations)  mapData.destinations  = destinations;
+  if (accommodation) mapData.accommodation = accommodation;
   if (contact?.mapsApiKey)  { window._mapsKey    = contact.mapsApiKey; }
   if (contact?.mapId)       { window._mapId      = contact.mapId; }
   if (contact?.mapCenter)   { window._mapCenter  = contact.mapCenter; }
+
+  if (mapInitPending && mapData.destinations.length) { buildMap(); mapInitPending = false; }
 
   if (contact)      renderEnvNotice(contact);
   if (about)        renderAbout(about);

@@ -16,5 +16,43 @@
     { "id": "beaches", "value": "7", "suffix": "", "label": "Beaches & Islands" },
     { "id": "envfee", "value": "₱20", "suffix": "", "label": "Env. Fee" },
     { "id": "travel", "value": "2", "suffix": "hrs", "label": "from Tablas Airport" }
+  ],
+  "tabs": [
+    {
+      "id": "geography",
+      "label": "Geography",
+      "content": [
+        "Calatrava occupies the northernmost coast of Tablas Island — the largest island in Romblon province and one of the most expansive in the Sibuyan Sea. The municipality spans 86.70 km² (about 5.65% of the province's total land area) at coordinates 12°37′N, 122°04′E, roughly 248 km south of Manila.",
+        "The terrain shifts from flat coastal plains along the Tablas Strait — the narrow channel separating Tablas from Romblon Island — to rugged forested hills in the interior, reaching elevations up to 672 meters. Seven barangays make up the municipality: Balogo, Linao, Poblacion, Pagsangahan, Pangulo, San Roque, and Talisay, each with its own distinct character from coastal fishing villages to upland farming communities.",
+        "The climate is tropical wet, with a mean annual temperature of 29°C and annual rainfall of approximately 1,811 mm. The wettest months fall between June and September. Calatrava is bordered by San Agustin to the east and San Andres to the south and west."
+      ]
+    },
+    {
+      "id": "history",
+      "label": "History",
+      "content": [
+        "Before Spanish colonisation, the settlement was known as Andagao — named after a medicinal plant found abundantly across the land. The first permanent settlers arrived around 1810, migrating from Banton Island and central Tablas, bringing with them the Asi language and founding traditions that survive today.",
+        "By 1838 the community was organised under the Banton parish. In 1853, with the Spanish colonial administration creating 17 new towns across the Romblon District, Calatrava was formally proclaimed a municipality. It would later revert to visita status in 1868, annexed to Badajoz (later San Agustin), before being re-proclaimed.",
+        "The town's present name was conferred in 1881 by Spanish Governor Don José Fernández de Terrán, honouring the Military Order of Calatrava — a 12th-century Cistercian military brotherhood founded in Spain that defended Castile during the Reconquista. Calatrava was finally established as a fully independent municipality in 1968 under Republic Act 5317."
+      ]
+    },
+    {
+      "id": "culture",
+      "label": "Culture & Language",
+      "content": [
+        "Three indigenous languages are spoken across Calatrava's barangays, reflecting the diverse origins of its settlers: Asi is the primary tongue in Poblacion, Pagsangahan, and San Roque; Ini (Romblomanon) is spoken in Talisay, Linao, and Pangulo; while Onhan is dominant in Balogo. Filipino and English are also widely understood.",
+        "The municipality's economy is rooted in fishing, coconut farming, and small-scale agriculture. Tablas Island is one of the country's notable pili nut producers, and Romblon province is nationally recognised as the Marble Capital of the Philippines — a designation that speaks to the broader region's geological and cultural identity.",
+        "The surrounding waters and forests harbour remarkable biodiversity. The Tablas Fantail, Tablas Drongo, and Tablas Bulbul are bird species endemic to the island, found nowhere else on Earth. Sea turtles and dolphins are also sighted along the coastline, making marine conservation an important part of local life."
+      ]
+    },
+    {
+      "id": "trivia",
+      "label": "Did You Know?",
+      "content": [
+        "The name \"Calatrava\" traces back to a medieval Spanish military order — the Order of Calatrava — founded in the 12th century and one of the most powerful chivalric institutions of the Reconquista. Today, the name lives on in dozens of places across the Spanish-speaking world, from Spain to the Philippines.",
+        "Calatrava's pre-colonial name, Andagao, referred to a medicinal plant once abundant in the area. The settlement's first documented settlers arrived from Banton Island in 1810, making the town over two centuries old — though human habitation of the broader Romblon archipelago dates back thousands of years.",
+        "The municipality's population has grown from 4,754 in 1970 to over 11,000 today, with a notably young median age of just 21 years. Poverty incidence has fallen sharply — from 57% in 2000 to around 27% in 2021 — reflecting steady community development in one of the Philippines' more remote island municipalities."
+      ]
+    }
   ]
 }
