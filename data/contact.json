@@ -28,9 +28,9 @@
     }
   ],
   "mapCenter": {
-    "lat": 12.574,
-    "lng": 122.187,
-    "zoom": 13
+    "lat": 12.619,
+    "lng": 122.071,
+    "zoom": 12
   },
   "mapsApiKey": "AIzaSyCV6vFCuzYIagF35FkznY6u8OzqW9t9LFw",
   "mapId": ""

@@ -17,8 +17,8 @@
       "assets/destinations/Destinations_TinagongDagat3_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_TinagongDagat1_thumb.jpg",
-    "lat": 12.595,
-    "lng": 122.205
+    "lat": 12.673,
+    "lng": 122.112
   },
   {
     "id": "lapus-lapus",
@@ -38,8 +38,8 @@
       "assets/destinations/Destinations_LapusLapus3_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_LapusLapus1_thumb.jpg",
-    "lat": 12.592,
-    "lng": 122.200
+    "lat": 12.654,
+    "lng": 122.112
   },
   {
     "id": "guindawahan-island",
@@ -60,8 +60,8 @@
       "assets/destinations/Destinations_GuindawahanIsland4_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_GuindawahanIsland1_thumb.jpg",
-    "lat": 12.598,
-    "lng": 122.208
+    "lat": 12.668,
+    "lng": 122.118
   },
   {
     "id": "cove-aurelio",
@@ -82,8 +82,8 @@
       "assets/destinations/Destinations_CoveAurelio4_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_CoveAurelio1_thumb.jpg",
-    "lat": 12.580,
-    "lng": 122.195
+    "lat": 12.638,
+    "lng": 122.100
   },
   {
     "id": "turtle-cove",
@@ -99,8 +99,8 @@
     "featuredOrder": null,
     "images": [],
     "thumbnail": null,
-    "lat": 12.578,
-    "lng": 122.193
+    "lat": 12.635,
+    "lng": 122.098
   },
   {
     "id": "ngak-ngak",
@@ -116,8 +116,8 @@
     "featuredOrder": null,
     "images": [],
     "thumbnail": null,
-    "lat": 12.576,
-    "lng": 122.191
+    "lat": 12.632,
+    "lng": 122.096
   },
   {
     "id": "balai-azinan",
@@ -133,8 +133,8 @@
     "featuredOrder": null,
     "images": [],
     "thumbnail": null,
-    "lat": 12.560,
-    "lng": 122.180
+    "lat": 12.610,
+    "lng": 122.080
   },
   {
     "id": "cawi-falls",
@@ -150,8 +150,8 @@
     "featuredOrder": null,
     "images": [],
     "thumbnail": null,
-    "lat": 12.555,
-    "lng": 122.165
+    "lat": 12.600,
+    "lng": 122.068
   },
   {
     "id": "oray-falls",
@@ -169,8 +169,8 @@
       "assets/destinations/Destination_OrayFalls1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_OrayFalls1_thumb.jpg",
-    "lat": 12.558,
-    "lng": 122.168
+    "lat": 12.603,
+    "lng": 122.072
   },
   {
     "id": "tago-falls",
@@ -189,8 +189,8 @@
       "assets/destinations/Destination_TagoFalls2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_TagoFalls1_thumb.jpg",
-    "lat": 12.545,
-    "lng": 122.170
+    "lat": 12.58953,
+    "lng": 122.091959
   },
   {
     "id": "cawa-cawa-falls",
@@ -208,8 +208,8 @@
       "assets/destinations/Destination_CawacawaFalls1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_CawacawaFalls1_thumb.jpg",
-    "lat": 12.548,
-    "lng": 122.172
+    "lat": 12.592,
+    "lng": 122.067
   },
   {
     "id": "hidden-falls",
@@ -227,8 +227,8 @@
       "assets/destinations/Destination_HiddenFalls1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_HiddenFalls1_thumb.jpg",
-    "lat": 12.550,
-    "lng": 122.175
+    "lat": 12.595,
+    "lng": 122.072
   },
   {
     "id": "pangulo-falls",
@@ -246,7 +246,7 @@
       "assets/destinations/Destinations_PanguloFalls1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_PanguloFalls1_thumb.jpg",
-    "lat": 12.535,
-    "lng": 122.160
+    "lat": 12.576,
+    "lng": 122.058
   }
 ]
