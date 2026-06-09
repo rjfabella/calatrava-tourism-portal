@@ -135,6 +135,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .act-title{font-family:var(--fd);font-size:1.65rem;font-weight:400;color:var(--white);line-height:1.2;margin-bottom:.7rem}
 .act-desc{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.68);margin-bottom:1rem}
 .act-rate{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gl);border-top:1px solid rgba(212,168,106,.3);padding-top:.7rem}
+.act-credit{position:absolute;top:.85rem;right:1rem;z-index:2;font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.45);font-style:italic;pointer-events:none}
 
 /* ── ACTIVITY MODAL ── */
 .act-modal-bg{position:fixed;inset:0;background:rgba(5,14,25,.85);backdrop-filter:blur(5px);z-index:900;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -441,6 +442,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <div class="act-card reveal">
         <div class="act-bg" style="background-image:url('assets/activities/act-island-hopping.jpg')"></div>
         <div class="act-overlay"></div>
+        <div class="act-credit">Photo: RJ Fabella</div>
         <div class="act-content">
           <div class="act-num">01</div>
           <div class="act-title">Island Hopping</div>
@@ -451,6 +453,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <div class="act-card reveal">
         <div class="act-bg" style="background-image:url('assets/activities/act-waterfall-trekking.jpg')"></div>
         <div class="act-overlay"></div>
+        <div class="act-credit">Photo: Calatrava Tourism Council</div>
         <div class="act-content">
           <div class="act-num">02</div>
           <div class="act-title">Waterfall Trekking</div>
@@ -461,6 +464,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <div class="act-card reveal">
         <div class="act-bg" style="background-image:url('assets/activities/act-snorkeling-diving.jpg')"></div>
         <div class="act-overlay"></div>
+        <div class="act-credit">Photo: Sisira PH</div>
         <div class="act-content">
           <div class="act-num">03</div>
           <div class="act-title">Snorkeling &amp; Diving</div>
@@ -479,13 +483,13 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <span class="s-label">Interactive Map</span>
       <h2 class="s-title">Find every service, <em>in one place</em></h2>
       <p>Browse all destinations, accommodations, restaurants, health services, and transport points — with updated information, photos, and contact details.</p>
-      <div class="map-tags">
+      <div class="map-tags" id="map-tags" style="display:none">
         <button class="map-tag active" data-filter="all">All</button>
         <button class="map-tag" data-filter="destinations">Destinations</button>
         <button class="map-tag" data-filter="accommodation">Accommodation</button>
         <button class="map-tag" data-filter="establishments">Establishments</button>
       </div>
-      <div class="map-legend">
+      <div class="map-legend" id="map-legend" style="display:none">
         <div class="map-legend-item"><span class="map-legend-dot" style="background:#B88A45"></span>Destinations</div>
         <div class="map-legend-item"><span class="map-legend-dot" style="background:#2A7FA8"></span>Accommodation</div>
         <div class="map-legend-item"><span class="map-legend-dot" style="background:#5E8B6E"></span>Establishments</div>
@@ -494,8 +498,15 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
       <a href="https://www.google.com/maps/place/Calatrava,+Romblon/@12.619,122.071,12z" target="_blank" rel="noopener" class="map-btn">Open in Google Maps</a>
     </div>
     <div id="map-container">
-      <!-- Offline SVG map — replaced by Google Maps when online -->
-      <div class="map-offline" id="mapOffline">
+      <iframe id="mapIframe"
+        src="https://storage.googleapis.com/maps-solutions-6kvpxep2a7/neighborhood-discovery/vqpx/neighborhood-discovery.html"
+        width="100%" height="100%"
+        style="border:0;"
+        loading="lazy"
+        title="Calatrava neighborhood map"></iframe>
+      <div id="gMap" style="display:none"></div>
+      <!-- Offline SVG fallback — hidden by default, restore by removing the iframe above -->
+      <div class="map-offline" id="mapOffline" style="display:none">
         <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" aria-label="Stylized map of Calatrava, Romblon">
           <!-- Water background -->
           <rect width="600" height="500" fill="#1A5C7A"/>
@@ -551,7 +562,6 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
           <text x="430" y="479" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.5)" id="mapStatus">Connects to Google Maps online</text>
         </svg>
       </div>
-      <div id="gMap"></div>
     </div>
   </div>
 </section>
@@ -646,6 +656,15 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
         <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" aria-label="Facebook page">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
+        <a href="https://www.instagram.com/calatravatourismcouncil/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.youtube.com/watch?v=e5YURlx8uoM" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 5 12 5 12 5s-7.1 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.4 8.9.4 8.9.4s7.1 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5zM9.75 15.5v-7l6 3.5z"/></svg>
+        </a>
+        <a href="mailto:andagaotour@gmail.com" aria-label="Email Calatrava Tourism">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
       </div>
     </div>
     <div class="f-col">
@@ -672,6 +691,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
         <li><a href="tel:09193350314">0919 335 0314</a></li>
         <li><a href="tel:09399154193">0939 915 4193</a></li>
         <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
+        <li><a href="mailto:andagaotour@gmail.com">andagaotour@gmail.com</a></li>
       </ul>
     </div>
   </div>
@@ -715,34 +735,67 @@ function observeReveal() {
 }
 observeReveal();
 
-// ── GOOGLE MAPS ──
+// ── MAP MODE SWITCH ──
+// "iframe" → embed contact.mapIframeUrl (Neighborhood Discovery, My Maps, etc.)
+// "pins"   → JS Google Maps with markers from destinations.json + accommodation.json
 const MAP_COLORS = {
   destinations:   '#B88A45',
   accommodation:  '#2A7FA8',
   establishments: '#5E8B6E',
 };
 
-let mapData        = { destinations: [], accommodation: [] };
-let markerGroups   = { destinations: [], accommodation: [], establishments: [] };
-let mapInstance    = null;
-let mapInfoWindow  = null;
-let currentFilter  = 'all';
-let mapInitPending = false;
-let mapsReady      = false;
+let mapData       = { destinations: [], accommodation: [] };
+let markerGroups  = { destinations: [], accommodation: [], establishments: [] };
+let mapInstance   = null;
+let mapInfoWindow = null;
+let currentFilter = 'all';
+let mapsReady     = false;
+let pendingPins   = false;
+
+function applyMapMode(contact) {
+  const mode = contact?.mapMode === 'pins' ? 'pins' : 'iframe';
+  const iframe = document.getElementById('mapIframe');
+  const gMap   = document.getElementById('gMap');
+  const tags   = document.getElementById('map-tags');
+  const legend = document.getElementById('map-legend');
+
+  if (mode === 'iframe') {
+    if (iframe && contact?.mapIframeUrl) iframe.src = contact.mapIframeUrl;
+    if (iframe) iframe.style.display = 'block';
+    if (gMap)   gMap.style.display   = 'none';
+    if (tags)   tags.style.display   = 'none';
+    if (legend) legend.style.display = 'none';
+    return;
+  }
+
+  // pins mode
+  if (iframe) { iframe.src = 'about:blank'; iframe.style.display = 'none'; }
+  if (gMap)   gMap.style.display   = 'block';
+  if (tags)   tags.style.display   = 'flex';
+  if (legend) legend.style.display = 'flex';
+
+  if (contact?.mapCenter) window._mapCenter = contact.mapCenter;
+  if (contact?.mapId)     window._mapId     = contact.mapId;
+
+  if (mapsReady) {
+    if (mapData.destinations.length) buildMap();
+    else pendingPins = true;
+  } else if (contact?.mapsApiKey) {
+    loadMaps(contact.mapsApiKey);
+  } else {
+    console.warn('Pins mode selected but no Google Maps API key configured.');
+  }
+}
 
 function initMap() {
   mapsReady = true;
-  if (!mapData.destinations.length) { mapInitPending = true; return; }
-  buildMap();
+  if (mapData.destinations.length) buildMap();
+  else pendingPins = true;
 }
 
 function buildMap() {
-  const mapOffline = document.getElementById('mapOffline');
-  const gMapEl     = document.getElementById('gMap');
-  if (!mapOffline || !gMapEl) return;
-
-  mapOffline.style.display = 'none';
-  gMapEl.style.display = 'block';
+  const gMapEl = document.getElementById('gMap');
+  if (!gMapEl) return;
 
   const mapConfig = {
     center: {lat: window._mapCenter?.lat || 12.619, lng: window._mapCenter?.lng || 122.071},
@@ -764,6 +817,8 @@ function buildMap() {
     ];
   }
 
+  // Reset marker groups in case buildMap runs twice (mode toggled at runtime)
+  markerGroups = { destinations: [], accommodation: [], establishments: [] };
   mapInstance   = new google.maps.Map(gMapEl, mapConfig);
   mapInfoWindow = new google.maps.InfoWindow();
 
@@ -817,31 +872,12 @@ function buildMap() {
     markerGroups[filterKey].push(marker);
   }
 
-  // Fallback destination data if JSON failed to load
-  const destFallback = [
-    {name:'Tinagong Dagat',    type:'Saltwater Lake',  fee:'₱25',      category:'beach', lat:12.673,   lng:122.112},
-    {name:'Lapus-Lapus',       type:'Beach',            fee:'₱25',      category:'beach', lat:12.654,   lng:122.112},
-    {name:'Guindawahan Island',type:'Island',           fee:'₱20',      category:'beach', lat:12.668,   lng:122.118},
-    {name:'Cove Aurelio',      type:'Beach',            fee:'₱25',      category:'beach', lat:12.638,   lng:122.100},
-    {name:'Turtle Cove',       type:'Beach Resort',     fee:'On-site',  category:'beach', lat:12.635,   lng:122.098},
-    {name:'Ngak-Ngak Beach',   type:'Beach Resort',     fee:'On-site',  category:'beach', lat:12.632,   lng:122.096},
-    {name:'Balai Azinan',      type:'Beach Resort',     fee:'On-site',  category:'resort',lat:12.610,   lng:122.080},
-    {name:'Tago Falls',        type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.58953, lng:122.091959},
-    {name:'Cawa-Cawa Falls',   type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.592,   lng:122.067},
-    {name:'Hidden Falls',      type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.595,   lng:122.072},
-    {name:'Caw-i Falls',       type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.600,   lng:122.068},
-    {name:'Oray Falls',        type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.603,   lng:122.072},
-    {name:'Pangulo Falls',     type:'Waterfall',        fee:'Guide fee',category:'falls', lat:12.576,   lng:122.058}
-  ];
-
-  (mapData.destinations.length ? mapData.destinations : destFallback)
-    .forEach(d => placeMarker(d, 'destinations'));
+  mapData.destinations.forEach(d => placeMarker(d, 'destinations'));
   mapData.accommodation.forEach(d => placeMarker(d, 'accommodation'));
 
-  // Wire filter buttons
-  document.querySelectorAll('.map-tag[data-filter]').forEach(btn => {
+  document.querySelectorAll('#map-tags .map-tag[data-filter]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.map-tag[data-filter]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#map-tags .map-tag[data-filter]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       applyFilter(btn.dataset.filter);
     });
@@ -869,15 +905,15 @@ function applyFilter(filter) {
 }
 
 function loadMaps(apiKey) {
-  if (!apiKey) return;
+  if (!apiKey || document.getElementById('gmaps-script')) return;
   const s = document.createElement('script');
-  s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
+  s.id    = 'gmaps-script';
+  s.src   = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
   s.async = true;
   s.defer = true;
   s.onerror = () => console.warn('Google Maps failed to load — check API key and billing.');
   document.head.appendChild(s);
 }
-window.addEventListener('online', () => { if (!mapsReady && window._mapsKey) loadMaps(window._mapsKey); });
 
 // ── RENDERERS ──
 function renderEnvNotice(contact) {
@@ -997,11 +1033,7 @@ function renderContactCards(contact) {
 
   if (destinations)  mapData.destinations  = destinations;
   if (accommodation) mapData.accommodation = accommodation;
-  if (contact?.mapsApiKey)  { window._mapsKey    = contact.mapsApiKey; }
-  if (contact?.mapId)       { window._mapId      = contact.mapId; }
-  if (contact?.mapCenter)   { window._mapCenter  = contact.mapCenter; }
-
-  if (mapInitPending && mapData.destinations.length) { buildMap(); mapInitPending = false; }
+  if (pendingPins && mapData.destinations.length) { buildMap(); pendingPins = false; }
 
   if (contact)      renderEnvNotice(contact);
   if (about)        renderAbout(about);
@@ -1009,11 +1041,9 @@ function renderContactCards(contact) {
   if (activities)   renderActivities(activities);
   if (accommodation) renderAccommodation(accommodation);
   if (contact)      renderContactCards(contact);
+  applyMapMode(contact || {});
 
   observeReveal();
-
-  // IMPORTANT: Restrict this API key in Google Cloud Console → APIs & Services → Credentials
-  if (contact?.mapsApiKey) loadMaps(contact.mapsApiKey);
 })();
 
 // ── ACTIVITY MODAL ──
@@ -1027,6 +1057,7 @@ function renderActivities(activities) {
     `<div class="act-card reveal" onclick="openActivityModal('${a.id}')">
       <div class="act-bg"${a.image ? ` style="background-image:url('${a.image}')"` : ''}></div>
       <div class="act-overlay"></div>
+      ${a.credit ? `<div class="act-credit">Photo: ${a.credit}</div>` : ''}
       <div class="act-content">
         <div class="act-num">${a.number}</div>
         <div class="act-title">${a.title}</div>
