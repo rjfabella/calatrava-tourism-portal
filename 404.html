@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Calatrava, Romblon</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--gold:#B88A45;--gl:#D4A86A;--white:#fff;
+  --fd:'Cormorant Garamond',Georgia,serif;--fb:'Jost','Segoe UI',system-ui,sans-serif;
+}
+body{font-family:var(--fb);background:var(--deep);color:var(--white);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;overflow:hidden}
+.wrap{position:relative;z-index:1;max-width:560px}
+.code{font-family:var(--fd);font-size:clamp(6rem,18vw,11rem);font-weight:300;line-height:1;color:rgba(255,255,255,.12)}
+h1{font-family:var(--fd);font-size:clamp(2rem,6vw,3.2rem);font-weight:300;line-height:1.15;margin:-2.5rem 0 1rem}
+h1 em{font-style:italic;color:var(--gl)}
+p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.78);margin-bottom:2.25rem}
+.actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.actions a{font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.85rem 1.7rem;border-radius:3px;transition:background .3s,color .3s,border-color .3s}
+.btn-solid{background:var(--gold);color:var(--white)}
+.btn-solid:hover{background:#a07a3a}
+.btn-line{color:var(--gl);border:1px solid rgba(212,168,106,.4)}
+.btn-line:hover{background:var(--gold);color:var(--white);border-color:var(--gold)}
+a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* drifting waves backdrop */
+.waves{position:fixed;left:0;right:0;bottom:-2px;opacity:.35;pointer-events:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="code">404</div>
+  <h1>Lost at sea? <em>It happens to the best explorers.</em></h1>
+  <p>The page you're looking for has drifted away — but Calatrava's hidden lakes, waterfalls, and beaches are right where you left them.</p>
+  <div class="actions">
+    <a class="btn-solid" href="/">Back to Home</a>
+    <a class="btn-line" href="/destinations.html">Explore Destinations</a>
+    <a class="btn-line" href="/getting-here.html">Getting Here</a>
+  </div>
+</div>
+<svg class="waves" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M0 70 Q 180 30 360 70 T 720 70 T 1080 70 T 1440 70 V 120 H 0 Z" fill="#1A5C7A" opacity=".6"/>
+  <path d="M0 90 Q 180 55 360 90 T 720 90 T 1080 90 T 1440 90 V 120 H 0 Z" fill="#1E8B72" opacity=".5"/>
+</svg>
+</body>
+</html>

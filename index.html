@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calatrava, Romblon — Official Tourism Portal</title>
+<meta name="description" content="Official tourism portal of Calatrava, Romblon, Philippines — hidden saltwater lakes, white-sand beaches, waterfalls, island hopping, and where to stay.">
+<!-- Social sharing (Open Graph) — TODO: replace calatrava-tourism.netlify.app with your production domain -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calatrava Tourism">
+<meta property="og:title" content="Calatrava, Romblon — Official Tourism Portal">
+<meta property="og:description" content="Hidden saltwater lakes, white-sand beaches, waterfalls, and island hopping in Calatrava, Romblon, Philippines.">
+<meta property="og:url" content="https://calatrava-tourism.netlify.app/">
+<meta property="og:image" content="https://calatrava-tourism.netlify.app/assets/destinations/Destinations_TinagongDagat1_web.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <!-- Google Fonts: loads when online, falls back to system fonts offline -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +56,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .mob-nav.open{display:flex}
 .mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
 .mob-nav a:hover{color:var(--gl)}
-.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.75);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
 .mob-close:hover{color:var(--white)}
 
 /* ── HERO ── */
@@ -66,7 +75,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .btn-primary:hover{background:var(--gold);color:var(--white)}
 .btn-ghost{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--white);padding:14px 34px;border-radius:2px;border:1px solid rgba(255,255,255,.4);transition:border-color .3s,background .3s}
 .btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:10px;letter-spacing:.22em;text-transform:uppercase;animation:fadeUp 1s ease .65s both}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.75);font-size:10px;letter-spacing:.22em;text-transform:uppercase;animation:fadeUp 1s ease .65s both}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:linePulse 2.2s ease-in-out infinite}
 
 /* ── ENV NOTICE ── */
@@ -86,18 +95,18 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .intro-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .intro-text .s-title{color:var(--white)}
 .intro-text .s-title em{color:var(--gl)}
-.intro-text p{font-size:15px;line-height:1.85;color:rgba(255,255,255,.65);margin:1.5rem 0 2rem}
+.intro-text p{font-size:15px;line-height:1.85;color:rgba(255,255,255,.78);margin:1.5rem 0 2rem}
 .intro-link{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gl);text-decoration:none;border-bottom:1px solid rgba(212,168,106,.4);padding-bottom:2px;transition:color .3s,border-color .3s}
 .intro-link:hover{color:var(--white);border-color:var(--white)}
 /* ── ABOUT TABS ── */
 .intro-tabs{display:flex;flex-direction:column;min-height:260px}
 .tab-nav{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:1.5rem}
-.tab-btn{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.38);background:none;border:none;border-bottom:2px solid transparent;padding:.55rem 1.1rem .55rem 0;cursor:pointer;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap}
+.tab-btn{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.7);background:none;border:none;border-bottom:2px solid transparent;padding:.55rem 1.1rem .55rem 0;cursor:pointer;margin-bottom:-1px;transition:color .2s,border-color .2s;white-space:nowrap}
 .tab-btn:hover{color:rgba(255,255,255,.75)}
 .tab-btn.active{color:var(--gl);border-bottom-color:var(--gold)}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:tabIn .22s ease}
-.tab-panel p{font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:.85rem}
+.tab-panel p{font-size:13.5px;line-height:1.85;color:rgba(255,255,255,.78);margin-bottom:.85rem}
 .tab-panel p:last-child{margin-bottom:0}
 @keyframes tabIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 /* ── STATS STRIP ── */
@@ -105,7 +114,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .stat{background:rgba(255,255,255,.04);padding:2rem 1.75rem}
 .stat-num{font-family:var(--fd);font-size:3rem;font-weight:300;color:var(--white);line-height:1;margin-bottom:.45rem}
 .stat-num sup{font-size:1.2rem;color:var(--gl)}
-.stat-lbl{font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.stat-lbl{font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 
 /* ── DESTINATIONS ── */
 .dest-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
@@ -119,9 +128,9 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .dest-card:hover .dest-img{transform:scale(1.04)}
 .dest-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,34,51,.88) 0%,transparent 55%)}
 .dest-info{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
-.dest-type{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.4rem}
+.dest-type{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.78);margin-bottom:.4rem}
 .dest-name{font-family:var(--fd);font-size:clamp(1.3rem,2.5vw,2rem);font-weight:400;color:var(--white);line-height:1.2}
-.dest-loc{font-size:11px;color:rgba(255,255,255,.52);margin-top:.35rem}
+.dest-loc{font-size:11px;color:rgba(255,255,255,.75);margin-top:.35rem}
 
 /* ── ACTIVITIES ── */
 .acts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
@@ -133,9 +142,9 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .act-content{position:relative;z-index:2;padding:2rem 1.75rem}
 .act-num{font-size:.72rem;font-weight:500;letter-spacing:.2em;color:var(--gl);margin-bottom:.6rem;font-family:var(--fs)}
 .act-title{font-family:var(--fd);font-size:1.65rem;font-weight:400;color:var(--white);line-height:1.2;margin-bottom:.7rem}
-.act-desc{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.68);margin-bottom:1rem}
+.act-desc{font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.78);margin-bottom:1rem}
 .act-rate{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gl);border-top:1px solid rgba(212,168,106,.3);padding-top:.7rem}
-.act-credit{position:absolute;top:.85rem;right:1rem;z-index:2;font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.45);font-style:italic;pointer-events:none}
+.act-credit{position:absolute;top:.85rem;right:1rem;z-index:2;font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.7);font-style:italic;pointer-events:none}
 
 /* ── ACTIVITY MODAL ── */
 .act-modal-bg{position:fixed;inset:0;background:rgba(5,14,25,.85);backdrop-filter:blur(5px);z-index:900;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -151,19 +160,19 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .act-modal-close{position:absolute;top:.85rem;right:.85rem;background:rgba(12,34,51,.7);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:34px;height:34px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s,color .2s;line-height:1}
 .act-modal-close:hover{background:rgba(255,255,255,.12);color:#fff}
 .act-modal-body{padding:1.75rem;overflow-y:auto}
-.act-modal-desc{font-size:14px;line-height:1.85;color:rgba(255,255,255,.6);padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:1.5rem}
+.act-modal-desc{font-size:14px;line-height:1.85;color:rgba(255,255,255,.78);padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:1.5rem}
 .act-modal-section{margin-bottom:1.5rem}
 .act-modal-section:last-child{margin-bottom:0}
 .act-modal-section-label{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gl);margin-bottom:.75rem}
 .act-modal-tags{display:flex;flex-wrap:wrap;gap:6px}
-.act-modal-tag{font-size:12px;color:rgba(255,255,255,.58);background:rgba(255,255,255,.06);padding:.3rem .7rem;border:1px solid rgba(255,255,255,.07)}
+.act-modal-tag{font-size:12px;color:rgba(255,255,255,.75);background:rgba(255,255,255,.06);padding:.3rem .7rem;border:1px solid rgba(255,255,255,.07)}
 .act-modal-meta{display:flex;gap:8px;flex-wrap:wrap}
-.act-modal-meta-item{font-size:12px;color:rgba(255,255,255,.55);background:rgba(184,138,69,.1);border:1px solid rgba(212,168,106,.2);padding:.3rem .8rem}
+.act-modal-meta-item{font-size:12px;color:rgba(255,255,255,.75);background:rgba(184,138,69,.1);border:1px solid rgba(212,168,106,.2);padding:.3rem .8rem}
 .act-contact-list{display:flex;flex-direction:column;gap:6px}
 .act-contact{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);padding:.9rem 1.1rem;text-decoration:none;border:1px solid rgba(255,255,255,.06);transition:background .2s,border-color .2s;gap:1rem}
 .act-contact:hover{background:rgba(255,255,255,.08);border-color:rgba(212,168,106,.3)}
 .act-contact-name{font-size:13px;font-weight:500;color:var(--white);margin-bottom:.18rem}
-.act-contact-role{font-size:11px;color:rgba(255,255,255,.38);letter-spacing:.02em}
+.act-contact-role{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.02em}
 .act-contact-phone{font-size:13px;color:var(--gl);font-weight:500;white-space:nowrap;flex-shrink:0}
 .act-card{cursor:pointer}
 @media(max-width:580px){
@@ -177,15 +186,15 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .map-info{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;background:var(--deep)}
 .map-info .s-title{color:var(--white);font-size:clamp(1.8rem,3vw,2.8rem)}
 .map-info .s-title em{color:var(--gl)}
-.map-info p{font-size:14px;line-height:1.82;color:rgba(255,255,255,.62);margin:1.25rem 0 1.75rem}
+.map-info p{font-size:14px;line-height:1.82;color:rgba(255,255,255,.78);margin:1.25rem 0 1.75rem}
 .map-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
-.map-tag{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:2px;cursor:pointer;background:transparent;transition:color .2s,border-color .2s,background .2s}
-.map-tag:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.4)}
+.map-tag{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:2px;cursor:pointer;background:transparent;transition:color .2s,border-color .2s,background .2s}
+.map-tag:hover{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.7)}
 .map-tag.active{color:#fff;border-color:var(--gold);background:rgba(184,138,69,.18)}
 .map-legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2rem}
-.map-legend-item{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.map-legend-item{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)}
 .map-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.map-no-data{display:none;font-size:13px;color:rgba(255,255,255,.45);font-style:italic;margin-bottom:1.5rem}
+.map-no-data{display:none;font-size:13px;color:rgba(255,255,255,.7);font-style:italic;margin-bottom:1.5rem}
 .map-btn{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:var(--deep);background:var(--gold);padding:14px 32px;border-radius:2px;transition:background .3s}
 .map-btn:hover{background:var(--gl)}
 /* map container — Google Maps replaces the SVG when online */
@@ -225,13 +234,13 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
 .f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
-.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:1.5rem}
+.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:1.5rem}
 .f-social{display:flex;gap:10px}
-.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);text-decoration:none;transition:border-color .3s,color .3s}
 .f-social a:hover{border-color:var(--gold);color:var(--gold)}
 .f-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
 .f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-.f-col ul a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s}
+.f-col ul a{font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .3s}
 .f-col ul a:hover{color:var(--white)}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-bottom p{font-size:11px;color:rgba(255,255,255,.28)}
@@ -285,9 +294,65 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   .hero-actions{flex-direction:column;align-items:center}
   .contact-cards{flex-direction:column}
 }
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;left:-9999px;z-index:300}
+.skip-link:focus{left:1rem;top:1rem;background:var(--deep);color:var(--white);padding:.7rem 1.2rem;border-radius:4px;font-size:13px;letter-spacing:.05em;text-decoration:none;outline:2px solid var(--gold);outline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ── VIDEOS (click-to-play YouTube facades) ── */
+.videos-section{background:var(--deep);padding:6rem 2.5rem}
+.videos-inner{max-width:1280px;margin:0 auto}
+.videos-section .s-title{color:var(--white)}
+.videos-section .s-title em{color:var(--gl)}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2.75rem}
+.video-tile{position:relative}
+.video-frame{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#000;cursor:pointer}
+.video-frame img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .3s,transform .5s}
+.video-frame:hover img{opacity:1;transform:scale(1.04)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:rgba(12,34,51,.75);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s;pointer-events:none}
+.video-frame:hover .video-play{background:var(--gold);transform:translate(-50%,-50%) scale(1.08)}
+.video-play::after{content:'';display:block;border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.video-meta{margin-top:.9rem}
+.video-title{font-family:var(--fd);font-size:1.15rem;color:var(--white);line-height:1.3}
+.video-caption{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.25rem}
+.videos-cta{margin-top:2.5rem;text-align:center}
+.videos-cta a{display:inline-block;font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gl);text-decoration:none;border:1px solid rgba(212,168,106,.4);padding:.8rem 1.8rem;border-radius:3px;transition:background .3s,color .3s}
+.videos-cta a:hover{background:var(--gold);color:var(--white)}
+@media(max-width:768px){.videos-section{padding:4rem 1.5rem}}
+
+/* ── PHOTO GALLERY CAROUSEL ── */
+.gallery-section{background:var(--white);padding:6rem 0 5rem}
+.gallery-section .gallery-head{padding:0 2.5rem;max-width:1280px;margin:0 auto 2.75rem}
+.gallery-strip{overflow:hidden;position:relative}
+.gallery-strip::before,.gallery-strip::after{content:'';position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.gallery-strip::before{left:0;background:linear-gradient(90deg,var(--white),transparent)}
+.gallery-strip::after{right:0;background:linear-gradient(270deg,var(--white),transparent)}
+.gallery-track{display:flex;width:max-content;will-change:transform;animation:galleryScroll var(--gallery-dur,120s) linear infinite}
+.gallery-strip:hover .gallery-track{animation-play-state:paused}
+.gallery-item{position:relative;width:300px;height:210px;flex-shrink:0;margin-right:14px;border-radius:6px;overflow:hidden;background:var(--sand)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item span{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .85rem .6rem;font-family:var(--fd);font-size:.95rem;letter-spacing:.02em;color:var(--white);background:linear-gradient(transparent,rgba(12,34,51,.78))}
+@keyframes galleryScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){
+  .gallery-track{animation:none}
+  .gallery-strip{overflow-x:auto}
+}
+@media(max-width:768px){
+  .gallery-section{padding:4rem 0 3.5rem}
+  .gallery-section .gallery-head{padding:0 1.5rem}
+  .gallery-item{width:230px;height:165px}
+}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#about">Skip to content</a>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -326,12 +391,14 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-media">
+    <!-- Sources are attached by JS only on larger screens without
+         prefers-reduced-motion; phones get the poster image (saves ~8 MB). -->
     <video autoplay muted loop playsinline
            poster="assets/video/hero_poster.jpg"
            id="heroVid"
-           preload="auto">
-      <source src="assets/video/festival_hero.webm" type="video/webm">
-      <source src="assets/video/festival_hero.mp4" type="video/mp4">
+           preload="metadata"
+           data-webm="assets/video/festival_hero.webm"
+           data-mp4="assets/video/festival_hero.mp4">
     </video>
   </div>
   <div class="hero-overlay"></div>
@@ -641,6 +708,31 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   </div>
 </section>
 
+<!-- VIDEOS -->
+<section class="videos-section" id="videos">
+  <div class="videos-inner">
+    <div class="reveal">
+      <span class="s-label">Watch</span>
+      <h2 class="s-title">Calatrava <em>in motion</em></h2>
+    </div>
+    <div class="videos-grid" id="videos-grid"></div>
+    <div class="videos-cta reveal">
+      <a href="https://www.youtube.com/channel/UCq09aABwKTJjwrxD7D1SMtg" target="_blank" rel="noopener">More on our YouTube channel ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-head reveal">
+    <span class="s-label">Photo Gallery</span>
+    <h2 class="s-title">Moments from <em>around Calatrava</em></h2>
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-track" id="gallery-track"></div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -784,6 +876,7 @@ function applyMapMode(contact) {
     loadMaps(contact.mapsApiKey);
   } else {
     console.warn('Pins mode selected but no Google Maps API key configured.');
+    showMapFallback();
   }
 }
 
@@ -905,15 +998,30 @@ function applyFilter(filter) {
 }
 
 function loadMaps(apiKey) {
-  if (!apiKey || document.getElementById('gmaps-script')) return;
+  if (!apiKey) { showMapFallback(); return; }
+  if (document.getElementById('gmaps-script')) return;
   const s = document.createElement('script');
   s.id    = 'gmaps-script';
   s.src   = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&loading=async&v=weekly&libraries=marker`;
   s.async = true;
   s.defer = true;
-  s.onerror = () => console.warn('Google Maps failed to load — check API key and billing.');
+  s.onerror = () => { console.warn('Google Maps failed to load — check API key and billing.'); showMapFallback(); };
   document.head.appendChild(s);
 }
+
+// Swap in the illustrated SVG map when Google Maps can't load (offline, bad
+// key, referer not allowed). Visitors still get orientation + the
+// "Open in Google Maps" link instead of Google's raw error tile.
+function showMapFallback() {
+  const hide = id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+  hide('mapIframe'); hide('gMap'); hide('map-tags'); hide('map-legend');
+  const off = document.getElementById('mapOffline');
+  if (off) off.style.display = 'flex';
+  const st = document.getElementById('mapStatus');
+  if (st) st.textContent = 'Offline view — use "Open in Google Maps" for live directions';
+}
+// Google Maps calls this global on auth/referer errors.
+window.gm_authFailure = showMapFallback;
 
 // ── RENDERERS ──
 function renderEnvNotice(contact) {
@@ -966,6 +1074,12 @@ function renderAbout(about) {
     </div>`).join('');
 }
 
+// Card-sized images don't need the ~1MB full photos; swap in the thumbnail
+// when one exists (falls back to the original via onerror if it doesn't).
+function thumbify(src) {
+  return (src || '').replace(/^assets\/destinations\/(.+)_web\.jpg$/, 'assets/thumbnails/$1_thumb.jpg');
+}
+
 function renderFeaturedDests(destinations) {
   const featured = destinations
     .filter(d => d.featured)
@@ -974,9 +1088,11 @@ function renderFeaturedDests(destinations) {
   if (!el) return;
   el.innerHTML = featured.map((d, i) => {
     const img = d.images && d.images[0]
-      ? `<img src="${d.images[0]}" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
+      ? `<img src="${thumbify(d.images[0])}" onerror="if(this.src.includes('_thumb'))this.src='${d.images[0]}'" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
       : `<div class="dest-img" style="background:linear-gradient(160deg,#1A5C7A,#0C2233);min-height:300px"></div>`;
-    return `<div class="dest-card" onclick="location.href='destinations.html#${d.id}'">
+    return `<div class="dest-card" role="link" tabindex="0" aria-label="${d.name} — view details"
+      onclick="location.href='destinations.html#${d.id}'"
+      onkeydown="if(event.key==='Enter')location.href='destinations.html#${d.id}'">
       ${img}
       <div class="dest-overlay"></div>
       <div class="dest-info">
@@ -993,8 +1109,9 @@ function renderAccommodation(accommodation) {
   if (!el) return;
   const placeholderGrads = ['linear-gradient(160deg,#1E8B72,#0C2233)','linear-gradient(160deg,#1A5C7A,#0C2233)','linear-gradient(160deg,#2A8B7A,#1A5C7A)'];
   el.innerHTML = accommodation.map((a, i) => {
-    const imgHtml = (a.images?.[0] || a.image)
-      ? `<img src="${a.images?.[0] || a.image}" alt="${a.name}" class="accom-img" loading="lazy">`
+    const cover = a.images?.[0] || a.image;
+    const imgHtml = cover
+      ? `<img src="${thumbify(cover)}" onerror="if(this.src.includes('_thumb'))this.src='${cover}'" alt="${a.name}" class="accom-img" loading="lazy">`
       : `<div class="accom-ph" style="background:${placeholderGrads[i % 3]}"></div>`;
     return `<div class="accom-card reveal">
       <div class="accom-img-wrap">${imgHtml}</div>
@@ -1008,6 +1125,56 @@ function renderAccommodation(accommodation) {
   }).join('');
 }
 
+function renderVideos(videos) {
+  const grid = document.getElementById('videos-grid');
+  if (!grid || !videos?.length) {
+    document.getElementById('videos')?.remove();
+    return;
+  }
+  grid.innerHTML = videos.map(v => `
+    <div class="video-tile reveal">
+      <div class="video-frame" onclick="playVideo(this, '${v.id}')" role="button" tabindex="0"
+           onkeydown="if(event.key==='Enter')playVideo(this,'${v.id}')" aria-label="Play: ${v.title}">
+        <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+        <span class="video-play" aria-hidden="true"></span>
+      </div>
+      <div class="video-meta">
+        <div class="video-title">${v.title}</div>
+        ${v.caption ? `<div class="video-caption">${v.caption}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+// Facade pattern: the YouTube iframe (and its ~1MB of JS) loads only on play.
+function playVideo(frame, id) {
+  frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
+    title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen></iframe>`;
+}
+
+function renderGallery(photos) {
+  const track = document.getElementById('gallery-track');
+  if (!track || !photos?.length) {
+    document.getElementById('gallery')?.remove();
+    return;
+  }
+  // Shuffle (Fisher–Yates) so every visit shows a different order
+  const list = [...photos];
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  const item = p => `<div class="gallery-item">
+    <img src="${p.src}" alt="${p.label || 'Calatrava, Romblon'}" loading="lazy">
+    ${p.label ? `<span>${p.label}</span>` : ''}
+  </div>`;
+  // Track is rendered twice; the animation slides exactly one copy's width
+  // (-50%), so the loop wraps seamlessly.
+  const half = list.map(item).join('');
+  track.innerHTML = half + half;
+  track.style.setProperty('--gallery-dur', (list.length * 4) + 's');
+}
+
 function renderContactCards(contact) {
   const el = document.getElementById('contact-cards');
   if (!el) return;
@@ -1019,16 +1186,35 @@ function renderContactCards(contact) {
     </a>`).join('');
 }
 
+// ── HERO VIDEO (desktop only, respects reduced motion) ──
+(function () {
+  const v = document.getElementById('heroVid');
+  if (!v) return;
+  const wantVideo = matchMedia('(min-width: 769px)').matches
+    && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!wantVideo) return; // poster image stays as the hero background
+  [['video/webm', v.dataset.webm], ['video/mp4', v.dataset.mp4]].forEach(([type, src]) => {
+    if (!src) return;
+    const s = document.createElement('source');
+    s.type = type; s.src = src;
+    v.appendChild(s);
+  });
+  v.load();
+  v.play().catch(() => {});
+})();
+
 // ── INIT ──
 (async function init() {
-  const safe = url => fetch(url).then(r => r.json()).catch(() => null);
+  const safe = url => fetch(url, {cache:'no-store'}).then(r => r.json()).catch(() => null);
 
-  const [about, destinations, activities, accommodation, contact] = await Promise.all([
+  const [about, destinations, activities, accommodation, contact, gallery, videos] = await Promise.all([
     safe('data/about.json'),
     safe('data/destinations.json'),
     safe('data/activities.json'),
     safe('data/accommodation.json'),
-    safe('data/contact.json')
+    safe('data/contact.json'),
+    safe('data/gallery.json'),
+    safe('data/videos.json')
   ]);
 
   if (destinations)  mapData.destinations  = destinations;
@@ -1041,6 +1227,8 @@ function renderContactCards(contact) {
   if (activities)   renderActivities(activities);
   if (accommodation) renderAccommodation(accommodation);
   if (contact)      renderContactCards(contact);
+  renderVideos(videos);
+  renderGallery(gallery);
   applyMapMode(contact || {});
 
   observeReveal();
@@ -1054,7 +1242,9 @@ function renderActivities(activities) {
   const el = document.getElementById('acts-grid');
   if (!el) return;
   el.innerHTML = activities.map(a =>
-    `<div class="act-card reveal" onclick="openActivityModal('${a.id}')">
+    `<div class="act-card reveal" role="button" tabindex="0" aria-label="${a.title} — open details"
+      onclick="openActivityModal('${a.id}')"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openActivityModal('${a.id}')}">
       <div class="act-bg"${a.image ? ` style="background-image:url('${a.image}')"` : ''}></div>
       <div class="act-overlay"></div>
       ${a.credit ? `<div class="act-credit">Photo: ${a.credit}</div>` : ''}
@@ -1102,11 +1292,20 @@ function openActivityModal(id) {
     </div>`;
   }
 
-  if (d.contacts?.length) {
+  const contactItems = [...(d.contacts || [])];
+  if (a.contactPhone) contactItems.push({
+    name: 'Contact number', role: 'Call or text to book',
+    phone: a.contactPhone, href: 'tel:' + a.contactPhone.replace(/\s/g, '')
+  });
+  if (a.contactUrl) contactItems.push({
+    name: 'Booking page', role: a.contactUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+    phone: '↗', href: a.contactUrl, external: true
+  });
+  if (contactItems.length) {
     html += `<div class="act-modal-section">
       <div class="act-modal-section-label">Book / Enquire</div>
-      <div class="act-contact-list">${d.contacts.map(c =>
-        `<a class="act-contact" href="${c.href || '#'}">
+      <div class="act-contact-list">${contactItems.map(c =>
+        `<a class="act-contact" href="${c.href || '#'}"${c.external ? ' target="_blank" rel="noopener"' : ''}>
           <div>
             <div class="act-contact-name">${c.name}</div>
             <div class="act-contact-role">${c.role}</div>

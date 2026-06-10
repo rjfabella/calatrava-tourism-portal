@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Where to Stay — Calatrava, Romblon</title>
 <meta name="description" content="Accommodation in Calatrava, Romblon — beach resorts, farm resorts, and overnight stays.">
+<!-- Social sharing (Open Graph) — TODO: replace calatrava-tourism.netlify.app with your production domain -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calatrava Tourism">
+<meta property="og:title" content="Where to Stay — Calatrava, Romblon">
+<meta property="og:description" content="Accommodation in Calatrava, Romblon — beach resorts, farm resorts, and overnight stays.">
+<meta property="og:url" content="https://calatrava-tourism.netlify.app/accommodation.html">
+<meta property="og:image" content="https://calatrava-tourism.netlify.app/assets/destinations/Destinations_CoveAurelio1_web.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +49,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .mob-nav.open{display:flex}
 .mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
 .mob-nav a:hover{color:var(--gl)}
-.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.5);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.75);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
 .mob-close:hover{color:var(--white)}
 
 /* ── PAGE HERO ── */
@@ -49,16 +57,16 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .page-hero::before{content:'';position:absolute;inset:0;background:url('assets/destinations/Destinations_CoveAurelio2_web.jpg') center/cover no-repeat;opacity:.18}
 .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
 .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
-.breadcrumb a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .3s}
+.breadcrumb a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .3s}
 .breadcrumb a:hover{color:var(--gl)}
 .breadcrumb span{font-size:11px;color:rgba(255,255,255,.25)}
 .page-hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,6rem);font-weight:300;color:var(--white);line-height:.95;margin-bottom:1rem}
 .page-hero h1 em{font-style:italic;color:var(--gl)}
-.page-hero p{font-size:15px;color:rgba(255,255,255,.6);max-width:520px;line-height:1.8}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.78);max-width:520px;line-height:1.8}
 .page-hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
 .ph-stat{display:flex;flex-direction:column}
 .ph-stat strong{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);line-height:1}
-.ph-stat span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:.3rem}
+.ph-stat span{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:.3rem}
 
 /* ── MAIN SECTION ── */
 .accom-section{padding:3.5rem 2.5rem 5rem}
@@ -108,11 +116,11 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .booking-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
 .booking-text h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:.5rem}
 .booking-text h2 em{font-style:italic;color:var(--gl)}
-.booking-text p{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.75}
+.booking-text p{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.75}
 .booking-cards{display:flex;gap:.75rem;flex-wrap:wrap}
 .booking-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:1.1rem 1.5rem;text-decoration:none;border-radius:3px;transition:border-color .3s,background .3s;min-width:180px}
 .booking-card:hover{border-color:var(--gl);background:rgba(255,255,255,.1)}
-.bc-label{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.4rem}
+.bc-label{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.4rem}
 .bc-name{font-size:14px;font-weight:500;color:var(--white);margin-bottom:.2rem}
 .bc-contact{font-size:12px;color:var(--gl)}
 
@@ -120,15 +128,15 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
 .f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
-.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:1.5rem}
+.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:1.5rem}
 .f-logos{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
 .f-logos img{width:36px;height:36px;object-fit:contain;opacity:.7;border-radius:50%}
 .f-social{display:flex;gap:10px}
-.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);text-decoration:none;transition:border-color .3s,color .3s}
 .f-social a:hover{border-color:var(--gold);color:var(--gold)}
 .f-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
 .f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
-.f-col ul a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .3s}
+.f-col ul a{font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .3s}
 .f-col ul a:hover{color:var(--white)}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-bottom p{font-size:11px;color:rgba(255,255,255,.28)}
@@ -169,10 +177,21 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   .resort-info{padding:1.5rem}
   .booking-cards{flex-direction:column}
 }
+
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;left:-9999px;z-index:300}
+.skip-link:focus{left:1rem;top:1rem;background:var(--deep);color:var(--white);padding:.7rem 1.2rem;border-radius:4px;font-size:13px;letter-spacing:.05em;text-decoration:none;outline:2px solid var(--gold);outline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#accom-list">Skip to content</a>
 <!-- NAV -->
 <nav class="nav" id="nav">
   <a href="index.html" class="nav-logo">
@@ -207,7 +226,7 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
 <!-- PAGE HERO -->
 <header class="page-hero">
   <div class="page-hero-inner">
-    <nav class="breadcrumb">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span>/</span>
       <a href="accommodation.html">Stay</a>
@@ -429,7 +448,7 @@ function switchImg(imgId, idx, dot) {
 (async function init() {
   let data = null;
   try {
-    const res = await fetch('data/accommodation.json');
+    const res = await fetch('data/accommodation.json', {cache:'no-store'});
     if (res.ok) data = await res.json();
   } catch(_){}
   if (!data || !data.length) data = ACCOM_FALLBACK;
