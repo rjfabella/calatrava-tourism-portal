@@ -1,0 +1,18 @@
+# Netlify config — static site + functions backend.
+# Deploy: connect the repo to Netlify, set the ADMIN_PASSWORD env var, done.
+[build]
+  publish = "."
+
+[functions]
+  # Bundle the committed JSON with the data function as read fallback,
+  # used until a section is first saved from the admin (then Blobs win).
+  included_files = ["data/*.json"]
+
+# Route every data read through the function so edits saved to Netlify Blobs
+# are live instantly — no changes needed to the public pages' fetch URLs.
+# force = true makes this win over the static files in data/.
+[[redirects]]
+  from = "/data/*"
+  to = "/api/data/:splat"
+  status = 200
+  force = true
