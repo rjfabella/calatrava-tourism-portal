@@ -2,5 +2,8 @@
 .claude/settings.local.json
 .claude/tmp-*/
 
-# Local Netlify folder
-.netlify
+# Netlify / Node
+node_modules/
+.netlify/
+.env
+deno.lock

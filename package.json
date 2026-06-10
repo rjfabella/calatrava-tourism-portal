@@ -1,0 +1,11 @@
+{
+  "name": "calatrava-tourism-portal",
+  "private": true,
+  "description": "Tourism portal for Calatrava, Romblon — static site with a Netlify Functions backend for the admin editor.",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

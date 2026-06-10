@@ -234,7 +234,7 @@ textarea{resize:vertical;min-height:80px}
           </div>
         </div>
         <div class="io-strip">
-          <p><strong>How it works:</strong> Edit here → Export JSON → replace <code>data/destinations.json</code> on your server.</p>
+          <p><strong>How it works:</strong> On the live site (Netlify), Save publishes instantly. On a plain static host, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
           <div class="io-strip-actions">
             <button class="btn btn-success btn-sm" onclick="exportJSON('destinations')">↓ Download destinations.json</button>
           </div>
@@ -371,16 +371,36 @@ textarea{resize:vertical;min-height:80px}
 
 <script>
 // ══ STATE ══
-const ADMIN_PW = 'calatrava2026';
+// Fallback for static hosting / offline only. When the Netlify backend is
+// deployed, the real check is server-side (ADMIN_PASSWORD env var) and this
+// constant is ignored.
+const FALLBACK_PW = 'calatrava2026';
 let data = {};
+let draftSections = new Set();
+let adminPw = null;          // kept in memory for publish calls
+let backendAvailable = null; // true = Netlify functions reachable, false = static-only
 let currentModalType = null;
 let currentModalIdx = null;
 let importTarget = null;
 
 // ══ AUTH ══
-function doLogin() {
+async function doLogin() {
   const pw = document.getElementById('pwInput').value;
-  if (pw === ADMIN_PW) {
+  let ok = false;
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify({password: pw})
+    });
+    if (res.ok)                    { ok = true;  backendAvailable = true; }
+    else if (res.status === 401)   { ok = false; backendAvailable = true; }
+    else                           { backendAvailable = false; } // 404/500 → no backend deployed
+  } catch(e)                       { backendAvailable = false; } // offline / file://
+  if (backendAvailable === false) ok = (pw === FALLBACK_PW);
+
+  if (ok) {
+    adminPw = pw;
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     initApp();
@@ -400,29 +420,61 @@ async function initApp() {
   const files = ['destinations','activities','accommodation','contact','about','getting-here'];
   const isArrayFile = f => ['destinations','activities','accommodation'].includes(f);
   const failed = [];
+  draftSections = new Set();
 
   for (const f of files) {
-    // 1. Prefer the on-disk JSON so newly-pulled content always shows.
     let disk = null;
     try {
       const res = await fetch('data/' + f + '.json', {cache: 'no-store'});
       if (res.ok) disk = await res.json();
     } catch(e) { /* fetch unavailable (e.g. file:// protocol) */ }
 
-    // 2. Fall back to localStorage drafts only when disk is unreachable.
     let local = null;
     try {
       const stored = localStorage.getItem('admin_' + f);
       if (stored) local = JSON.parse(stored);
     } catch(e) { /* corrupt localStorage entry */ }
 
-    if (disk !== null)       data[f] = disk;
+    if (disk !== null) {
+      // Unpublished local edits win over disk so saves survive a reload;
+      // drafts identical to disk are ignored so freshly-pulled content shows.
+      if (local !== null && JSON.stringify(local) !== JSON.stringify(disk)) {
+        data[f] = local;
+        draftSections.add(f);
+      } else {
+        data[f] = disk;
+      }
+    }
     else if (local !== null) data[f] = local;
     else { data[f] = isArrayFile(f) ? [] : {}; failed.push(f); }
   }
 
   if (failed.length) showLoadError(failed);
+  refreshDraftBanner();
   renderAll();
+}
+
+function refreshDraftBanner() {
+  let banner = document.getElementById('draftBanner');
+  if (!draftSections.size) { banner?.remove(); return; }
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'draftBanner';
+    banner.style.cssText = 'background:#EFF6FF;border-bottom:1px solid #BFDBFE;color:#1E40AF;padding:.75rem 1.25rem;font-size:13px;line-height:1.5;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap';
+    document.querySelector('.topbar')?.after(banner);
+  }
+  banner.innerHTML = `<span><strong>Unpublished drafts</strong> (saved in this browser only): ${[...draftSections].join(', ')}.</span>
+    <button class="btn btn-primary btn-sm" onclick="exportAll()">↓ Export All to publish</button>
+    <button class="btn btn-outline btn-sm" onclick="discardDrafts()">Discard drafts</button>`;
+}
+
+function discardDrafts() {
+  if (!confirm('Discard all local drafts and reload content from the server?')) return;
+  for (const f of draftSections) localStorage.removeItem('admin_' + f);
+  draftSections = new Set();
+  refreshDraftBanner();
+  initApp();
+  toast('Drafts discarded — reloaded from server');
 }
 
 function showLoadError(failed) {
@@ -472,8 +524,38 @@ function toast(msg, type='success') {
 }
 
 // ══ PERSIST ══
+// Always keep a localStorage draft (offline safety net), then try to publish
+// to the Netlify backend. On success the draft is cleared — the server is the
+// source of truth. Without a backend this behaves exactly like before.
 function persist(key) {
   localStorage.setItem('admin_' + key, JSON.stringify(data[key]));
+  draftSections.add(key);
+  refreshDraftBanner();
+  publish(key);
+}
+
+async function publish(key) {
+  if (backendAvailable === false || !adminPw) return; // static-only mode: drafts + export
+  try {
+    const res = await fetch('/api/data/' + key + '.json', {
+      method: 'PUT',
+      headers: {'content-type': 'application/json', 'authorization': 'Bearer ' + adminPw},
+      body: JSON.stringify(data[key])
+    });
+    if (res.ok) {
+      localStorage.removeItem('admin_' + key);
+      draftSections.delete(key);
+      refreshDraftBanner();
+      toast(key + ' published — live on the site');
+    } else if (res.status === 401) {
+      toast('Publish failed: password rejected by server', 'error');
+    } else {
+      const err = await res.json().catch(() => ({}));
+      toast('Publish failed (' + (err.error || res.status) + ') — kept as local draft', 'error');
+    }
+  } catch(e) {
+    toast('Server unreachable — kept as local draft', 'error');
+  }
 }
 
 // ══════════════════════════════════
@@ -853,7 +935,7 @@ function renderContact() {
         </div>
         <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Map Settings</button>
         <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:12px;line-height:1.5;color:#92400E">
-          <strong>To publish:</strong> Saving stores changes in this browser only. Click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push to make the map change live for visitors.
+          <strong>To publish:</strong> On the live site (Netlify backend) saving publishes instantly. Without the backend, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push.
         </div>
       </div>
     </div>`;

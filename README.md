@@ -1,7 +1,9 @@
 # Calatrava Tourism Portal
 
-Static website for the Municipality of Calatrava, Romblon, Philippines.
-Plain HTML / CSS / JS — no build step, no backend, no dependencies.
+Website for the Municipality of Calatrava, Romblon, Philippines.
+Plain HTML / CSS / JS — no build step. Runs on any static host; when deployed
+on **Netlify**, two serverless functions give the admin editor instant
+publishing (saves go straight to Netlify Blobs and are live immediately).
 
 ## Pages
 
@@ -15,17 +17,42 @@ Each public page renders from the matching JSON in `data/`, with a hardcoded fal
 
 ## Editing content
 
-1. Open `admin.html` in a browser.
-2. Sign in (password is in `admin.html` — share with staff out-of-band).
-3. Edit any section. Changes save to **browser localStorage only** — they are not yet live.
-4. Click **Export All** in the topbar (or per-section "Download" buttons) to download the updated JSON files.
-5. Replace the matching files in `data/` and commit + push to publish.
+1. Open `admin.html` in a browser and sign in.
+2. Edit any section and hit Save.
 
-The Export step is the publish step. Until you commit the downloaded JSON, edits exist only in your browser.
+**On Netlify (with the backend):** every Save publishes instantly — the
+functions store the JSON in Netlify Blobs and all pages read through
+`/api/data/*`, so visitors see the change on their next page load. The
+password is checked server-side against the `ADMIN_PASSWORD` env var.
+
+**On a plain static host (or offline):** edits save to browser localStorage
+only. Drafts survive reloads; a blue banner lists sections with unpublished
+drafts and offers Export All / Discard. Export the JSON, replace the matching
+files in `data/`, and commit + push to publish.
+
+Note: once the backend is in use, Netlify Blobs is the source of truth and the
+committed `data/*.json` files are only the initial seed / fallback. Use
+**Export All** periodically and commit the files to keep a versioned backup in git.
 
 ## Deployment
 
-Serve the repo root as static files. Works on GitHub Pages, Netlify, Cloudflare Pages, or any static host. No server-side runtime needed.
+### Netlify (recommended — enables instant publishing)
+
+1. [app.netlify.com](https://app.netlify.com) → Add new site → Import from GitHub → pick this repo.
+   Build command: none. Publish directory: `.` (already set in `netlify.toml`).
+2. Site configuration → Environment variables → add `ADMIN_PASSWORD` (this is
+   the real admin password; the constant in `admin.html` is only the offline fallback).
+3. Deploy. Functions and the `/data/*` rewrite are picked up from `netlify.toml` automatically.
+
+Local development: `npm install`, then `npx netlify-cli dev` (reads
+`ADMIN_PASSWORD` from a local `.env` file, serves functions + a sandboxed
+local blob store on http://localhost:8888).
+
+### Any other static host
+
+Serve the repo root as static files (GitHub Pages, Cloudflare Pages, etc.).
+Everything works, but admin publishing falls back to the manual
+export-and-commit flow described above.
 
 ## Security — required before going live
 
@@ -42,11 +69,17 @@ If you ever commit a key without restrictions, **rotate it immediately** (delete
 
 ### Admin password
 
-`admin.html` uses a client-side password check (`ADMIN_PW` constant). Anyone who views the page source can read it. This is fine for casual gating of the staff editor on a public host, **but**:
+On Netlify, the password is verified **server-side** (`ADMIN_PASSWORD` env
+var) for both login and every save — this is a real write barrier. Pick a
+strong value that differs from the fallback constant in `admin.html`.
+
+The `FALLBACK_PW` constant in `admin.html` is only used when no backend is
+reachable (plain static host / offline), where saves can't go further than the
+editor's own browser anyway. Still:
 
 - Treat the admin URL as semi-private (don't link to it from indexable pages — the footer "Staff Portal" link is intentionally dim).
-- Rotate the password if a staffer leaves.
-- For a real auth boundary, put `admin.html` behind your host's basic-auth or a private route.
+- Rotate `ADMIN_PASSWORD` if a staffer leaves (Netlify → Environment variables, then redeploy).
+- For extra hardening, put `admin.html` behind Netlify's password protection or basic-auth.
 
 ## Files
 
