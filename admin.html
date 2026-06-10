@@ -810,6 +810,7 @@ function renderContact() {
           <div class="form-group"><label>Fee Amount</label><input id="ct_envFee" value="${c.envFee||'₱20'}" oninput="updateContactField('envFee',this.value)"></div>
           <div class="form-group full"><label>Notice Message</label><input id="ct_envMsg" value="${c.envFeeMessage||''}" oninput="updateContactField('envFeeMessage',this.value)"></div>
         </div>
+        <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Fee Notice</button>
       </div>
     </div>
     <div class="card" style="margin-bottom:1rem">
@@ -834,7 +835,7 @@ function renderContact() {
       <div class="card-body">
         <div class="form-group">
           <label>Mode</label>
-          <select oninput="updateContactField('mapMode',this.value)">
+          <select onchange="updateContactField('mapMode',this.value)">
             <option value="iframe" ${(c.mapMode||'iframe')==='iframe'?'selected':''}>Iframe widget (Neighborhood Discovery / My Maps)</option>
             <option value="pins"   ${c.mapMode==='pins'?'selected':''}>Custom pins (from destinations &amp; accommodation)</option>
           </select>
@@ -845,14 +846,15 @@ function renderContact() {
           <input type="text" value="${c.mapIframeUrl||''}" oninput="updateContactField('mapIframeUrl',this.value)" placeholder="https://storage.googleapis.com/maps-solutions-.../neighborhood-discovery.html">
           <p class="hint" style="margin-top:.4rem">Paste the <code>src</code> from a Google Maps Solutions widget or a Google My Maps embed. Only used when Mode = Iframe.</p>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><h3>Google Maps API</h3></div>
-      <div class="card-body">
-        <div class="form-group"><label>API Key</label><input type="text" value="${c.mapsApiKey||''}" oninput="updateContactField('mapsApiKey',this.value)"></div>
-        <p class="hint" style="margin-top:.4rem">⚠️ Only used in <strong>Pins</strong> mode. Restrict this key in Google Cloud Console → APIs &amp; Services → Credentials → HTTP referrers.</p>
-        <button class="btn btn-success btn-sm" style="margin-top:.85rem" onclick="saveContact()">Save Contact Info</button>
+        <div class="form-group">
+          <label>API Key</label>
+          <input type="text" value="${c.mapsApiKey||''}" oninput="updateContactField('mapsApiKey',this.value)">
+          <p class="hint" style="margin-top:.4rem">⚠️ Only used in <strong>Pins</strong> mode. Restrict this key in Google Cloud Console → APIs &amp; Services → Credentials → HTTP referrers.</p>
+        </div>
+        <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Map Settings</button>
+        <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:12px;line-height:1.5;color:#92400E">
+          <strong>To publish:</strong> Saving stores changes in this browser only. Click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push to make the map change live for visitors.
+        </div>
       </div>
     </div>`;
 }
