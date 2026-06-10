@@ -203,6 +203,11 @@ textarea{resize:vertical;min-height:80px}
         Accommodation
         <span class="nav-badge" id="badge-accommodation">3</span>
       </div>
+      <div class="nav-item" onclick="showPage('videos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Videos
+        <span class="nav-badge" id="badge-videos">0</span>
+      </div>
       <div class="nav-item" onclick="showPage('getting-here')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.7 5.9L2.3 7.3c-.4.4-.2 1 .3 1.3L10 12l-2 3H5l-1 1 3 2 2 3 1-1v-3l3-2 3.5 7.3c.3.5.9.7 1.3.3l1.4-1.4c.5-.3.8-.7.6-1.2z"/></svg>
         Getting Here
@@ -300,6 +305,22 @@ textarea{resize:vertical;min-height:80px}
           </div>
         </div>
         <div id="accommodationList"></div>
+      </div>
+
+      <!-- ══ VIDEOS ══ -->
+      <div class="page" id="page-videos">
+        <div class="page-header">
+          <div>
+            <h2>Videos</h2>
+            <p>YouTube videos shown in the "Calatrava in motion" section on the homepage.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('videos')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('videos')">↓ Download videos.json</button>
+            <button class="btn btn-primary" onclick="openVideoModal(null)">+ Add Video</button>
+          </div>
+        </div>
+        <div id="videosList"></div>
       </div>
 
       <!-- ══ GETTING HERE ══ -->
@@ -417,8 +438,8 @@ function doLogout() {
 
 // ══ INIT ══
 async function initApp() {
-  const files = ['destinations','activities','accommodation','contact','about','getting-here'];
-  const isArrayFile = f => ['destinations','activities','accommodation'].includes(f);
+  const files = ['destinations','activities','accommodation','contact','about','getting-here','videos'];
+  const isArrayFile = f => ['destinations','activities','accommodation','videos'].includes(f);
   const failed = [];
   draftSections = new Set();
 
@@ -464,8 +485,13 @@ function refreshDraftBanner() {
     document.querySelector('.topbar')?.after(banner);
   }
   banner.innerHTML = `<span><strong>Unpublished drafts</strong> (saved in this browser only): ${[...draftSections].join(', ')}.</span>
-    <button class="btn btn-primary btn-sm" onclick="exportAll()">↓ Export All to publish</button>
+    ${backendAvailable ? `<button class="btn btn-success btn-sm" onclick="publishAllDrafts()">⤴ Publish drafts to site</button>` : ''}
+    <button class="btn btn-primary btn-sm" onclick="exportAll()">${backendAvailable ? '↓ Export All (backup)' : '↓ Export All to publish'}</button>
     <button class="btn btn-outline btn-sm" onclick="discardDrafts()">Discard drafts</button>`;
+}
+
+async function publishAllDrafts() {
+  for (const k of [...draftSections]) await publish(k);
 }
 
 function discardDrafts() {
@@ -492,6 +518,7 @@ function renderAll() {
   renderDestTable();
   renderActivities();
   renderAccommodation();
+  renderVideos();
   renderGettingHere();
   renderAbout();
   renderContact();
@@ -505,6 +532,7 @@ function updateBadges() {
   document.getElementById('badge-destinations').textContent = d.length;
   document.getElementById('badge-activities').textContent = a.length;
   document.getElementById('badge-accommodation').textContent = ac.length;
+  document.getElementById('badge-videos').textContent = (data.videos || []).length;
 }
 
 // ══ NAVIGATION ══
@@ -556,6 +584,75 @@ async function publish(key) {
   } catch(e) {
     toast('Server unreachable — kept as local draft', 'error');
   }
+}
+
+// ══ OPEN LOCATION CODE (Plus Codes) ══
+// Minimal decoder so staff can paste a Plus Code from Google Maps instead of
+// raw coordinates. Short codes (e.g. "J3XF+5C") are recovered against the
+// Calatrava poblacion reference point.
+const OLC_ALPHABET = '23456789CFGHJMPQRVWX';
+const OLC_REF = { lat: 12.61, lng: 122.07 };
+
+function olcEncode(lat, lng) {
+  let la = Math.min(89.999999, Math.max(-90, lat)) + 90;
+  let lo = lng - Math.floor((lng + 180) / 360) * 360 + 180;
+  let code = '', prec = 20;
+  for (let i = 0; i < 5; i++) {
+    const a = Math.min(19, Math.floor(la / prec));
+    const b = Math.min(19, Math.floor(lo / prec));
+    code += OLC_ALPHABET[a] + OLC_ALPHABET[b];
+    la -= a * prec; lo -= b * prec;
+    prec /= 20;
+    if (code.length === 8) code += '+';
+  }
+  return code;
+}
+
+function olcDecode(code) {
+  const clean = code.toUpperCase().replace(/\+/g, '');
+  if (clean.length < 8 || /[^23456789CFGHJMPQRVWX]/.test(clean)) return null;
+  let lat = -90, lng = -180, prec = 20;
+  const digits = clean.slice(0, 10);
+  for (let i = 0; i + 1 < digits.length; i += 2) {
+    lat += OLC_ALPHABET.indexOf(digits[i]) * prec;
+    lng += OLC_ALPHABET.indexOf(digits[i + 1]) * prec;
+    prec /= 20;
+  }
+  return { lat: lat + prec * 10, lng: lng + prec * 10 };
+}
+
+// Accepts "7Q63J3XF+5C", "J3XF+5C", or "J3XF+5C Calatrava". Returns {lat,lng} or null.
+function olcToLatLng(input) {
+  let code = (input || '').trim().toUpperCase().split(/\s+/)[0];
+  const plusIdx = code.indexOf('+');
+  if (plusIdx === -1) return null;
+  if (plusIdx < 8) {
+    const missing = 8 - plusIdx;
+    if (missing % 2 !== 0) return null;
+    code = olcEncode(OLC_REF.lat, OLC_REF.lng).slice(0, missing) + code;
+    const pt = olcDecode(code);
+    if (!pt) return null;
+    // Snap to the grid repetition nearest the reference point.
+    const res = Math.pow(20, 2 - missing / 2);
+    if (OLC_REF.lat + res / 2 < pt.lat && pt.lat - res >= -90) pt.lat -= res;
+    else if (OLC_REF.lat - res / 2 > pt.lat && pt.lat + res <= 90) pt.lat += res;
+    if (OLC_REF.lng + res / 2 < pt.lng) pt.lng -= res;
+    else if (OLC_REF.lng - res / 2 > pt.lng) pt.lng += res;
+    return pt;
+  }
+  return olcDecode(code);
+}
+
+// Reads the modal's plus-code + lat/lng inputs; returns {lat,lng} or null, or
+// the string 'invalid' when a plus code was given but could not be decoded.
+function resolveCoords(g) {
+  const plus = g('f_pluscode');
+  if (plus) {
+    const pt = olcToLatLng(plus);
+    if (!pt) return 'invalid';
+    return { lat: +pt.lat.toFixed(6), lng: +pt.lng.toFixed(6) };
+  }
+  return { lat: parseFloat(g('f_lat')) || null, lng: parseFloat(g('f_lng')) || null };
 }
 
 // ══════════════════════════════════
@@ -625,6 +722,10 @@ function openDestModal(idx) {
       <div class="form-group"><label>Fee Note</label><input id="f_feeNote" value="${d.feeNote||''}" placeholder="Boat via Tourism Council"></div>
       <div class="form-group"><label>Latitude</label><input id="f_lat" value="${d.lat||''}" placeholder="12.595"></div>
       <div class="form-group"><label>Longitude</label><input id="f_lng" value="${d.lng||''}" placeholder="122.205"></div>
+      <div class="form-group full"><label>Plus Code (optional)</label>
+        <input id="f_pluscode" placeholder="7Q63J3XF+5C or J3XF+5C">
+        <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
+      </div>
       <div class="form-group full"><label>Images (one URL per line)</label>
         <textarea id="f_images" style="min-height:70px">${(d.images||[]).join('\n')}</textarea>
         <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code></span>
@@ -684,6 +785,8 @@ function openActivityModal(idx) {
       <div class="form-group"><label>Description</label><textarea id="f_desc">${a.description}</textarea></div>
       <div class="form-group"><label>Rate / Price note</label><input id="f_rate" value="${a.rate}" placeholder="From ₱3,000 for 10 persons"></div>
       <div class="form-group"><label>Photo credit</label><input id="f_credit" value="${a.credit || ''}" placeholder="e.g. RJ Fabella"></div>
+      <div class="form-group"><label>Contact number</label><input id="f_contactPhone" value="${a.contactPhone || ''}" placeholder="0919 335 0314"></div>
+      <div class="form-group"><label>Contact URL</label><input id="f_contactUrl" value="${a.contactUrl || ''}" placeholder="https://www.facebook.com/..."></div>
     </div>`;
   document.getElementById('modal').classList.add('open');
 }
@@ -708,6 +811,7 @@ function renderAccommodation() {
           <p style="font-size:12px;color:var(--muted)">Brgy. ${a.barangay}</p>
           <p style="font-size:13px;margin-top:.25rem">${a.description}</p>
           <p style="font-size:11px;margin-top:.4rem;color:${a.lat && a.lng ? 'var(--success)' : 'var(--muted)'}">${a.lat && a.lng ? `📍 ${a.lat}, ${a.lng}` : '📍 No coordinates set'}</p>
+          ${a.phone || a.facebook ? `<p style="font-size:11px;margin-top:.25rem;color:var(--muted)">${a.phone ? '📞 ' + a.phone : ''}${a.phone && a.facebook ? ' · ' : ''}${a.facebook ? '🔗 ' + a.facebook : ''}</p>` : ''}
         </div>
       </div>
     </div>`).join('');
@@ -733,13 +837,91 @@ function openAccomModal(idx) {
       <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${a.type}" placeholder="Beach Resort"></div>
       <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${a.barangay}"></div>
       <div class="form-group full"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
+      <div class="form-group"><label>Contact number</label><input id="f_phone" value="${a.phone||''}" placeholder="0919 335 0314"></div>
+      <div class="form-group"><label>Contact name / label</label><input id="f_phoneLabel" value="${a.phoneLabel||''}" placeholder="Calatrava Tourism Council"></div>
+      <div class="form-group"><label>Contact URL</label><input id="f_facebook" value="${a.facebook||''}" placeholder="https://www.facebook.com/..."></div>
+      <div class="form-group"><label>Contact URL label</label><input id="f_facebookLabel" value="${a.facebookLabel||''}" placeholder="Facebook Page"></div>
       <div class="form-group"><label>Latitude</label><input id="f_lat" value="${a.lat||''}" placeholder="12.619"></div>
       <div class="form-group"><label>Longitude</label><input id="f_lng" value="${a.lng||''}" placeholder="122.071"></div>
+      <div class="form-group full"><label>Plus Code (optional)</label>
+        <input id="f_pluscode" placeholder="7Q63J3XF+5C or J3XF+5C">
+        <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
+      </div>
       <div class="form-group full"><label>Images (one path per line)</label>
         <textarea id="f_images" style="min-height:70px">${(a.images||[]).join('\n')}</textarea>
         <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code>. First image shown as cover.</span>
       </div>
       <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="accommodation.html#cove-aurelio"></div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
+// VIDEOS
+// ══════════════════════════════════
+// Accepts a full YouTube URL (watch, youtu.be, shorts, embed, live) or a bare
+// 11-character video ID. Returns the ID or null.
+function parseYouTubeId(input) {
+  const s = (input || '').trim();
+  if (/^[\w-]{11}$/.test(s)) return s;
+  const m = s.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function renderVideos() {
+  const items = data.videos || [];
+  document.getElementById('videosList').innerHTML = items.map((v, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${v.title}</h3>
+        <div style="display:flex;gap:.5rem">
+          ${i > 0 ? `<button class="btn btn-outline btn-sm" onclick="moveVideo(${i},-1)" title="Move up">↑</button>` : ''}
+          ${i < items.length - 1 ? `<button class="btn btn-outline btn-sm" onclick="moveVideo(${i},1)" title="Move down">↓</button>` : ''}
+          <button class="btn btn-outline btn-sm" onclick="openVideoModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" style="width:120px;height:68px;object-fit:cover;border-radius:4px;flex-shrink:0" alt="">
+        <div>
+          <p style="font-size:12px;color:var(--muted)">${v.caption || ''}</p>
+          <p style="font-size:11px;margin-top:.35rem"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">youtube.com/watch?v=${v.id}</a></p>
+        </div>
+      </div>
+    </div>`).join('') || '<p style="font-size:13px;color:var(--muted)">No videos yet — click "+ Add Video" and paste a YouTube link.</p>';
+}
+
+function moveVideo(i, dir) {
+  const items = data.videos;
+  const j = i + dir;
+  if (j < 0 || j >= items.length) return;
+  [items[i], items[j]] = [items[j], items[i]];
+  persist('videos');
+  renderVideos();
+}
+
+function deleteVideo(i) {
+  if (!confirm(`Delete "${data.videos[i].title}"?`)) return;
+  data.videos.splice(i, 1);
+  persist('videos');
+  renderVideos();
+  updateBadges();
+  toast('Video deleted');
+}
+
+function openVideoModal(idx) {
+  currentModalType = 'video';
+  currentModalIdx = idx;
+  const v = idx !== null ? data.videos[idx] : {id:'',title:'',caption:''};
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Video' : 'Add Video';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid single">
+      <div class="form-group"><label>YouTube link or video ID *</label>
+        <input id="f_videoUrl" value="${v.id}" placeholder="https://www.youtube.com/watch?v=...">
+        <span class="hint">Paste the full URL from YouTube (watch, youtu.be, or Shorts) — the ID is extracted automatically.</span>
+      </div>
+      <div class="form-group"><label>Title *</label><input id="f_title" value="${v.title}" placeholder="Maley Kamo sa Calatrava!"></div>
+      <div class="form-group"><label>Caption</label><input id="f_caption" value="${v.caption||''}" placeholder="Official Calatrava Tourism Promo Video"></div>
     </div>`;
   document.getElementById('modal').classList.add('open');
 }
@@ -981,7 +1163,11 @@ function saveModal() {
   const gb = id => { const el = document.getElementById(id); return el ? el.checked : false; };
 
   if (currentModalType === 'destination') {
+    const coords = resolveCoords(g);
+    if (coords === 'invalid') { toast('Invalid Plus Code','error'); return; }
+    const existing = currentModalIdx !== null ? data.destinations[currentModalIdx] : {};
     const item = {
+      ...existing,
       id: g('f_id') || g('f_name').toLowerCase().replace(/\s+/g,'-'),
       name: g('f_name'), type: g('f_type'), category: g('f_category'),
       barangay: g('f_barangay'), description: g('f_desc'),
@@ -990,8 +1176,8 @@ function saveModal() {
       featuredOrder: g('f_featuredOrder') ? parseInt(g('f_featuredOrder')) : null,
       images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean),
       thumbnail: g('f_thumb') || null,
-      lat: parseFloat(g('f_lat')) || null,
-      lng: parseFloat(g('f_lng')) || null
+      lat: coords.lat,
+      lng: coords.lng
     };
     if (!item.name) { toast('Name is required','error'); return; }
     if (currentModalIdx !== null) data.destinations[currentModalIdx] = item;
@@ -1009,7 +1195,9 @@ function saveModal() {
       title: g('f_title'),
       description: g('f_desc'),
       rate: g('f_rate'),
-      credit: g('f_credit')
+      credit: g('f_credit'),
+      contactPhone: g('f_contactPhone'),
+      contactUrl: g('f_contactUrl')
     };
     if (!item.title) { toast('Title is required','error'); return; }
     if (currentModalIdx !== null) data.activities[currentModalIdx] = item;
@@ -1019,12 +1207,30 @@ function saveModal() {
     updateBadges();
 
   } else if (currentModalType === 'accommodation') {
-    const item = { id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), lat: parseFloat(g('f_lat')) || null, lng: parseFloat(g('f_lng')) || null, images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean), detailsUrl: g('f_detailsUrl')||'' };
+    const coords = resolveCoords(g);
+    if (coords === 'invalid') { toast('Invalid Plus Code','error'); return; }
+    // Spread the existing item so fields without admin inputs (address,
+    // amenities, priceRange, bookingNote, …) survive an edit — the public
+    // accommodation page renders them.
+    const existing = currentModalIdx !== null ? data.accommodation[currentModalIdx] : {};
+    const item = { ...existing, id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), phone: g('f_phone'), phoneLabel: g('f_phoneLabel'), facebook: g('f_facebook'), facebookLabel: g('f_facebookLabel'), lat: coords.lat, lng: coords.lng, images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean), detailsUrl: g('f_detailsUrl')||'' };
     if (!item.name) { toast('Name is required','error'); return; }
     if (currentModalIdx !== null) data.accommodation[currentModalIdx] = item;
     else data.accommodation.push(item);
     persist('accommodation');
     renderAccommodation();
+    updateBadges();
+
+  } else if (currentModalType === 'video') {
+    const vid = parseYouTubeId(g('f_videoUrl'));
+    if (!vid) { toast('Could not read a YouTube video ID from that link','error'); return; }
+    const item = { id: vid, title: g('f_title'), caption: g('f_caption') };
+    if (!item.title) { toast('Title is required','error'); return; }
+    if (!data.videos) data.videos = [];
+    if (currentModalIdx !== null) data.videos[currentModalIdx] = item;
+    else data.videos.push(item);
+    persist('videos');
+    renderVideos();
     updateBadges();
 
   } else if (currentModalType === 'tip') {

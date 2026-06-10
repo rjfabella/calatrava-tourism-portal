@@ -8,8 +8,10 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 // Keep in sync with the `files` list in admin.html initApp().
-const FILES = ['destinations', 'activities', 'accommodation', 'contact', 'about', 'getting-here'];
-const ARRAY_FILES = ['destinations', 'activities', 'accommodation'];
+// 'gallery' is read-only from the public site (no admin UI yet) but must be
+// whitelisted here because the /data/* rewrite routes all reads through us.
+const FILES = ['destinations', 'activities', 'accommodation', 'contact', 'about', 'getting-here', 'gallery', 'videos'];
+const ARRAY_FILES = ['destinations', 'activities', 'accommodation', 'gallery', 'videos'];
 
 async function repoFallback(key) {
   // data/*.json ship with the function via included_files in netlify.toml.
