@@ -149,7 +149,8 @@ textarea{resize:vertical;min-height:80px}
 
 <!-- AUTH SCREEN -->
 <div id="authScreen">
-  <div class="auth-box">
+  <div class="auth-box" style="text-align:center">
+    <img src="assets/logos/CalatravaTourismLogo.png" alt="Experience Calatrava — Tourism Logo" style="width:110px;height:auto;margin:0 auto 1.25rem;display:block" onerror="this.style.display='none'">
     <h1>Admin Portal</h1>
     <p>Calatrava, Romblon Tourism — Content Management</p>
     <input type="password" id="pwInput" placeholder="Enter admin password" autocomplete="current-password">
@@ -643,6 +644,18 @@ function olcToLatLng(input) {
   return olcDecode(code);
 }
 
+// Normalize an asset path typed/pasted by staff: Windows backslashes become
+// forward slashes and a missing file extension gets .jpg appended (every
+// site photo is a .jpg). Prevents broken images from Explorer copy-paste.
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+function parseImageLines(raw) {
+  return raw.split('\n').map(fixAssetPath).filter(Boolean);
+}
+
 // Reads the modal's plus-code + lat/lng inputs; returns {lat,lng} or null, or
 // the string 'invalid' when a plus code was given but could not be decoded.
 function resolveCoords(g) {
@@ -666,7 +679,7 @@ function renderDestTable() {
   tbody.innerHTML = items.map((d, i) => {
     const realIdx = data.destinations.indexOf(d);
     const img = d.images && d.images[0]
-      ? `<img class="td-img" src="${d.images[0]}" alt="${d.name}" onerror="this.style.display='none'">`
+      ? `<img class="td-img" src="${fixAssetPath(d.images[0])}" alt="${d.name}" onerror="this.style.display='none'">`
       : `<span class="td-img-ph"></span>`;
     return `<tr>
       <td>${img}</td>
@@ -728,7 +741,7 @@ function openDestModal(idx) {
       </div>
       <div class="form-group full"><label>Images (one URL per line)</label>
         <textarea id="f_images" style="min-height:70px">${(d.images||[]).join('\n')}</textarea>
-        <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code></span>
+        <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically</span>
       </div>
       <div class="form-group"><label>Thumbnail path</label><input id="f_thumb" value="${d.thumbnail||''}" placeholder="assets/thumbnails/..."></div>
       <div class="form-group">
@@ -806,7 +819,7 @@ function renderAccommodation() {
         </div>
       </div>
       <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
-        ${a.images?.[0] ? `<img src="${a.images[0]}" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        ${a.images?.[0] ? `<img src="${fixAssetPath(a.images[0])}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
         <div>
           <p style="font-size:12px;color:var(--muted)">Brgy. ${a.barangay}</p>
           <p style="font-size:13px;margin-top:.25rem">${a.description}</p>
@@ -837,6 +850,9 @@ function openAccomModal(idx) {
       <div class="form-group"><label>Type / Subtitle</label><input id="f_type" value="${a.type}" placeholder="Beach Resort"></div>
       <div class="form-group"><label>Barangay</label><input id="f_barangay" value="${a.barangay}"></div>
       <div class="form-group full"><label>Short description</label><textarea id="f_desc" style="min-height:55px">${a.description}</textarea></div>
+      <div class="form-group full"><label>Starting rate / price range</label><input id="f_priceRange" value="${a.priceRange||''}" placeholder="₱25 entrance · ₱200+ cottage rental">
+        <span class="hint">Shown on the accommodation page cards — e.g. <code>From ₱1,500/night</code> or <code>Rates available on-site</code></span>
+      </div>
       <div class="form-group"><label>Contact number</label><input id="f_phone" value="${a.phone||''}" placeholder="0919 335 0314"></div>
       <div class="form-group"><label>Contact name / label</label><input id="f_phoneLabel" value="${a.phoneLabel||''}" placeholder="Calatrava Tourism Council"></div>
       <div class="form-group"><label>Contact URL</label><input id="f_facebook" value="${a.facebook||''}" placeholder="https://www.facebook.com/..."></div>
@@ -849,7 +865,7 @@ function openAccomModal(idx) {
       </div>
       <div class="form-group full"><label>Images (one path per line)</label>
         <textarea id="f_images" style="min-height:70px">${(a.images||[]).join('\n')}</textarea>
-        <span class="hint">Use relative paths like <code>assets/destinations/MyPhoto_web.jpg</code>. First image shown as cover.</span>
+        <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically. First image shown as cover.</span>
       </div>
       <div class="form-group"><label>Details URL</label><input id="f_detailsUrl" value="${a.detailsUrl||''}" placeholder="accommodation.html#cove-aurelio"></div>
     </div>`;
@@ -1174,8 +1190,8 @@ function saveModal() {
       fee: g('f_fee'), feeNote: g('f_feeNote'), badge: g('f_badge'),
       featured: gb('f_featured'),
       featuredOrder: g('f_featuredOrder') ? parseInt(g('f_featuredOrder')) : null,
-      images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean),
-      thumbnail: g('f_thumb') || null,
+      images: parseImageLines(g('f_images')),
+      thumbnail: fixAssetPath(g('f_thumb')) || null,
       lat: coords.lat,
       lng: coords.lng
     };
@@ -1213,7 +1229,7 @@ function saveModal() {
     // amenities, priceRange, bookingNote, …) survive an edit — the public
     // accommodation page renders them.
     const existing = currentModalIdx !== null ? data.accommodation[currentModalIdx] : {};
-    const item = { ...existing, id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), phone: g('f_phone'), phoneLabel: g('f_phoneLabel'), facebook: g('f_facebook'), facebookLabel: g('f_facebookLabel'), lat: coords.lat, lng: coords.lng, images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean), detailsUrl: g('f_detailsUrl')||'' };
+    const item = { ...existing, id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), priceRange: g('f_priceRange'), phone: g('f_phone'), phoneLabel: g('f_phoneLabel'), facebook: g('f_facebook'), facebookLabel: g('f_facebookLabel'), lat: coords.lat, lng: coords.lng, images: parseImageLines(g('f_images')), detailsUrl: g('f_detailsUrl')||'' };
     if (!item.name) { toast('Name is required','error'); return; }
     // Standard "Brgy. X, …" addresses follow the barangay field; custom
     // addresses (street/sitio detail) are left alone.
