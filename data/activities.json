@@ -8,8 +8,20 @@
     "image": "assets/activities/act-island-hopping.jpg",
     "credit": "RJ Fabella",
     "details": {
-      "highlights": ["Tinagong Dagat (Hidden Sea)", "Guindawahan Island", "Limestone sea caves", "Crystal-clear lagoons", "Snorkeling stops"],
-      "whatToBring": ["Sunscreen", "1L+ water", "Change of clothes", "Waterproof bag", "Cash for fees"],
+      "highlights": [
+        "Tinagong Dagat (Hidden Sea)",
+        "Guindawahan Island",
+        "Limestone sea caves",
+        "Crystal-clear lagoons",
+        "Snorkeling stops"
+      ],
+      "whatToBring": [
+        "Sunscreen",
+        "1L+ water",
+        "Change of clothes",
+        "Waterproof bag",
+        "Cash for fees"
+      ],
       "bestTime": "November to May",
       "duration": "4–8 hours",
       "contacts": [
@@ -37,8 +49,20 @@
     "image": "assets/activities/act-waterfall-trekking.jpg",
     "credit": "Calatrava Tourism Council",
     "details": {
-      "highlights": ["Tago Falls (7–9 m)", "Hidden Falls", "Cawa-Cawa Falls", "Oray Falls", "Natural pool swimming"],
-      "whatToBring": ["Trekking shoes", "2L+ water", "Light snacks", "Insect repellent", "Dry bag"],
+      "highlights": [
+        "Tago Falls (7–9 m)",
+        "Hidden Falls",
+        "Cawa-Cawa Falls",
+        "Oray Falls",
+        "Natural pool swimming"
+      ],
+      "whatToBring": [
+        "Trekking shoes",
+        "2L+ water",
+        "Light snacks",
+        "Insect repellent",
+        "Dry bag"
+      ],
       "bestTime": "Year-round (drier Nov–May)",
       "duration": "2–6 hours per trail",
       "contacts": [
@@ -60,8 +84,19 @@
     "image": "assets/activities/act-snorkeling-diving.jpg",
     "credit": "Sisira PH",
     "details": {
-      "highlights": ["Coral reef ecosystems", "Sea turtles", "Tropical fish schools", "High water visibility", "Protected marine areas"],
-      "whatToBring": ["Rash guard", "Waterproof camera", "Reef-safe sunscreen", "Snorkel gear (or rent on-site)"],
+      "highlights": [
+        "Coral reef ecosystems",
+        "Sea turtles",
+        "Tropical fish schools",
+        "High water visibility",
+        "Protected marine areas"
+      ],
+      "whatToBring": [
+        "Rash guard",
+        "Waterproof camera",
+        "Reef-safe sunscreen",
+        "Snorkel gear (or rent on-site)"
+      ],
       "bestTime": "November to May",
       "duration": "2–4 hours",
       "contacts": [
