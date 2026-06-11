@@ -68,7 +68,7 @@
     "name": "Cove Aurelio",
     "type": "Beach",
     "category": "beach",
-    "barangay": "Linao",
+    "barangay": "Talisay",
     "description": "A charming beach retreat with natural rock formations and available cottages. Known for its paluto service — bring your fresh catch and have it cooked right at the beach. A favorite for a relaxed, local-style day out.",
     "fee": "₱25 entrance fee",
     "feeNote": "Cottages & paluto service",
@@ -83,7 +83,7 @@
     ],
     "thumbnail": "assets/thumbnails/Destinations_CoveAurelio1_thumb.jpg",
     "lat": 12.638,
-    "lng": 122.100
+    "lng": 122.1
   },
   {
     "id": "turtle-cove",
@@ -120,23 +120,6 @@
     "lng": 122.096
   },
   {
-    "id": "balai-azinan",
-    "name": "Balai Azinan",
-    "type": "Full-facility Beach Resort",
-    "category": "beach",
-    "barangay": "Balogo",
-    "description": "The largest resort in Calatrava, Balai Azinan offers a complete experience: swimming pools, beachfront cottages, function rooms, and overnight accommodations. Ideal for group events, family outings, and extended stays.",
-    "fee": "Rates available on-site",
-    "feeNote": "Pools, cottages, function rooms, overnight",
-    "badge": "resort",
-    "featured": false,
-    "featuredOrder": null,
-    "images": [],
-    "thumbnail": null,
-    "lat": 12.610,
-    "lng": 122.080
-  },
-  {
     "id": "cawi-falls",
     "name": "Caw-i Falls",
     "type": "Waterfall — Trekking",
@@ -150,7 +133,7 @@
     "featuredOrder": null,
     "images": [],
     "thumbnail": null,
-    "lat": 12.600,
+    "lat": 12.6,
     "lng": 122.068
   },
   {

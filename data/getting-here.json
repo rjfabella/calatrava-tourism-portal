@@ -12,26 +12,39 @@
           "label": "Step 1 — Manila",
           "name": "NAIA Terminal → Tugdan Airport (Tablas)",
           "description": "Fly directly to Tugdan Airport (TBH) on Tablas Island. Several carriers operate this route; flight time is approximately 55 minutes. Book in advance — seats fill quickly during peak season and holidays.",
-          "tags": ["~55 min flight", "Book ahead"]
+          "tags": [
+            "~55 min flight",
+            "Book ahead"
+          ]
         },
         {
           "label": "Step 2 — Tugdan Airport",
           "name": "Airport → San Agustin Terminal (Jeepney or Tricycle)",
           "description": "Upon arrival at Tugdan, take a jeepney or tricycle towards San Agustin, the main commercial hub of Tablas. This is a short ride along the main road.",
-          "tags": ["~15–20 min", "₱30–₱80 tricycle"]
+          "tags": [
+            "~15–20 min",
+            "₱30–₱80 tricycle"
+          ]
         },
         {
           "label": "Step 3 — San Agustin",
           "name": "San Agustin → Calatrava (Jeepney)",
           "description": "Board a jeepney bound for Calatrava from the San Agustin terminal. The route passes through several barangays along Tablas' northern coast and offers scenic views along the way. Jeepneys depart when full.",
-          "tags": ["~1.5–2 hrs", "₱60–₱80", "Departs when full"],
+          "tags": [
+            "~1.5–2 hrs",
+            "₱60–₱80",
+            "Departs when full"
+          ],
           "highlightTag": "~1.5–2 hrs"
         },
         {
           "label": "Arrival",
           "name": "Calatrava Poblacion",
           "description": "You arrive at the town center of Calatrava. From here, tricycles take you to any barangay or resort. Contact your accommodation in advance to arrange a pick-up if needed.",
-          "tags": ["Tricycles available", "₱20–₱50 local fare"]
+          "tags": [
+            "Tricycles available",
+            "₱20–₱50 local fare"
+          ]
         }
       ]
     },
@@ -47,26 +60,38 @@
           "label": "Step 1 — Metro Manila",
           "name": "Manila → Batangas Port (Bus or Car)",
           "description": "Head to Batangas Grand Terminal and board a bus to Batangas Port. Several bus lines operate frequent trips from Cubao, Buendia, and other Manila terminals. Alternatively, drive or take a private vehicle.",
-          "tags": ["~2–3 hrs from Manila", "Bus or private car"]
+          "tags": [
+            "~2–3 hrs from Manila",
+            "Bus or private car"
+          ]
         },
         {
           "label": "Step 2 — Batangas Port",
           "name": "Ferry to Odiongan or Romblon Town",
           "description": "RORO ferries depart Batangas Port bound for Odiongan (Tablas) or Romblon Town. Check the latest schedules with Montenegro Shipping Lines or other operators. Overnight trips are common and save on accommodation costs.",
-          "tags": ["8–12 hrs overnight", "Check schedules", "₱500–₱900 fare"],
+          "tags": [
+            "8–12 hrs overnight",
+            "Check schedules",
+            "₱500–₱900 fare"
+          ],
           "highlightTag": "8–12 hrs overnight"
         },
         {
           "label": "Step 3 — Odiongan",
           "name": "Odiongan Port → Calatrava (Jeepney)",
           "description": "Upon docking at Odiongan, board a jeepney heading north toward Santa Fe or Calatrava. The road runs along Tablas Island's interior and coastline. The ride is scenic and comfortable.",
-          "tags": ["~2–2.5 hrs", "₱80–₱100"]
+          "tags": [
+            "~2–2.5 hrs",
+            "₱80–₱100"
+          ]
         },
         {
           "label": "Arrival",
           "name": "Calatrava Poblacion",
           "description": "Arrive at the Calatrava town center, rested and ready to explore. Tricycles are available at the terminal for the final leg to your accommodation or destination.",
-          "tags": ["Tricycles available"]
+          "tags": [
+            "Tricycles available"
+          ]
         }
       ]
     }

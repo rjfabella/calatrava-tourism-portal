@@ -2,11 +2,18 @@
   {
     "id": "cove-aurelio",
     "name": "Cove Aurelio",
-    "type": "Beach Resort",
-    "barangay": "Linao",
+    "type": "Eco Beach Resort",
+    "barangay": "Talisay",
     "address": "Brgy. Linao, Calatrava, Romblon",
     "description": "A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.",
-    "amenities": ["Cottages", "Paluto Service", "Swimming", "Rock Formations", "Day Use", "Picnic Area"],
+    "amenities": [
+      "Cottages",
+      "Paluto Service",
+      "Swimming",
+      "Rock Formations",
+      "Day Use",
+      "Picnic Area"
+    ],
     "priceRange": "₱25 entrance · ₱200+ cottage rental",
     "images": [
       "assets/destinations/Destinations_CoveAurelio1_web.jpg",
@@ -14,13 +21,14 @@
       "assets/destinations/Destinations_CoveAurelio3_web.jpg",
       "assets/destinations/Destinations_CoveAurelio4_web.jpg"
     ],
-    "phone": "0919 335 0314",
-    "phoneLabel": "Calatrava Tourism Council",
-    "facebook": "https://www.facebook.com/calatravatourismcouncil",
-    "facebookLabel": "Calatrava Tourism",
-    "lat": 12.580,
-    "lng": 122.195,
-    "bookingNote": "Contact the Tourism Council to arrange visits and cottage reservations."
+    "phone": "0930 458 8582",
+    "phoneLabel": "Cove Aurelio",
+    "facebook": "https://www.facebook.com/CoveAurelio",
+    "facebookLabel": "Cove Aurelio Facebook Page",
+    "lat": 12.646437,
+    "lng": 122.102937,
+    "bookingNote": "Contact the Tourism Council to arrange visits and cottage reservations.",
+    "detailsUrl": ""
   },
   {
     "id": "balai-azinan",
@@ -29,33 +37,94 @@
     "barangay": "Balogo",
     "address": "Brgy. Balogo, Calatrava, Romblon",
     "description": "The largest resort in Calatrava, Balai Azinan offers a complete beach experience. Features a swimming pool, beachfront cottages, and fully equipped function rooms — ideal for group events, family reunions, and overnight stays. The resort's wide beachfront is perfect for both relaxation and celebrations.",
-    "amenities": ["Swimming Pool", "Beach Cottages", "Function Rooms", "Overnight Stay", "Events Venue", "Beachfront", "Day Use"],
+    "amenities": [
+      "Swimming Pool",
+      "Beach Cottages",
+      "Function Rooms",
+      "Overnight Stay",
+      "Events Venue",
+      "Beachfront",
+      "Day Use"
+    ],
     "priceRange": "Rates available on-site",
-    "images": [],
-    "phone": "0919 335 0314",
-    "phoneLabel": "Calatrava Tourism Council",
-    "facebook": "https://www.facebook.com/calatravatourismcouncil",
-    "facebookLabel": "Calatrava Tourism",
-    "lat": 12.560,
-    "lng": 122.180,
-    "bookingNote": "Contact the Tourism Council for current rates and availability."
+    "images": [
+      "assets\\accommodations\\accommodations_balaiazinan_main",
+      "assets\\accommodations\\accommodations_balaiazinan1",
+      "assets\\accommodations\\accommodations_balaiazinan2",
+      "assets\\accommodations\\accommodations_balaiazinan3",
+      "assets\\accommodations\\accommodations_balaiazinan4"
+    ],
+    "phone": "0966 486 9893",
+    "phoneLabel": "Balai Azinan",
+    "facebook": "https://www.facebook.com/balaiazinan/",
+    "facebookLabel": "Balai Azinan Facebook Page",
+    "lat": 12.620312,
+    "lng": 122.068312,
+    "bookingNote": "Contact the Tourism Council for current rates and availability.",
+    "detailsUrl": ""
   },
   {
     "id": "bulawan-farm-resort",
     "name": "Bulawan Farm Resort",
-    "type": "Farm Resort",
+    "type": "Mountain Resort",
     "barangay": "Pagsangahan",
     "address": "Brgy. Pagsangahan, Calatrava, Romblon",
     "description": "A nature-immersed farm resort tucked in the hills of Pagsangahan. Bulawan offers a peaceful escape from the coast, surrounded by lush farm landscapes. Perfect for visitors seeking a quieter, countryside experience alongside Calatrava's natural scenery.",
-    "amenities": ["Farm Setting", "Nature Views", "Accommodation", "Peaceful Environment"],
+    "amenities": [
+      "Farm Setting",
+      "Nature Views",
+      "Accommodation",
+      "Peaceful Environment"
+    ],
     "priceRange": "Rates available on-site",
-    "images": [],
-    "phone": "0919 335 0314",
-    "phoneLabel": "Calatrava Tourism Council",
-    "facebook": "https://www.facebook.com/calatravatourismcouncil",
-    "facebookLabel": "Calatrava Tourism",
+    "images": [
+      "assets\\accommodations\\accommodations_bulawan_main",
+      "assets\\accommodations\\accommodations_bulawan1",
+      "assets\\accommodations\\accommodations_bulawan2"
+    ],
+    "phone": "0963 759 4547",
+    "phoneLabel": "Darwin Fezarit",
+    "facebook": "https://www.facebook.com/bulawanfarmresort/",
+    "facebookLabel": "Bulawan Resort Facebook Page",
     "lat": 12.548,
-    "lng": 122.170,
-    "bookingNote": "Contact the Tourism Council for directions and current rates."
+    "lng": 122.17,
+    "bookingNote": "Contact the Tourism Council for directions and current rates.",
+    "detailsUrl": ""
+  },
+  {
+    "id": "calatrava-inn",
+    "name": "Calatrava Inn",
+    "type": "Hotel",
+    "barangay": "Poblacion",
+    "description": "Nestled in the heart of the municipality, Calatrava Inn offers travelers a cozy and welcoming home away from home with convenient access to the town's pristine natural wonders.",
+    "lat": 12.6204023,
+    "lng": 122.0685669,
+    "images": [
+      "assets\\accommodations\\accommodations_calatravainn_main.jpg",
+      "assets\\accommodations\\accommodations_calatravainn1.jpg",
+      "assets\\accommodations\\accommodations_calatravainn2.jpg"
+    ],
+    "detailsUrl": "",
+    "phone": "09497468757",
+    "phoneLabel": "Diovani Mantes",
+    "facebook": "https://www.facebook.com/CalatravaInn",
+    "facebookLabel": "Calatrava Inn Facebook Page"
+  },
+  {
+    "id": "liralari-guest-house",
+    "name": "Liralari Guest House",
+    "type": "Hotel",
+    "barangay": "Poblacion",
+    "description": "Liralari Guesthouse provides a cozy and budget-friendly sanctuary for travelers, blending warm local hospitality with a peaceful atmosphere that serves as the perfect base for exploring Calatrava's pristine beaches and hidden waterfalls.",
+    "phone": "0999 196 8806",
+    "phoneLabel": "Ed Fiedacan",
+    "facebook": "https://www.facebook.com/liralariguesthouse/",
+    "facebookLabel": "Liralari Guesthouse Facebook Page",
+    "lat": 12.62033383492313,
+    "lng": 122.07048769895164,
+    "images": [
+      "assets\\accommodations\\accommodations_liralari_main"
+    ],
+    "detailsUrl": ""
   }
 ]
