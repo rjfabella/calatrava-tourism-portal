@@ -86,8 +86,6 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .filter-tab.active{color:var(--deep);border-bottom-color:var(--gold)}
 .filter-count{font-size:10px;background:var(--sand);color:var(--muted);padding:2px 7px;border-radius:20px;margin-left:6px;font-weight:400}
 .filter-tab.active .filter-count{background:var(--gold);color:var(--white)}
-.filter-sort{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
-.filter-sort select{font-size:11px;font-family:var(--fb);border:1px solid var(--border);background:transparent;color:var(--deep);padding:5px 10px;border-radius:2px;cursor:pointer;outline:none}
 
 /* ── DESTINATIONS GRID ── */
 .dest-section{padding:3rem 2.5rem 5rem}
@@ -191,7 +189,6 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   .cards-grid{grid-template-columns:1fr 1fr}
   .cards-grid.two-col{grid-template-columns:1fr}
   .filter-inner{padding:0 1.5rem}
-  .filter-sort{display:none}
   .dest-section{padding:2rem 1.5rem 4rem}
   .booking-inner{grid-template-columns:1fr;gap:2rem}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
@@ -280,13 +277,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <button class="filter-tab"        role="tab" aria-selected="false" data-filter="beach"  onclick="filter(this,'beach')">Beaches &amp; Islands <span class="filter-count">7</span></button>
       <button class="filter-tab"        role="tab" aria-selected="false" data-filter="falls"  onclick="filter(this,'falls')">Waterfalls <span class="filter-count">6</span></button>
     </div>
-    <div class="filter-sort">
-      <label for="sortSelect" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase">Sort</label>
-      <select id="sortSelect" onchange="sortCards(this.value)">
-        <option value="default">By barangay</option>
-        <option value="name">By name</option>
-      </select>
-    </div>
   </div>
 </div>
 
@@ -308,7 +298,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <h2>Ready to book? <em>We can arrange it.</em></h2>
       <p>Our accredited tourism operators handle island hopping, waterfall trekking guides, and transport arrangements from the port terminal. Contact us directly for group packages and custom itineraries.</p>
     </div>
-    <div class="booking-cards reveal">
+    <div class="booking-cards reveal" id="booking-cards">
       <a href="tel:09193350314" class="booking-card">
         <div class="bc-label">Island Hopping &amp; Tourism</div>
         <div class="bc-name">Calatrava Tourism Council</div>
@@ -554,28 +544,36 @@ function switchImg(imgId, idx, dot) {
   dot.classList.add('active');
 }
 
-// ── SORT ──
-function sortCards(val) {
-  document.querySelectorAll('.dest-group').forEach(g => {
-    const grid = g.querySelector('.cards-grid');
-    if (!grid) return;
-    const cards = [...grid.querySelectorAll('.dest-card')];
-    if (val === 'name') cards.sort((a,b) => (a.dataset.name||'').localeCompare(b.dataset.name||''));
-    else {
-      const names = allDestinations.filter(d => d.barangay === g.querySelector('h2')?.textContent?.replace('Brgy. ','')).map(d=>d.name);
-      cards.sort((a,b) => names.indexOf(a.dataset.name) - names.indexOf(b.dataset.name));
-    }
-    cards.forEach(c => grid.appendChild(c));
+// ── BOOKING CARDS (one per activity, same data as the homepage Experiences) ──
+function renderBookingCards(activities) {
+  const el = document.getElementById('booking-cards');
+  if (!el || !activities?.length) return; // keep the static fallback cards
+  const cards = activities.map(a => {
+    const c = (a.details?.contacts || [])[0];
+    const phone = a.contactPhone || c?.phone || '0919 335 0314';
+    const href = a.contactUrl || 'tel:' + phone.replace(/\s/g, '');
+    const external = /^https?:/.test(href);
+    return `<a href="${href}"${external ? ' target="_blank" rel="noopener"' : ''} class="booking-card">
+      <div class="bc-label">${a.rate || 'Enquire for rates'}</div>
+      <div class="bc-name">Book: ${a.title}</div>
+      <div class="bc-contact">${external ? (c?.name || 'Booking page') + ' ↗' : phone + (c?.name ? ' · ' + c.name : '')}</div>
+    </a>`;
   });
+  cards.push(`<a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" class="booking-card">
+      <div class="bc-label">Facebook</div>
+      <div class="bc-name">Calatrava Tourism Council</div>
+      <div class="bc-contact">calatravatourismcouncil</div>
+    </a>`);
+  el.innerHTML = cards.join('');
 }
 
 // ── INIT ──
 (async function init() {
-  let destinations = null;
-  try {
-    const res = await fetch('data/destinations.json', {cache:'no-store'});
-    if (res.ok) destinations = await res.json();
-  } catch(_) {}
+  const safe = url => fetch(url, {cache:'no-store'}).then(r => r.ok ? r.json() : null).catch(() => null);
+  let [destinations, activities] = await Promise.all([
+    safe('data/destinations.json'),
+    safe('data/activities.json')
+  ]);
 
   // Fall back to inline data if fetch failed
   if (!destinations || !destinations.length) destinations = DEST_FALLBACK;
@@ -583,6 +581,7 @@ function sortCards(val) {
   allDestinations = destinations;
   document.getElementById('dest-container').innerHTML = renderGroups(destinations);
   updateFilterCounts(destinations);
+  renderBookingCards(activities);
   observeReveal();
 
   if (location.hash) {

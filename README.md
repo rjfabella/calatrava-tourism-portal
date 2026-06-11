@@ -31,8 +31,17 @@ drafts and offers Export All / Discard. Export the JSON, replace the matching
 files in `data/`, and commit + push to publish.
 
 Note: once the backend is in use, Netlify Blobs is the source of truth and the
-committed `data/*.json` files are only the initial seed / fallback. Use
-**Export All** periodically and commit the files to keep a versioned backup in git.
+committed `data/*.json` files are only the initial seed / fallback.
+
+**Automatic git backup:** if a `GITHUB_TOKEN` env var is set on the Netlify
+site, every publish also commits the JSON to this repo (`Admin publish: update
+data/<file>.json`), giving a full edit history in git. Create a fine-grained
+personal access token (GitHub → Settings → Developer settings → Fine-grained
+tokens) scoped to **only this repo** with **Contents: read & write**, add it as
+`GITHUB_TOKEN` in Netlify → Environment variables, and redeploy. Optional:
+`GITHUB_REPO` (default `rjfabella/calatrava-tourism-portal`) and
+`GITHUB_BRANCH` (default `main`). Without the token, publishes still work —
+use **Export All** periodically and commit the files manually instead.
 
 ## Deployment
 

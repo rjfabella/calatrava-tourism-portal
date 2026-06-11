@@ -1215,6 +1215,11 @@ function saveModal() {
     const existing = currentModalIdx !== null ? data.accommodation[currentModalIdx] : {};
     const item = { ...existing, id: g('f_name').toLowerCase().replace(/\s+/g,'-'), name: g('f_name'), type: g('f_type'), barangay: g('f_barangay'), description: g('f_desc'), phone: g('f_phone'), phoneLabel: g('f_phoneLabel'), facebook: g('f_facebook'), facebookLabel: g('f_facebookLabel'), lat: coords.lat, lng: coords.lng, images: g('f_images').split('\n').map(s=>s.trim()).filter(Boolean), detailsUrl: g('f_detailsUrl')||'' };
     if (!item.name) { toast('Name is required','error'); return; }
+    // Standard "Brgy. X, …" addresses follow the barangay field; custom
+    // addresses (street/sitio detail) are left alone.
+    if (item.barangay && (!item.address || /^Brgy\.\s/i.test(item.address))) {
+      item.address = 'Brgy. ' + item.barangay + ', Calatrava, Romblon';
+    }
     if (currentModalIdx !== null) data.accommodation[currentModalIdx] = item;
     else data.accommodation.push(item);
     persist('accommodation');

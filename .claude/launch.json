@@ -3,8 +3,11 @@
   "configurations": [
     {
       "name": "netlify",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "netlify-cli", "dev", "--port", "8888"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "set ADMIN_PASSWORD=test-server-pw-2026&& npx --yes netlify-cli dev --port 8888 --dir D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\vibrant-hopper-bfc9ce --functions D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\vibrant-hopper-bfc9ce\\netlify\\functions"
+      ],
       "port": 8888
     },
     {

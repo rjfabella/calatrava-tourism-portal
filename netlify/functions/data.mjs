@@ -69,10 +69,52 @@ export default async (req) => {
       return Response.json({ error: key + ' must be a JSON ' + (wantArray ? 'array' : 'object') }, { status: 400 });
     }
     await store.setJSON(key, body);
-    return Response.json({ ok: true });
+    // Mirror the publish into git so GitHub stays the durable, versioned
+    // backup. Blobs remain the live source of truth; a commit failure must
+    // never fail the save.
+    let github;
+    try { github = await commitToGitHub(key, body); }
+    catch (e) { github = 'failed: ' + (e.message || e); }
+    return Response.json({ ok: true, github });
   }
 
   return Response.json({ error: 'Method not allowed' }, { status: 405 });
 };
+
+// Commit the published JSON to GitHub via the Contents API. Requires a
+// fine-grained PAT (Contents: read/write on this repo) in the GITHUB_TOKEN
+// env var; without it the backup is skipped and saves work as before.
+async function commitToGitHub(key, body) {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return 'skipped: GITHUB_TOKEN not set';
+  const repo   = process.env.GITHUB_REPO   || 'rjfabella/calatrava-tourism-portal';
+  const branch = process.env.GITHUB_BRANCH || 'main';
+  const path   = 'data/' + key + '.json';
+  const api    = `https://api.github.com/repos/${repo}/contents/${path}`;
+  const headers = {
+    'authorization': 'Bearer ' + token,
+    'accept': 'application/vnd.github+json',
+    'user-agent': 'calatrava-admin-publish',
+  };
+  const content = Buffer.from(JSON.stringify(body, null, 2) + '\n').toString('base64');
+
+  // Need the current blob sha to update an existing file (404 = new file).
+  let sha;
+  const cur = await fetch(`${api}?ref=${branch}`, { headers });
+  if (cur.ok) {
+    const j = await cur.json();
+    if ((j.content || '').replace(/\n/g, '') === content) return 'unchanged';
+    sha = j.sha;
+  } else if (cur.status !== 404) {
+    return 'failed: read ' + cur.status;
+  }
+
+  const res = await fetch(api, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ message: `Admin publish: update ${path}`, content, sha, branch }),
+  });
+  return res.ok ? 'committed' : 'failed: write ' + res.status;
+}
 
 export const config = { path: '/api/data/:file' };
