@@ -651,7 +651,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <div class="accom-body">
           <div class="accom-type">Beach Resort</div>
           <div class="accom-name">Cove Aurelio</div>
-          <div class="accom-loc">Brgy. Linao &mdash; Rock formations, cottages, paluto service</div>
+          <div class="accom-loc">Brgy. Talisay &mdash; Rock formations, cottages, paluto service</div>
           <a href="accommodation.html#cove-aurelio" class="accom-link">View details</a>
         </div>
       </div>
@@ -1074,10 +1074,18 @@ function renderAbout(about) {
     </div>`).join('');
 }
 
+// Heal image paths typed into the admin: backslashes from Windows copy-paste
+// and missing file extensions (all site photos are .jpg).
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+
 // Card-sized images don't need the ~1MB full photos; swap in the thumbnail
 // when one exists (falls back to the original via onerror if it doesn't).
 function thumbify(src) {
-  return (src || '').replace(/^assets\/destinations\/(.+)_web\.jpg$/, 'assets/thumbnails/$1_thumb.jpg');
+  return fixAssetPath(src).replace(/^assets\/destinations\/(.+)_web\.jpg$/, 'assets/thumbnails/$1_thumb.jpg');
 }
 
 function renderFeaturedDests(destinations) {
@@ -1088,7 +1096,7 @@ function renderFeaturedDests(destinations) {
   if (!el) return;
   el.innerHTML = featured.map((d, i) => {
     const img = d.images && d.images[0]
-      ? `<img src="${thumbify(d.images[0])}" onerror="if(this.src.includes('_thumb'))this.src='${d.images[0]}'" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
+      ? `<img src="${thumbify(d.images[0])}" onerror="if(this.src.includes('_thumb'))this.src='${fixAssetPath(d.images[0])}'" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
       : `<div class="dest-img" style="background:linear-gradient(160deg,#1A5C7A,#0C2233);min-height:300px"></div>`;
     return `<div class="dest-card" role="link" tabindex="0" aria-label="${d.name} — view details"
       onclick="location.href='destinations.html#${d.id}'"
@@ -1109,7 +1117,7 @@ function renderAccommodation(accommodation) {
   if (!el) return;
   const placeholderGrads = ['linear-gradient(160deg,#1E8B72,#0C2233)','linear-gradient(160deg,#1A5C7A,#0C2233)','linear-gradient(160deg,#2A8B7A,#1A5C7A)'];
   el.innerHTML = accommodation.map((a, i) => {
-    const cover = a.images?.[0] || a.image;
+    const cover = fixAssetPath(a.images?.[0] || a.image);
     const imgHtml = cover
       ? `<img src="${thumbify(cover)}" onerror="if(this.src.includes('_thumb'))this.src='${cover}'" alt="${a.name}" class="accom-img" loading="lazy">`
       : `<div class="accom-ph" style="background:${placeholderGrads[i % 3]}"></div>`;

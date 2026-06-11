@@ -234,9 +234,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <h1>Where to <em>Stay</em></h1>
     <p>Beach resorts, farm retreats, and overnight stays across Calatrava's barangays — from beachfront cottages to hillside farm escapes.</p>
     <div class="page-hero-stats">
-      <div class="ph-stat"><strong id="stat-resorts">3</strong><span>Resorts</span></div>
-      <div class="ph-stat"><strong>3</strong><span>Barangays</span></div>
-      <div class="ph-stat"><strong>₱20</strong><span>Env. Fee</span></div>
+      <div class="ph-stat"><strong id="stat-resorts">3</strong><span>Places to Stay</span></div>
+      <div class="ph-stat"><strong id="stat-brgys">4</strong><span>Barangays</span></div>
+      <div class="ph-stat"><strong>Day &amp; Night</strong><span>Stay Options</span></div>
     </div>
   </div>
 </header>
@@ -352,7 +352,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <script>
 // ── INLINE FALLBACK ──
-const ACCOM_FALLBACK = [{"id":"cove-aurelio","name":"Cove Aurelio","type":"Beach Resort","barangay":"Linao","address":"Brgy. Linao, Calatrava, Romblon","description":"A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.","amenities":["Cottages","Paluto Service","Swimming","Rock Formations","Day Use","Picnic Area"],"priceRange":"₱25 entrance · ₱200+ cottage rental","images":["assets/destinations/Destinations_CoveAurelio1_web.jpg","assets/destinations/Destinations_CoveAurelio2_web.jpg","assets/destinations/Destinations_CoveAurelio3_web.jpg","assets/destinations/Destinations_CoveAurelio4_web.jpg"],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.580,"lng":122.195,"bookingNote":"Contact the Tourism Council to arrange visits and cottage reservations."},{"id":"balai-azinan","name":"Balai Azinan","type":"Full-Facility Beach Resort","barangay":"Balogo","address":"Brgy. Balogo, Calatrava, Romblon","description":"The largest resort in Calatrava, Balai Azinan offers a complete beach experience. Features a swimming pool, beachfront cottages, and fully equipped function rooms — ideal for group events, family reunions, and overnight stays. The resort's wide beachfront is perfect for both relaxation and celebrations.","amenities":["Swimming Pool","Beach Cottages","Function Rooms","Overnight Stay","Events Venue","Beachfront","Day Use"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.560,"lng":122.180,"bookingNote":"Contact the Tourism Council for current rates and availability."},{"id":"bulawan-farm-resort","name":"Bulawan Farm Resort","type":"Farm Resort","barangay":"Pagsangahan","address":"Brgy. Pagsangahan, Calatrava, Romblon","description":"A nature-immersed farm resort tucked in the hills of Pagsangahan. Bulawan offers a peaceful escape from the coast, surrounded by lush farm landscapes. Perfect for visitors seeking a quieter, countryside experience alongside Calatrava's natural scenery.","amenities":["Farm Setting","Nature Views","Accommodation","Peaceful Environment"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.548,"lng":122.170,"bookingNote":"Contact the Tourism Council for directions and current rates."}];
+const ACCOM_FALLBACK = [{"id":"cove-aurelio","name":"Cove Aurelio","type":"Beach Resort","barangay":"Talisay","address":"Brgy. Talisay, Calatrava, Romblon","description":"A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.","amenities":["Cottages","Paluto Service","Swimming","Rock Formations","Day Use","Picnic Area"],"priceRange":"₱25 entrance · ₱200+ cottage rental","images":["assets/destinations/Destinations_CoveAurelio1_web.jpg","assets/destinations/Destinations_CoveAurelio2_web.jpg","assets/destinations/Destinations_CoveAurelio3_web.jpg","assets/destinations/Destinations_CoveAurelio4_web.jpg"],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.580,"lng":122.195,"bookingNote":"Contact the Tourism Council to arrange visits and cottage reservations."},{"id":"balai-azinan","name":"Balai Azinan","type":"Full-Facility Beach Resort","barangay":"Balogo","address":"Brgy. Balogo, Calatrava, Romblon","description":"The largest resort in Calatrava, Balai Azinan offers a complete beach experience. Features a swimming pool, beachfront cottages, and fully equipped function rooms — ideal for group events, family reunions, and overnight stays. The resort's wide beachfront is perfect for both relaxation and celebrations.","amenities":["Swimming Pool","Beach Cottages","Function Rooms","Overnight Stay","Events Venue","Beachfront","Day Use"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.560,"lng":122.180,"bookingNote":"Contact the Tourism Council for current rates and availability."},{"id":"bulawan-farm-resort","name":"Bulawan Farm Resort","type":"Farm Resort","barangay":"Pagsangahan","address":"Brgy. Pagsangahan, Calatrava, Romblon","description":"A nature-immersed farm resort tucked in the hills of Pagsangahan. Bulawan offers a peaceful escape from the coast, surrounded by lush farm landscapes. Perfect for visitors seeking a quieter, countryside experience alongside Calatrava's natural scenery.","amenities":["Farm Setting","Nature Views","Accommodation","Peaceful Environment"],"priceRange":"Rates available on-site","images":[],"phone":"0919 335 0314","phoneLabel":"Calatrava Tourism Council","facebook":"https://www.facebook.com/calatravatourismcouncil","facebookLabel":"Calatrava Tourism","lat":12.548,"lng":122.170,"bookingNote":"Contact the Tourism Council for directions and current rates."}];
 
 // ── REVEAL ──
 const io = new IntersectionObserver(entries => {
@@ -420,10 +420,10 @@ function renderCard(r, idx) {
     <div class="resort-info">
       <div class="resort-type">${r.type}</div>
       <div class="resort-name">${r.name}</div>
-      <div class="resort-loc">${locSvg} ${r.address || 'Brgy. ' + r.barangay + ', Calatrava, Romblon'}</div>
+      <div class="resort-loc">${locSvg} ${r.address && !/^Brgy\.\s/i.test(r.address) ? r.address : 'Brgy. ' + r.barangay + ', Calatrava, Romblon'}</div>
       <p class="resort-desc">${r.description}</p>
       ${amenities ? `<div class="resort-amenities">${amenities}</div>` : ''}
-      <div class="resort-price">${r.priceRange}<span> — day use &amp; overnight</span></div>
+      ${r.priceRange ? `<div class="resort-price">${r.priceRange}<span> — day use &amp; overnight</span></div>` : ''}
       <div class="resort-actions">
         ${r.phone ? `<a href="${phoneHref}" class="res-btn res-btn-call">${callSvg} Call: ${r.phone}</a>` : ''}
         ${r.facebook ? `<a href="${r.facebook}" target="_blank" rel="noopener" class="res-btn res-btn-fb">${fbSvg} ${r.facebookLabel || 'Facebook'}</a>` : ''}
@@ -444,6 +444,14 @@ function switchImg(imgId, idx, dot) {
   dot.classList.add('active');
 }
 
+// Heal image paths typed into the admin: backslashes from Windows copy-paste
+// and missing file extensions (all site photos are .jpg).
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+
 // ── INIT ──
 (async function init() {
   let data = null;
@@ -452,10 +460,13 @@ function switchImg(imgId, idx, dot) {
     if (res.ok) data = await res.json();
   } catch(_){}
   if (!data || !data.length) data = ACCOM_FALLBACK;
+  data.forEach(r => { r.images = (r.images || []).map(fixAssetPath).filter(Boolean); });
 
   document.getElementById('accom-list').innerHTML = data.map(renderCard).join('');
   const statEl = document.getElementById('stat-resorts');
   if (statEl) statEl.textContent = data.length;
+  const brgyEl = document.getElementById('stat-brgys');
+  if (brgyEl) brgyEl.textContent = new Set(data.map(r => r.barangay).filter(Boolean)).size;
   observeReveal();
 })();
 </script>
