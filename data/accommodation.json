@@ -4,7 +4,7 @@
     "name": "Cove Aurelio",
     "type": "Eco Beach Resort",
     "barangay": "Talisay",
-    "address": "Brgy. Talisay, Calatrava, Romblon",
+    "address": "Brgy. Linao, Calatrava, Romblon",
     "description": "A charming beach retreat set among dramatic natural rock formations along the Linao coastline. Known for its paluto service — bring your fresh catch from the market and have it cooked right at the beach. Offers cottages for day use, ideal for family outings and group celebrations.",
     "amenities": [
       "Cottages",
@@ -86,8 +86,8 @@
     "phoneLabel": "Darwin Fezarit",
     "facebook": "https://www.facebook.com/bulawanfarmresort/",
     "facebookLabel": "Bulawan Resort Facebook Page",
-    "lat": 12.548,
-    "lng": 122.17,
+    "lat": 12.6023,
+    "lng": 122.0731,
     "bookingNote": "Contact the Tourism Council for directions and current rates.",
     "detailsUrl": ""
   },
