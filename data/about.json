@@ -12,10 +12,30 @@
     "ctaUrl": "getting-here.html"
   },
   "stats": [
-    { "id": "waterfalls", "value": "6", "suffix": "", "label": "Waterfalls" },
-    { "id": "beaches", "value": "7", "suffix": "", "label": "Beaches & Islands" },
-    { "id": "envfee", "value": "₱20", "suffix": "", "label": "Env. Fee" },
-    { "id": "travel", "value": "2", "suffix": "hrs", "label": "from Tablas Airport" }
+    {
+      "id": "waterfalls",
+      "value": "6",
+      "suffix": "",
+      "label": "Waterfalls"
+    },
+    {
+      "id": "beaches",
+      "value": "7",
+      "suffix": "",
+      "label": "Beaches & Islands"
+    },
+    {
+      "id": "envfee",
+      "value": "₱20",
+      "suffix": "",
+      "label": "Env. Fee"
+    },
+    {
+      "id": "travel",
+      "value": "2",
+      "suffix": "hrs",
+      "label": "from Tablas Airport"
+    }
   ],
   "tabs": [
     {
