@@ -153,9 +153,10 @@ textarea{resize:vertical;min-height:80px}
     <img src="assets/logos/CalatravaTourismLogo.png" alt="Experience Calatrava — Tourism Logo" style="width:110px;height:auto;margin:0 auto 1.25rem;display:block" onerror="this.style.display='none'">
     <h1>Admin Portal</h1>
     <p>Calatrava, Romblon Tourism — Content Management</p>
-    <input type="password" id="pwInput" placeholder="Enter admin password" autocomplete="current-password">
+    <input type="password" id="pwInput" placeholder="Admin password or GitHub token" autocomplete="current-password">
     <button onclick="doLogin()">Sign In</button>
     <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
+    <p style="font-size:11px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
   </div>
 </div>
 
@@ -240,7 +241,7 @@ textarea{resize:vertical;min-height:80px}
           </div>
         </div>
         <div class="io-strip">
-          <p><strong>How it works:</strong> On the live site (Netlify), Save publishes instantly. On a plain static host, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
+          <p><strong>How it works:</strong> On GitHub Pages, Save commits to the repo and is live in about a minute (sign in with a GitHub token once). On Netlify, Save publishes instantly. Without either, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
           <div class="io-strip-actions">
             <button class="btn btn-success btn-sm" onclick="exportJSON('destinations')">↓ Download destinations.json</button>
           </div>
@@ -395,20 +396,43 @@ textarea{resize:vertical;min-height:80px}
 // ══ STATE ══
 // Fallback for static hosting / offline only. When the Netlify backend is
 // deployed, the real check is server-side (ADMIN_PASSWORD env var) and this
-// constant is ignored.
+// constant is ignored. On GitHub Pages the real credential is the GitHub
+// token — this password only unlocks a token already saved on the device.
 const FALLBACK_PW = 'calatrava2026';
+// GitHub publishing (GitHub Pages hosting): commits straight to the repo,
+// which is what the site serves. Needs a fine-grained PAT with Contents
+// read & write on this repo, pasted once into the login box.
+const GH_REPO   = 'rjfabella/calatrava-tourism-portal';
+const GH_BRANCH = 'main';
 let data = {};
 let draftSections = new Set();
-let adminPw = null;          // kept in memory for publish calls
-let backendAvailable = null; // true = Netlify functions reachable, false = static-only
+let adminPw = null;          // kept in memory for Netlify publish calls
+let ghToken = null;          // GitHub token for direct-commit publishing
+// 'netlify' = functions backend reachable; 'github' = direct commits via
+// GitHub API; 'static' = browser drafts + export only.
+let publishMode = 'static';
 let currentModalType = null;
 let currentModalIdx = null;
 let importTarget = null;
 
 // ══ AUTH ══
+const looksLikeGhToken = s => /^(github_pat_|ghp_)/.test(s);
+
+async function validateGhToken(token) {
+  try {
+    const res = await fetch('https://api.github.com/repos/' + GH_REPO, {
+      headers: { authorization: 'Bearer ' + token, accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) return false;
+    const repo = await res.json();
+    return !!repo.permissions?.push;
+  } catch (e) { return false; }
+}
+
 async function doLogin() {
   const pw = document.getElementById('pwInput').value;
   let ok = false;
+  let backendAvailable;
   try {
     const res = await fetch('/api/login', {
       method: 'POST',
@@ -419,7 +443,27 @@ async function doLogin() {
     else if (res.status === 401)   { ok = false; backendAvailable = true; }
     else                           { backendAvailable = false; } // 404/500 → no backend deployed
   } catch(e)                       { backendAvailable = false; } // offline / file://
-  if (backendAvailable === false) ok = (pw === FALLBACK_PW);
+  if (backendAvailable) publishMode = 'netlify';
+
+  if (backendAvailable === false) {
+    // No server. A pasted GitHub token is the real credential; the fallback
+    // password unlocks a token previously saved on this device.
+    if (looksLikeGhToken(pw)) {
+      if (await validateGhToken(pw)) {
+        ok = true; ghToken = pw; publishMode = 'github';
+        try { localStorage.setItem('admin_gh_token', pw); } catch(e) {}
+      }
+    } else if (pw === FALLBACK_PW) {
+      ok = true;
+      const stored = localStorage.getItem('admin_gh_token');
+      if (stored && await validateGhToken(stored)) {
+        ghToken = stored; publishMode = 'github';
+      } else {
+        publishMode = 'static';
+        if (stored) toast('Saved GitHub token no longer works — paste a new one to publish', 'error');
+      }
+    }
+  }
 
   if (ok) {
     adminPw = pw;
@@ -433,6 +477,11 @@ async function doLogin() {
 }
 document.getElementById('pwInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 function doLogout() {
+  if (localStorage.getItem('admin_gh_token')
+      && confirm('Also forget the saved GitHub token on this device?\n\nChoose OK on shared computers. You will need to paste the token again to publish.')) {
+    localStorage.removeItem('admin_gh_token');
+  }
+  adminPw = null; ghToken = null; publishMode = 'static';
   document.getElementById('authScreen').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
 }
@@ -446,10 +495,16 @@ async function initApp() {
 
   for (const f of files) {
     let disk = null;
-    try {
-      const res = await fetch('data/' + f + '.json', {cache: 'no-store'});
-      if (res.ok) disk = await res.json();
-    } catch(e) { /* fetch unavailable (e.g. file:// protocol) */ }
+    // GitHub mode reads through the API: the GitHub Pages CDN caches
+    // data/*.json for up to ~10 minutes, so a just-published edit could
+    // otherwise reload stale and get overwritten on the next save.
+    if (publishMode === 'github') disk = await ghReadFile(f);
+    if (disk === null) {
+      try {
+        const res = await fetch('data/' + f + '.json', {cache: 'no-store'});
+        if (res.ok) disk = await res.json();
+      } catch(e) { /* fetch unavailable (e.g. file:// protocol) */ }
+    }
 
     let local = null;
     try {
@@ -486,8 +541,8 @@ function refreshDraftBanner() {
     document.querySelector('.topbar')?.after(banner);
   }
   banner.innerHTML = `<span><strong>Unpublished drafts</strong> (saved in this browser only): ${[...draftSections].join(', ')}.</span>
-    ${backendAvailable ? `<button class="btn btn-success btn-sm" onclick="publishAllDrafts()">⤴ Publish drafts to site</button>` : ''}
-    <button class="btn btn-primary btn-sm" onclick="exportAll()">${backendAvailable ? '↓ Export All (backup)' : '↓ Export All to publish'}</button>
+    ${publishMode !== 'static' ? `<button class="btn btn-success btn-sm" onclick="publishAllDrafts()">⤴ Publish drafts to site</button>` : ''}
+    <button class="btn btn-primary btn-sm" onclick="exportAll()">${publishMode !== 'static' ? '↓ Export All (backup)' : '↓ Export All to publish'}</button>
     <button class="btn btn-outline btn-sm" onclick="discardDrafts()">Discard drafts</button>`;
 }
 
@@ -552,10 +607,60 @@ function toast(msg, type='success') {
   setTimeout(() => t.className = '', 2500);
 }
 
+// ══ GITHUB CONTENTS API (publishMode 'github') ══
+const ghApi = f => `https://api.github.com/repos/${GH_REPO}/contents/data/${f}.json`;
+const ghHeaders = () => ({ authorization: 'Bearer ' + ghToken, accept: 'application/vnd.github+json' });
+
+// UTF-8-safe base64 (atob/btoa alone mangle ₱, —, etc.)
+function b64DecodeUtf8(b64) {
+  const bin = atob(b64.replace(/\n/g, ''));
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+function b64EncodeUtf8(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin);
+}
+
+async function ghReadFile(f) {
+  try {
+    const res = await fetch(ghApi(f) + '?ref=' + GH_BRANCH, { headers: ghHeaders() });
+    if (!res.ok) return null;
+    const j = await res.json();
+    return JSON.parse(b64DecodeUtf8(j.content));
+  } catch (e) { return null; }
+}
+
+async function ghPublish(key) {
+  // Fetch the current sha right before writing so concurrent edits from
+  // another device fail loudly (409) instead of being silently overwritten.
+  let sha;
+  const cur = await fetch(ghApi(key) + '?ref=' + GH_BRANCH, { headers: ghHeaders() });
+  if (cur.ok) sha = (await cur.json()).sha;
+  else if (cur.status !== 404) throw new Error('read failed (' + cur.status + ')');
+
+  const res = await fetch(ghApi(key), {
+    method: 'PUT',
+    headers: { ...ghHeaders(), 'content-type': 'application/json' },
+    body: JSON.stringify({
+      // [skip netlify] keeps the old Netlify site from burning deploy
+      // credits on these commits; GitHub Pages ignores the marker.
+      message: `Admin publish: update data/${key}.json [skip netlify]`,
+      content: b64EncodeUtf8(JSON.stringify(data[key], null, 2) + '\n'),
+      sha, branch: GH_BRANCH
+    })
+  });
+  if (res.status === 401 || res.status === 403) throw new Error('token rejected');
+  if (res.status === 409) throw new Error('edit conflict — reload and try again');
+  if (!res.ok) throw new Error('write failed (' + res.status + ')');
+}
+
 // ══ PERSIST ══
 // Always keep a localStorage draft (offline safety net), then try to publish
-// to the Netlify backend. On success the draft is cleared — the server is the
-// source of truth. Without a backend this behaves exactly like before.
+// to the backend (Netlify functions or GitHub commits). On success the draft
+// is cleared — the server is the source of truth.
 function persist(key) {
   localStorage.setItem('admin_' + key, JSON.stringify(data[key]));
   draftSections.add(key);
@@ -564,7 +669,19 @@ function persist(key) {
 }
 
 async function publish(key) {
-  if (backendAvailable === false || !adminPw) return; // static-only mode: drafts + export
+  if (publishMode === 'github') {
+    try {
+      await ghPublish(key);
+      localStorage.removeItem('admin_' + key);
+      draftSections.delete(key);
+      refreshDraftBanner();
+      toast(key + ' published — live on the site in about a minute');
+    } catch(e) {
+      toast('Publish failed (' + e.message + ') — kept as local draft', 'error');
+    }
+    return;
+  }
+  if (publishMode !== 'netlify' || !adminPw) return; // static-only mode: drafts + export
   try {
     const res = await fetch('/api/data/' + key + '.json', {
       method: 'PUT',
