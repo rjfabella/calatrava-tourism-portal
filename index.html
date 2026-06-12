@@ -397,7 +397,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
            poster="assets/video/hero_poster.jpg"
            id="heroVid"
            preload="metadata"
-           data-webm="assets/video/festival_hero.webm"
            data-mp4="assets/video/festival_hero.mp4">
     </video>
   </div>
@@ -1209,6 +1208,11 @@ function renderContactCards(contact) {
   });
   v.load();
   v.play().catch(() => {});
+  // Battery-saver modes can reject even muted autoplay; retry once the
+  // visitor interacts so they aren't stuck on the poster frame.
+  const retry = () => { if (v.paused) v.play().catch(() => {}); };
+  ['pointerdown', 'keydown', 'scroll'].forEach(ev =>
+    addEventListener(ev, retry, { once: true, passive: true }));
 })();
 
 // ── INIT ──
