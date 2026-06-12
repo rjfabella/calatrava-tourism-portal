@@ -1209,6 +1209,11 @@ function renderContactCards(contact) {
   });
   v.load();
   v.play().catch(() => {});
+  // Battery-saver modes can reject even muted autoplay; retry once the
+  // visitor interacts so they aren't stuck on the poster frame.
+  const retry = () => { if (v.paused) v.play().catch(() => {}); };
+  ['pointerdown', 'keydown', 'scroll'].forEach(ev =>
+    addEventListener(ev, retry, { once: true, passive: true }));
 })();
 
 // ── INIT ──
