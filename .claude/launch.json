@@ -6,7 +6,7 @@
       "runtimeExecutable": "cmd",
       "runtimeArgs": [
         "/c",
-        "set ADMIN_PASSWORD=test-server-pw-2026&& npx --yes netlify-cli dev --port 8888 --dir D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\vibrant-hopper-bfc9ce --functions D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\vibrant-hopper-bfc9ce\\netlify\\functions"
+        "set ADMIN_PASSWORD=test-server-pw-2026&& npx --yes netlify-cli dev --port 8888 --dir D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\charming-swirles-7ef8bf --functions D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\charming-swirles-7ef8bf\\netlify\\functions"
       ],
       "port": 8888
     },
