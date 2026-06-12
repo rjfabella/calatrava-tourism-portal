@@ -1,9 +1,11 @@
 # Calatrava Tourism Portal
 
 Website for the Municipality of Calatrava, Romblon, Philippines.
-Plain HTML / CSS / JS — no build step. Runs on any static host; when deployed
-on **Netlify**, two serverless functions give the admin editor instant
-publishing (saves go straight to Netlify Blobs and are live immediately).
+Plain HTML / CSS / JS — no build step. Hosted for free on **GitHub Pages**;
+the admin editor publishes by committing straight to this repo via the GitHub
+API, so the repo's `data/*.json` files are the single source of truth.
+(A legacy Netlify Functions + Blobs backend is still in the repo and works if
+the site is ever deployed there again — see Deployment.)
 
 ## Pages
 
@@ -20,48 +22,58 @@ Each public page renders from the matching JSON in `data/`, with a hardcoded fal
 1. Open `admin.html` in a browser and sign in.
 2. Edit any section and hit Save.
 
-**On Netlify (with the backend):** every Save publishes instantly — the
+**On GitHub Pages (current hosting):** sign in once with a **fine-grained
+GitHub personal access token** (GitHub → Settings → Developer settings →
+Fine-grained tokens; scope it to **only this repo**, permission **Contents:
+read & write**). The token is validated against the GitHub API, remembered in
+that browser, and afterwards the regular admin password signs you in. Every
+Save commits the JSON to `main` (`Admin publish: update data/<file>.json
+[skip netlify]`) and GitHub Pages redeploys it — changes are live in about a
+minute. The admin always loads the latest committed data through the API, so
+staff never edit a stale CDN copy.
+
+**On Netlify (legacy backend):** every Save publishes instantly — the
 functions store the JSON in Netlify Blobs and all pages read through
-`/api/data/*`, so visitors see the change on their next page load. The
-password is checked server-side against the `ADMIN_PASSWORD` env var.
+`/api/data/*`. The password is checked server-side against the
+`ADMIN_PASSWORD` env var, and if a `GITHUB_TOKEN` env var is set, every
+publish is also mirrored as a commit to this repo.
 
 **On a plain static host (or offline):** edits save to browser localStorage
 only. Drafts survive reloads; a blue banner lists sections with unpublished
 drafts and offers Export All / Discard. Export the JSON, replace the matching
 files in `data/`, and commit + push to publish.
 
-Note: once the backend is in use, Netlify Blobs is the source of truth and the
-committed `data/*.json` files are only the initial seed / fallback.
-
-**Automatic git backup:** if a `GITHUB_TOKEN` env var is set on the Netlify
-site, every publish also commits the JSON to this repo (`Admin publish: update
-data/<file>.json`), giving a full edit history in git. Create a fine-grained
-personal access token (GitHub → Settings → Developer settings → Fine-grained
-tokens) scoped to **only this repo** with **Contents: read & write**, add it as
-`GITHUB_TOKEN` in Netlify → Environment variables, and redeploy. Optional:
-`GITHUB_REPO` (default `rjfabella/calatrava-tourism-portal`) and
-`GITHUB_BRANCH` (default `main`). Without the token, publishes still work —
-use **Export All** periodically and commit the files manually instead.
-
 ## Deployment
 
-### Netlify (recommended — enables instant publishing)
+### GitHub Pages (current — free)
+
+1. Repo → Settings → Pages → Source: **Deploy from a branch**, branch
+   `main`, folder `/ (root)`. (Already enabled for this repo.)
+2. The site serves at <https://rjfabella.github.io/calatrava-tourism-portal/>.
+   No build step, no secrets — `data/*.json` is served as committed.
+3. For admin publishing, each staff member needs the fine-grained PAT
+   described above (one shared token also works; rotate it when staff change:
+   GitHub → Settings → Developer settings → revoke + issue a new one).
+
+Caveats: publishes take ~30–60 s to deploy plus up to ~10 min of CDN cache
+for visitors, and the GitHub token is the real credential — the admin
+password alone can't publish.
+
+### Netlify (legacy — instant publishing, uses paid credits)
 
 1. [app.netlify.com](https://app.netlify.com) → Add new site → Import from GitHub → pick this repo.
    Build command: none. Publish directory: `.` (already set in `netlify.toml`).
-2. Site configuration → Environment variables → add `ADMIN_PASSWORD` (this is
-   the real admin password; the constant in `admin.html` is only the offline fallback).
+2. Site configuration → Environment variables → add `ADMIN_PASSWORD`, and
+   optionally `GITHUB_TOKEN` / `GITHUB_REPO` / `GITHUB_BRANCH` for the git
+   backup mirror.
 3. Deploy. Functions and the `/data/*` rewrite are picked up from `netlify.toml` automatically.
+   Note: on credit-based Netlify plans every production deploy costs credits;
+   admin-publish backup commits carry `[skip netlify]` so they don't trigger
+   redundant deploys (the data is served from Blobs there).
 
-Local development: `npm install`, then `npx netlify-cli dev` (reads
-`ADMIN_PASSWORD` from a local `.env` file, serves functions + a sandboxed
-local blob store on http://localhost:8888).
-
-### Any other static host
-
-Serve the repo root as static files (GitHub Pages, Cloudflare Pages, etc.).
-Everything works, but admin publishing falls back to the manual
-export-and-commit flow described above.
+Local development: `npx http-server . -p 5173` for the static site, or
+`npm install` + `npx netlify-cli dev` to exercise the legacy functions
+backend.
 
 ## Security — required before going live
 
@@ -76,19 +88,21 @@ The key in `data/contact.json` is **publicly visible** (it ships to every visito
 
 If you ever commit a key without restrictions, **rotate it immediately** (delete + create new, update `data/contact.json`).
 
-### Admin password
+### Admin credentials
 
-On Netlify, the password is verified **server-side** (`ADMIN_PASSWORD` env
-var) for both login and every save — this is a real write barrier. Pick a
-strong value that differs from the fallback constant in `admin.html`.
+**On GitHub Pages, the GitHub token is the real write barrier** — publishing
+is a commit, authorized by GitHub itself. The `FALLBACK_PW` constant in
+`admin.html` is only a convenience gate: it unlocks a token already saved in
+that browser, and on a machine without a saved token it can't publish
+anything. Keep tokens fine-grained (this repo only, Contents read & write)
+and revoke them on GitHub when a staffer leaves — that immediately cuts off
+publishing from every device using that token.
 
-The `FALLBACK_PW` constant in `admin.html` is only used when no backend is
-reachable (plain static host / offline), where saves can't go further than the
-editor's own browser anyway. Still:
+**On Netlify (legacy)**, the password is verified server-side
+(`ADMIN_PASSWORD` env var) for both login and every save.
 
 - Treat the admin URL as semi-private (don't link to it from indexable pages — the footer "Staff Portal" link is intentionally dim).
-- Rotate `ADMIN_PASSWORD` if a staffer leaves (Netlify → Environment variables, then redeploy).
-- For extra hardening, put `admin.html` behind Netlify's password protection or basic-auth.
+- The saved token lives in the browser's localStorage on staff machines — use the Sign out button on shared computers.
 
 ## Files
 
