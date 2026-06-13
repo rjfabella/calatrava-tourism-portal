@@ -234,16 +234,17 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .contact-text h2 em{font-style:italic;color:var(--ocean)}
 .contact-text p{font-size:14px;color:var(--muted);line-height:1.7}
 
-/* ── LOCAL LIFE GUIDE STRIP ── */
-.life-strip{background:linear-gradient(120deg,var(--deep),var(--ocean));padding:4.5rem 2.5rem;position:relative;overflow:hidden}
+/* ── LOCAL LIFE GUIDE STRIP (inverted palette — bright band before the footer) ── */
+.life-strip{background:linear-gradient(120deg,var(--gl),var(--gold));padding:4.5rem 2.5rem;position:relative;overflow:hidden}
+.life-strip::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% -20%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
 .life-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1}
 .life-text{max-width:640px}
-.life-text .s-label{color:var(--gl)}
-.life-text h2{font-family:var(--fd);font-size:clamp(2rem,3.4vw,3rem);font-weight:300;color:var(--white);line-height:1.15;margin:.35rem 0 .65rem}
-.life-text h2 em{font-style:italic;color:var(--gl)}
-.life-text p{font-size:14.5px;color:rgba(255,255,255,.8);line-height:1.75;max-width:560px}
-.life-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--gl);color:var(--deep);font-family:var(--fb);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border-radius:2px;transition:background .3s,transform .3s;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-.life-btn:hover{background:var(--white);transform:translateY(-2px)}
+.life-text .s-label{color:var(--deep);opacity:.72}
+.life-text h2{font-family:var(--fd);font-size:clamp(2rem,3.4vw,3rem);font-weight:300;color:var(--deep);line-height:1.15;margin:.35rem 0 .65rem}
+.life-text h2 em{font-style:italic;color:var(--white)}
+.life-text p{font-size:14.5px;color:rgba(12,34,51,.8);line-height:1.75;max-width:560px}
+.life-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--deep);color:var(--white);font-family:var(--fb);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border-radius:2px;transition:background .3s,transform .3s;box-shadow:0 12px 30px rgba(12,34,51,.28)}
+.life-btn:hover{background:var(--ocean);transform:translateY(-2px)}
 .life-btn span{font-size:1.15em;line-height:1}
 .contact-cards{display:flex;gap:1rem;flex-wrap:wrap}
 .contact-card{background:var(--white);border:0.5px solid var(--border);border-radius:3px;padding:1.25rem 1.5rem;text-decoration:none;transition:box-shadow .3s,border-color .3s;min-width:200px}
