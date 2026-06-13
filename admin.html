@@ -205,6 +205,11 @@ textarea{resize:vertical;min-height:80px}
         Accommodation
         <span class="nav-badge" id="badge-accommodation">3</span>
       </div>
+      <div class="nav-item" onclick="showPage('establishments')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></svg>
+        Local Life
+        <span class="nav-badge" id="badge-establishments">0</span>
+      </div>
       <div class="nav-item" onclick="showPage('videos')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         Videos
@@ -241,7 +246,7 @@ textarea{resize:vertical;min-height:80px}
           </div>
         </div>
         <div class="io-strip">
-          <p><strong>How it works:</strong> On GitHub Pages, Save commits to the repo and is live in about a minute (sign in with a GitHub token once). On Netlify, Save publishes instantly. Without either, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
+          <p><strong>How it works:</strong> On GitHub Pages, Save commits to the repo and is live in about a minute (sign in with a GitHub token once). Without a token, edits stay as browser drafts — Export JSON and replace <code>data/destinations.json</code> to publish.</p>
           <div class="io-strip-actions">
             <button class="btn btn-success btn-sm" onclick="exportJSON('destinations')">↓ Download destinations.json</button>
           </div>
@@ -307,6 +312,28 @@ textarea{resize:vertical;min-height:80px}
           </div>
         </div>
         <div id="accommodationList"></div>
+      </div>
+
+      <!-- ══ ESTABLISHMENTS (LOCAL LIFE GUIDE) ══ -->
+      <div class="page" id="page-establishments">
+        <div class="page-header">
+          <div>
+            <h2>Local Life Guide</h2>
+            <p>Establishments shown on the Local Life Guide page — dining, cafés, shops, and everyday services.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" onclick="importJSON('establishments')">↑ Import</button>
+            <button class="btn btn-success btn-sm" onclick="exportJSON('establishments')">↓ Download establishments.json</button>
+            <button class="btn btn-primary" onclick="openEstabModal(null)">+ Add Establishment</button>
+          </div>
+        </div>
+        <div class="io-strip">
+          <p><strong>Photos:</strong> upload images to <code>assets/establishments/</code> and reference them by path (e.g. <code>assets/establishments/lolas-carinderia.jpg</code>). Establishments without a photo show a category icon automatically.</p>
+          <div class="io-strip-actions">
+            <button class="btn btn-success btn-sm" onclick="exportJSON('establishments')">↓ Download establishments.json</button>
+          </div>
+        </div>
+        <div id="establishmentsList"></div>
       </div>
 
       <!-- ══ VIDEOS ══ -->
@@ -394,10 +421,9 @@ textarea{resize:vertical;min-height:80px}
 
 <script>
 // ══ STATE ══
-// Fallback for static hosting / offline only. When the Netlify backend is
-// deployed, the real check is server-side (ADMIN_PASSWORD env var) and this
-// constant is ignored. On GitHub Pages the real credential is the GitHub
-// token — this password only unlocks a token already saved on the device.
+// Fallback password for static hosting / offline. On GitHub Pages the real
+// credential is the GitHub token — this password only unlocks a token already
+// saved on the device.
 const FALLBACK_PW = 'calatrava2026';
 // GitHub publishing (GitHub Pages hosting): commits straight to the repo,
 // which is what the site serves. Needs a fine-grained PAT with Contents
@@ -406,10 +432,10 @@ const GH_REPO   = 'rjfabella/calatrava-tourism-portal';
 const GH_BRANCH = 'main';
 let data = {};
 let draftSections = new Set();
-let adminPw = null;          // kept in memory for Netlify publish calls
+let adminPw = null;          // kept in memory after login
 let ghToken = null;          // GitHub token for direct-commit publishing
-// 'netlify' = functions backend reachable; 'github' = direct commits via
-// GitHub API; 'static' = browser drafts + export only.
+// 'github' = direct commits via GitHub API; 'static' = browser drafts +
+// export only.
 let publishMode = 'static';
 let currentModalType = null;
 let currentModalIdx = null;
@@ -432,36 +458,21 @@ async function validateGhToken(token) {
 async function doLogin() {
   const pw = document.getElementById('pwInput').value;
   let ok = false;
-  let backendAvailable;
-  try {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {'content-type': 'application/json'},
-      body: JSON.stringify({password: pw})
-    });
-    if (res.ok)                    { ok = true;  backendAvailable = true; }
-    else if (res.status === 401)   { ok = false; backendAvailable = true; }
-    else                           { backendAvailable = false; } // 404/500 → no backend deployed
-  } catch(e)                       { backendAvailable = false; } // offline / file://
-  if (backendAvailable) publishMode = 'netlify';
-
-  if (backendAvailable === false) {
-    // No server. A pasted GitHub token is the real credential; the fallback
-    // password unlocks a token previously saved on this device.
-    if (looksLikeGhToken(pw)) {
-      if (await validateGhToken(pw)) {
-        ok = true; ghToken = pw; publishMode = 'github';
-        try { localStorage.setItem('admin_gh_token', pw); } catch(e) {}
-      }
-    } else if (pw === FALLBACK_PW) {
-      ok = true;
-      const stored = localStorage.getItem('admin_gh_token');
-      if (stored && await validateGhToken(stored)) {
-        ghToken = stored; publishMode = 'github';
-      } else {
-        publishMode = 'static';
-        if (stored) toast('Saved GitHub token no longer works — paste a new one to publish', 'error');
-      }
+  // A pasted GitHub token is the real credential; the fallback password
+  // unlocks a token previously saved on this device.
+  if (looksLikeGhToken(pw)) {
+    if (await validateGhToken(pw)) {
+      ok = true; ghToken = pw; publishMode = 'github';
+      try { localStorage.setItem('admin_gh_token', pw); } catch(e) {}
+    }
+  } else if (pw === FALLBACK_PW) {
+    ok = true;
+    const stored = localStorage.getItem('admin_gh_token');
+    if (stored && await validateGhToken(stored)) {
+      ghToken = stored; publishMode = 'github';
+    } else {
+      publishMode = 'static';
+      if (stored) toast('Saved GitHub token no longer works — paste a new one to publish', 'error');
     }
   }
 
@@ -488,8 +499,8 @@ function doLogout() {
 
 // ══ INIT ══
 async function initApp() {
-  const files = ['destinations','activities','accommodation','contact','about','getting-here','videos'];
-  const isArrayFile = f => ['destinations','activities','accommodation','videos'].includes(f);
+  const files = ['destinations','activities','accommodation','establishments','contact','about','getting-here','videos'];
+  const isArrayFile = f => ['destinations','activities','accommodation','establishments','videos'].includes(f);
   const failed = [];
   draftSections = new Set();
 
@@ -574,6 +585,7 @@ function renderAll() {
   renderDestTable();
   renderActivities();
   renderAccommodation();
+  renderEstablishments();
   renderVideos();
   renderGettingHere();
   renderAbout();
@@ -588,6 +600,7 @@ function updateBadges() {
   document.getElementById('badge-destinations').textContent = d.length;
   document.getElementById('badge-activities').textContent = a.length;
   document.getElementById('badge-accommodation').textContent = ac.length;
+  document.getElementById('badge-establishments').textContent = (data.establishments || []).length;
   document.getElementById('badge-videos').textContent = (data.videos || []).length;
 }
 
@@ -645,9 +658,7 @@ async function ghPublish(key) {
     method: 'PUT',
     headers: { ...ghHeaders(), 'content-type': 'application/json' },
     body: JSON.stringify({
-      // [skip netlify] keeps the old Netlify site from burning deploy
-      // credits on these commits; GitHub Pages ignores the marker.
-      message: `Admin publish: update data/${key}.json [skip netlify]`,
+      message: `Admin publish: update data/${key}.json`,
       content: b64EncodeUtf8(JSON.stringify(data[key], null, 2) + '\n'),
       sha, branch: GH_BRANCH
     })
@@ -659,8 +670,8 @@ async function ghPublish(key) {
 
 // ══ PERSIST ══
 // Always keep a localStorage draft (offline safety net), then try to publish
-// to the backend (Netlify functions or GitHub commits). On success the draft
-// is cleared — the server is the source of truth.
+// to the repo via GitHub commits. On success the draft is cleared — the repo
+// is the source of truth.
 function persist(key) {
   localStorage.setItem('admin_' + key, JSON.stringify(data[key]));
   draftSections.add(key);
@@ -681,27 +692,7 @@ async function publish(key) {
     }
     return;
   }
-  if (publishMode !== 'netlify' || !adminPw) return; // static-only mode: drafts + export
-  try {
-    const res = await fetch('/api/data/' + key + '.json', {
-      method: 'PUT',
-      headers: {'content-type': 'application/json', 'authorization': 'Bearer ' + adminPw},
-      body: JSON.stringify(data[key])
-    });
-    if (res.ok) {
-      localStorage.removeItem('admin_' + key);
-      draftSections.delete(key);
-      refreshDraftBanner();
-      toast(key + ' published — live on the site');
-    } else if (res.status === 401) {
-      toast('Publish failed: password rejected by server', 'error');
-    } else {
-      const err = await res.json().catch(() => ({}));
-      toast('Publish failed (' + (err.error || res.status) + ') — kept as local draft', 'error');
-    }
-  } catch(e) {
-    toast('Server unreachable — kept as local draft', 'error');
-  }
+  // static-only mode: drafts + export, nothing to publish to
 }
 
 // ══ OPEN LOCATION CODE (Plus Codes) ══
@@ -997,6 +988,74 @@ function openAccomModal(idx) {
 }
 
 // ══════════════════════════════════
+// ESTABLISHMENTS (LOCAL LIFE GUIDE)
+// ══════════════════════════════════
+const ESTAB_CATEGORIES = [['dining','Dining'],['cafe','Café'],['shop','Shop'],['pharmacy','Pharmacy'],['clinic','Clinic'],['gym','Gym'],['church','Church']];
+const estabLabel = c => (ESTAB_CATEGORIES.find(([v]) => v === c) || [c, c||''])[1];
+
+function renderEstablishments() {
+  const items = data.establishments || [];
+  const el = document.getElementById('establishmentsList');
+  if (!el) return;
+  if (!items.length) {
+    el.innerHTML = `<div class="card"><div class="card-body" style="color:var(--muted);font-size:13px">No establishments yet. Click <strong>+ Add Establishment</strong> to add the first dining spot, shop, or service.</div></div>`;
+    return;
+  }
+  el.innerHTML = items.map((e, i) => `
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <h3>${e.name || '(unnamed)'} <span style="font-size:11px;color:var(--gold);font-weight:400;margin-left:.5rem">${estabLabel(e.category)}</span></h3>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn btn-outline btn-sm" onclick="openEstabModal(${i})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteEstab(${i})">Delete</button>
+        </div>
+      </div>
+      <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
+        ${e.image ? `<img src="${fixAssetPath(e.image)}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
+        <div>
+          ${e.address ? `<p style="font-size:12px;color:var(--muted)">${e.address}</p>` : ''}
+          <p style="font-size:11px;margin-top:.4rem;color:${e.mapsUrl ? 'var(--success)' : 'var(--muted)'}">${e.mapsUrl ? '📍 Google Maps link set' : '📍 No maps link'}</p>
+          ${e.phone || e.socials ? `<p style="font-size:11px;margin-top:.25rem;color:var(--muted)">${e.phone ? '📞 ' + e.phone : ''}${e.phone && e.socials ? ' · ' : ''}${e.socials ? '🔗 ' + e.socials : ''}</p>` : ''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function deleteEstab(i) {
+  if (!confirm(`Delete "${data.establishments[i].name}"?`)) return;
+  data.establishments.splice(i, 1);
+  persist('establishments');
+  renderEstablishments();
+  updateBadges();
+  toast('Establishment deleted');
+}
+
+function openEstabModal(idx) {
+  currentModalType = 'establishment';
+  currentModalIdx = idx;
+  const e = idx !== null ? data.establishments[idx] : {id:'',name:'',category:'dining',address:'',phone:'',socials:'',mapsUrl:'',image:''};
+  const opts = ESTAB_CATEGORIES.map(([v,l]) => `<option value="${v}" ${e.category===v?'selected':''}>${l}</option>`).join('');
+  document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Establishment' : 'Add Establishment';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-group full"><label>Name *</label><input id="f_name" value="${e.name||''}"></div>
+      <div class="form-group"><label>Category *</label><select id="f_category">${opts}</select></div>
+      <div class="form-group"><label>Contact number</label><input id="f_phone" value="${e.phone||''}" placeholder="0919 335 0314"></div>
+      <div class="form-group full"><label>Address</label><input id="f_address" value="${e.address||''}" placeholder="Rizal St, Poblacion, Calatrava"></div>
+      <div class="form-group full"><label>Socials URL</label><input id="f_socials" value="${e.socials||''}" placeholder="https://www.facebook.com/...">
+        <span class="hint">Facebook page, Instagram, or website. Powers the “Socials” button on the card.</span>
+      </div>
+      <div class="form-group full"><label>Google Maps link</label><input id="f_mapsUrl" value="${e.mapsUrl||''}" placeholder="https://maps.app.goo.gl/...">
+        <span class="hint">Paste the place's Google Maps share link. Powers the “Directions” button (falls back to an address search if blank).</span>
+      </div>
+      <div class="form-group full"><label>Image reference</label><input id="f_image" value="${e.image||''}" placeholder="assets/establishments/photo.jpg">
+        <span class="hint">Single image path under <code>assets/establishments/</code>. Forward slashes, with extension; backslashes and a missing .jpg are fixed automatically. Leave blank to show a category icon.</span>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+}
+
+// ══════════════════════════════════
 // VIDEOS
 // ══════════════════════════════════
 // Accepts a full YouTube URL (watch, youtu.be, shorts, embed, live) or a bare
@@ -1257,7 +1316,7 @@ function renderContact() {
         </div>
         <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Map Settings</button>
         <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:12px;line-height:1.5;color:#92400E">
-          <strong>To publish:</strong> On the live site (Netlify backend) saving publishes instantly. Without the backend, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push.
+          <strong>To publish:</strong> Signed in with a GitHub token, Save commits to the repo and is live in about a minute. Without a token, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push.
         </div>
       </div>
     </div>`;
@@ -1405,6 +1464,27 @@ function saveModal() {
     else data.contact.contacts.push(item);
     persist('contact');
     renderContact();
+
+  } else if (currentModalType === 'establishment') {
+    const existing = currentModalIdx !== null ? data.establishments[currentModalIdx] : {};
+    const item = {
+      ...existing,
+      id: g('f_name').toLowerCase().replace(/\s+/g,'-'),
+      name: g('f_name'),
+      category: g('f_category'),
+      address: g('f_address'),
+      phone: g('f_phone'),
+      socials: g('f_socials'),
+      mapsUrl: g('f_mapsUrl'),
+      image: fixAssetPath(g('f_image'))
+    };
+    if (!item.name) { toast('Name is required','error'); return; }
+    if (!data.establishments) data.establishments = [];
+    if (currentModalIdx !== null) data.establishments[currentModalIdx] = item;
+    else data.establishments.push(item);
+    persist('establishments');
+    renderEstablishments();
+    updateBadges();
   }
 
   closeModal();

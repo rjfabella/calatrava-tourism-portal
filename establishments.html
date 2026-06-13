@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Life Guide — Calatrava, Romblon</title>
+<meta name="description" content="Your guide to everyday life in Calatrava, Romblon — dining, cafés, shops, pharmacies, clinics, gyms, and churches for visitors who want to stay a while.">
+<!-- Social sharing (Open Graph) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Calatrava Tourism">
+<meta property="og:title" content="Local Life Guide — Calatrava, Romblon">
+<meta property="og:description" content="Dining, cafés, shops, pharmacies, clinics, gyms, and churches in Calatrava, Romblon.">
+<meta property="og:url" content="https://rjfabella.github.io/calatrava-tourism-portal/establishments.html">
+<meta property="og:image" content="https://rjfabella.github.io/calatrava-tourism-portal/assets/destinations/Destinations_CoveAurelio1_web.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/logos/Calatrava_Romblon_web.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#0C2233;--ocean:#1A5C7A;--teal:#1E8B72;
+  --sand:#F0E9DD;--cream:#FAF7F2;--gold:#B88A45;--gl:#D4A86A;
+  --white:#fff;--text:#1C1C1C;--muted:#717B7B;--border:rgba(12,34,51,.1);
+  --fd:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --fb:'Jost','Segoe UI',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:hidden;font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2.5rem;background:rgba(250,247,242,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-seal{width:38px;height:38px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.nav-seal img{width:100%;height:100%;object-fit:cover}
+.nav-name{font-family:var(--fd);font-size:16px;font-weight:500;color:var(--deep);letter-spacing:.03em;line-height:1.15}
+.nav-name small{display:block;font-size:10px;font-family:var(--fb);font-weight:300;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{font-size:11.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--deep)}
+.nav-cta{background:var(--deep);color:var(--white)!important;padding:8px 20px;border-radius:2px;transition:background .3s}
+.nav-cta:hover{background:var(--gold)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--deep)}
+
+/* ── MOBILE NAV ── */
+.mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+.mob-nav a:hover{color:var(--gl)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.75);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
+.mob-close:hover{color:var(--white)}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:9rem 2.5rem 5rem;background:var(--deep);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('assets/destinations/Destinations_CoveAurelio1_web.jpg') center/cover no-repeat;opacity:.18}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:1.5rem}
+.breadcrumb a{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.75);text-decoration:none;transition:color .3s}
+.breadcrumb a:hover{color:var(--gl)}
+.breadcrumb span{font-size:11px;color:rgba(255,255,255,.25)}
+.page-hero h1{font-family:var(--fd);font-size:clamp(3rem,7vw,6rem);font-weight:300;color:var(--white);line-height:.95;margin-bottom:1rem}
+.page-hero h1 em{font-style:italic;color:var(--gl)}
+.page-hero p{font-size:15px;color:rgba(255,255,255,.78);max-width:560px;line-height:1.8}
+
+/* ── FILTERS ── */
+.est-section{padding:3.25rem 2.5rem 5rem}
+.est-container{max-width:1200px;margin:0 auto}
+.est-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.5rem}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--fb);font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--white);border:1px solid var(--border);padding:8px 16px;border-radius:40px;cursor:pointer;transition:color .2s,background .2s,border-color .2s}
+.chip:hover{color:var(--deep);border-color:var(--deep)}
+.chip.active{background:var(--deep);color:var(--white);border-color:var(--deep)}
+.chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── GRID ── */
+.est-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.est-card{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .3s,transform .3s}
+.est-card:hover{box-shadow:0 14px 40px rgba(12,34,51,.12);transform:translateY(-3px)}
+.est-img-wrap{position:relative;height:200px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.est-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;z-index:1}
+.est-card:hover .est-img{transform:scale(1.05)}
+.est-ph-icon{width:48px;height:48px;color:rgba(255,255,255,.9)}
+.est-badge{position:absolute;top:.85rem;left:.85rem;z-index:2;display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:5px 12px;border-radius:2px;color:var(--white);backdrop-filter:blur(6px)}
+.est-body{padding:1.4rem 1.5rem 1.6rem;display:flex;flex-direction:column;flex:1}
+.est-type{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
+.est-name{font-family:var(--fd);font-size:1.55rem;font-weight:400;color:var(--deep);line-height:1.15;margin-bottom:.5rem}
+.est-addr{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem;flex:1}
+.est-addr svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--ocean)}
+.est-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+.est-btn{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.06em;text-decoration:none;padding:8px 14px;border-radius:3px;transition:all .2s;border:1.5px solid transparent;white-space:nowrap}
+.est-btn svg{width:13px;height:13px;flex-shrink:0}
+.est-btn-call{background:var(--deep);color:var(--white);border-color:var(--deep)}
+.est-btn-call:hover{background:var(--ocean);border-color:var(--ocean)}
+.est-btn-web{background:transparent;color:var(--ocean);border-color:var(--ocean)}
+.est-btn-web:hover{background:var(--ocean);color:var(--white)}
+.est-btn-map{background:transparent;color:var(--gold);border-color:var(--gold)}
+.est-btn-map:hover{background:var(--gold);color:var(--white)}
+
+/* ── EMPTY STATE ── */
+.est-empty{text-align:center;padding:4rem 1.5rem;color:var(--muted)}
+.est-empty h3{font-family:var(--fd);font-size:1.8rem;font-weight:300;color:var(--deep);margin-bottom:.5rem}
+.est-empty p{font-size:14px;max-width:460px;margin:0 auto;line-height:1.8}
+
+/* ── FOOTER ── */
+footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem}
+.f-brand h3{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.f-brand p{font-size:12.5px;line-height:1.8;color:rgba(255,255,255,.75);margin-bottom:1.5rem}
+.f-logos{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.f-logos img{width:36px;height:36px;object-fit:contain;opacity:.7;border-radius:50%}
+.f-social{display:flex;gap:10px}
+.f-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);text-decoration:none;transition:border-color .3s,color .3s}
+.f-social a:hover{border-color:var(--gold);color:var(--gold)}
+.f-col h4{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:1.25rem}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.f-col ul a{font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .3s}
+.f-col ul a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.28)}
+
+/* ── QUICK BAR ── */
+.quick-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:var(--deep);box-shadow:0 -1px 0 rgba(255,255,255,.08)}
+.quick-bar-inner{display:grid;grid-template-columns:1fr 1fr}
+.quick-bar a{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--white);transition:background .2s}
+.quick-bar a:first-child{background:var(--ocean);border-right:1px solid rgba(255,255,255,.1)}
+.quick-bar a:first-child:hover{background:var(--teal)}
+.q-ico{width:15px;height:15px;flex-shrink:0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .est-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .f-brand{grid-column:1/-1}
+}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .quick-bar{display:block}
+  body{padding-bottom:54px}
+  .est-section{padding:2.5rem 1.5rem 4rem}
+  .page-hero{padding:7rem 1.5rem 3.5rem}
+}
+@media(max-width:580px){
+  .est-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;left:-9999px;z-index:300}
+.skip-link:focus{left:1rem;top:1rem;background:var(--deep);color:var(--white);padding:.7rem 1.2rem;border-radius:4px;font-size:13px;letter-spacing:.05em;text-decoration:none;outline:2px solid var(--gold);outline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#est-grid">Skip to content</a>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-seal">
+      <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="nav-name">Calatrava<small>Romblon, Philippines</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="destinations.html">Destinations</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="accommodation.html">Stay</a></li>
+    <li><a href="establishments.html" class="active">Local Life</a></li>
+    <li><a href="getting-here.html">Getting Here</a></li>
+    <li><a href="tel:09193350314" class="nav-cta">Talk to a Local Guide</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">&times;</button>
+  <a href="destinations.html" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
+  <a href="index.html#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
+  <a href="accommodation.html" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="establishments.html" onclick="document.getElementById('mobNav').classList.remove('open')">Local Life</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
+</nav>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="establishments.html">Local Life</a>
+    </nav>
+    <h1>Local <em>Life Guide</em></h1>
+    <p>Staying a while? Here's where the locals go — the dining spots, cafés, shops, pharmacies, clinics, gyms, and churches that make everyday life in Calatrava easy.</p>
+  </div>
+</header>
+
+<!-- ESTABLISHMENTS -->
+<section class="est-section">
+  <div class="est-container">
+    <div class="est-filters" id="est-filters" role="tablist" aria-label="Filter by category"></div>
+    <div class="est-grid" id="est-grid">
+      <!-- rendered from data/establishments.json -->
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="f-logos">
+        <img src="assets/logos/Calatrava_Romblon_web.png" alt="Calatrava Seal">
+        <img src="assets/logos/Ph_seal_romblon_web.png" alt="Romblon Seal">
+        <img src="assets/logos/DOT_PH_web.svg" alt="Philippines Department of Tourism">
+      </div>
+      <h3>Calatrava, Romblon</h3>
+      <p>Official tourism portal of the Municipality of Calatrava, Province of Romblon, Philippines. Managed by the Calatrava Tourism Council.</p>
+      <div class="f-social">
+        <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/calatravatourismcouncil/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.youtube.com/watch?v=e5YURlx8uoM" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 5 12 5 12 5s-7.1 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.4 8.9.4 8.9.4s7.1 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5zM9.75 15.5v-7l6 3.5z"/></svg>
+        </a>
+        <a href="mailto:calatravatourismcouncil@gmail.com" aria-label="Email Calatrava Tourism">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="f-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="destinations.html">All Destinations</a></li>
+        <li><a href="accommodation.html">Where to Stay</a></li>
+        <li><a href="establishments.html">Local Life Guide</a></li>
+        <li><a href="index.html#activities">Activities</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Plan Your Visit</h4>
+      <ul>
+        <li><a href="getting-here.html">Getting Here</a></li>
+        <li><a href="accommodation.html">Accommodation</a></li>
+        <li><a href="index.html#map">Services Map</a></li>
+        <li><a href="index.html#activities">Tour Operators</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09193350314">0919 335 0314</a></li>
+        <li><a href="tel:09399154193">0939 915 4193</a></li>
+        <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
+        <li><a href="mailto:calatravatourismcouncil@gmail.com">calatravatourismcouncil@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
+    <p>Republic of the Philippines</p>
+    <a href="admin.html" style="color:rgba(255,255,255,.12);font-size:10px;letter-spacing:.08em;text-decoration:none;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.12)'">Staff Portal</a>
+  </div>
+</footer>
+
+<!-- MOBILE QUICK BAR -->
+<div class="quick-bar">
+  <div class="quick-bar-inner">
+    <a href="tel:09193350314">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Talk to a Local Guide
+    </a>
+    <a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">
+      <svg class="q-ico" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook Page
+    </a>
+  </div>
+</div>
+
+<script>
+// ── CATEGORY CONFIG ──
+// Keys match the admin's category dropdown. color drives the badge + photo
+// placeholder; icon is a Feather-style stroke glyph.
+const ICONS = {
+  dining:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7a3 3 0 0 0 6 0V2"/><path d="M6 9v13"/><path d="M18 2c-1.7 0-3 2-3 5s1.3 5 3 5"/><path d="M18 2v20"/></svg>`,
+  cafe:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`,
+  shop:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+  pharmacy:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
+  clinic:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  gym:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>`,
+  church:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M9 5h6"/><path d="m12 8 7 4v10H5V12Z"/><path d="M9 22v-5a3 3 0 0 1 6 0v5"/></svg>`
+};
+const CATEGORIES = {
+  dining:  { label:'Dining',   color:'#C2603E' },
+  cafe:    { label:'Café',     color:'#8A6D3B' },
+  shop:    { label:'Shop',     color:'#2A7FA8' },
+  pharmacy:{ label:'Pharmacy', color:'#2E8B57' },
+  clinic:  { label:'Clinic',   color:'#C0455B' },
+  gym:     { label:'Gym',      color:'#5E6B8B' },
+  church:  { label:'Church',   color:'#7A5C9E' }
+};
+const CAT_ORDER = ['dining','cafe','shop','pharmacy','clinic','gym','church'];
+const OTHER = { label:'Place', color:'#4A6572' };
+const catInfo = c => CATEGORIES[c] || OTHER;
+const catIcon = c => ICONS[c] || ICONS.shop;
+
+// ── ICONS ──
+const locSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const callSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+const webSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
+const mapSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>`;
+
+// Heal image paths typed into the admin: backslashes from Windows copy-paste
+// and missing file extensions (all site photos are .jpg).
+function fixAssetPath(s) {
+  s = (s || '').trim().replace(/\\/g, '/');
+  if (s && !/\.[a-z0-9]{2,5}$/i.test(s)) s += '.jpg';
+  return s;
+}
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+// ── REVEAL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i*60); io.unobserve(e.target); }
+  });
+},{threshold:.08});
+function observeReveal(){ document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el)); }
+
+// ── RENDER ──
+function renderCard(e) {
+  const info = catInfo(e.category);
+  const img = fixAssetPath(e.image);
+  const name = esc(e.name);
+  const addr = esc(e.address);
+  const typeLabel = esc(e.categoryLabel || info.label);
+  // Prefer the curated Google Maps link; fall back to an address search.
+  const mapsUrl = (e.mapsUrl || '').trim()
+    || (e.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.address + ', Calatrava, Romblon')}` : '');
+  const phoneHref = e.phone ? 'tel:' + String(e.phone).replace(/[^0-9+]/g,'') : '';
+  const socials = (e.socials || '').trim();
+
+  const imgHtml = img
+    ? `<img src="${esc(img)}" alt="${name}" class="est-img" loading="lazy" onerror="this.remove()">`
+    : '';
+
+  return `<div class="est-card reveal" data-category="${esc(e.category)}">
+    <div class="est-img-wrap" style="background:${info.color}">
+      <span class="est-ph-icon">${catIcon(e.category)}</span>
+      ${imgHtml}
+      <span class="est-badge" style="background:${info.color}cc">${esc(info.label)}</span>
+    </div>
+    <div class="est-body">
+      <div class="est-type">${typeLabel}</div>
+      <div class="est-name">${name}</div>
+      ${addr ? `<div class="est-addr">${locSvg} ${addr}</div>` : `<div class="est-addr">${locSvg} Calatrava, Romblon</div>`}
+      <div class="est-actions">
+        ${phoneHref ? `<a href="${phoneHref}" class="est-btn est-btn-call">${callSvg} Call</a>` : ''}
+        ${socials ? `<a href="${esc(socials)}" target="_blank" rel="noopener" class="est-btn est-btn-web">${webSvg} Socials</a>` : ''}
+        ${mapsUrl ? `<a href="${esc(mapsUrl)}" target="_blank" rel="noopener" class="est-btn est-btn-map">${mapSvg} Directions</a>` : ''}
+      </div>
+    </div>
+  </div>`;
+}
+
+let ALL = [];
+
+function renderFilters() {
+  const present = CAT_ORDER.filter(c => ALL.some(e => e.category === c));
+  const chips = [`<button class="chip active" data-cat="all" onclick="filterCat('all',this)">All <span style="opacity:.6">${ALL.length}</span></button>`]
+    .concat(present.map(c => {
+      const info = CATEGORIES[c];
+      const n = ALL.filter(e => e.category === c).length;
+      return `<button class="chip" data-cat="${c}" onclick="filterCat('${c}',this)"><span class="dot" style="background:${info.color}"></span>${info.label} <span style="opacity:.6">${n}</span></button>`;
+    }));
+  document.getElementById('est-filters').innerHTML = chips.join('');
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.est-filters .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.est-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+  });
+}
+
+function renderAll() {
+  const grid = document.getElementById('est-grid');
+  if (!ALL.length) {
+    document.getElementById('est-filters').innerHTML = '';
+    grid.innerHTML = `<div class="est-empty" style="grid-column:1/-1">
+      <h3>Guide coming soon</h3>
+      <p>We're putting together a guide to Calatrava's cafés, shops, and everyday essentials. Check back shortly — or call the Tourism Council for recommendations.</p>
+    </div>`;
+    return;
+  }
+  // Group by category order for a tidy default layout.
+  ALL.sort((a,b) => {
+    const ai = CAT_ORDER.indexOf(a.category), bi = CAT_ORDER.indexOf(b.category);
+    return (ai<0?99:ai) - (bi<0?99:bi) || String(a.name||'').localeCompare(String(b.name||''));
+  });
+  renderFilters();
+  grid.innerHTML = ALL.map(renderCard).join('');
+  observeReveal();
+}
+
+// ── INIT ──
+(async function init() {
+  let data = null;
+  try {
+    const res = await fetch('data/establishments.json', {cache:'no-store'});
+    if (res.ok) data = await res.json();
+  } catch(_) {}
+  ALL = Array.isArray(data) ? data.filter(e => e && e.name) : [];
+  renderAll();
+})();
+</script>
+</body>
+</html>

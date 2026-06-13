@@ -132,6 +132,16 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .dest-name{font-family:var(--fd);font-size:clamp(1.3rem,2.5vw,2rem);font-weight:400;color:var(--white);line-height:1.2}
 .dest-loc{font-size:11px;color:rgba(255,255,255,.75);margin-top:.35rem}
 
+/* ── CARD IMAGE NAV (subtle arrow overlays) ── */
+.card-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:36px;height:36px;padding:0;border:none;border-radius:50%;background:rgba(12,34,51,.4);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease,background .2s ease;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.card-nav:hover{background:rgba(12,34,51,.7)}
+.card-nav:focus-visible{opacity:1;outline:2px solid var(--white);outline-offset:2px}
+.card-nav.prev{left:.6rem}
+.card-nav.next{right:.6rem}
+.card-nav svg{width:17px;height:17px;display:block}
+.dest-card:hover .card-nav,.accom-card:hover .card-nav,.dest-card:focus-within .card-nav,.accom-card:focus-within .card-nav{opacity:1}
+@media (hover:none){.card-nav{opacity:.9}}
+
 /* ── ACTIVITIES ── */
 .acts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem}
 .act-card{position:relative;overflow:hidden;min-height:480px;display:flex;flex-direction:column;justify-content:flex-end}
@@ -206,7 +216,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 /* ── ACCOMMODATION ── */
 .accom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;background:rgba(12,34,51,.06)}
 .accom-card{background:var(--white);overflow:hidden}
-.accom-img-wrap{overflow:hidden;height:230px}
+.accom-img-wrap{position:relative;overflow:hidden;height:230px}
 .accom-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s}
 .accom-card:hover .accom-img{transform:scale(1.05)}
 .accom-ph{width:100%;height:230px;display:block}
@@ -223,6 +233,18 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .contact-text h2{font-family:var(--fd);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--deep);margin-bottom:.5rem}
 .contact-text h2 em{font-style:italic;color:var(--ocean)}
 .contact-text p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ── LOCAL LIFE GUIDE STRIP ── */
+.life-strip{background:linear-gradient(120deg,var(--deep),var(--ocean));padding:4.5rem 2.5rem;position:relative;overflow:hidden}
+.life-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1}
+.life-text{max-width:640px}
+.life-text .s-label{color:var(--gl)}
+.life-text h2{font-family:var(--fd);font-size:clamp(2rem,3.4vw,3rem);font-weight:300;color:var(--white);line-height:1.15;margin:.35rem 0 .65rem}
+.life-text h2 em{font-style:italic;color:var(--gl)}
+.life-text p{font-size:14.5px;color:rgba(255,255,255,.8);line-height:1.75;max-width:560px}
+.life-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--gl);color:var(--deep);font-family:var(--fb);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border-radius:2px;transition:background .3s,transform .3s;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.life-btn:hover{background:var(--white);transform:translateY(-2px)}
+.life-btn span{font-size:1.15em;line-height:1}
 .contact-cards{display:flex;gap:1rem;flex-wrap:wrap}
 .contact-card{background:var(--white);border:0.5px solid var(--border);border-radius:3px;padding:1.25rem 1.5rem;text-decoration:none;transition:box-shadow .3s,border-color .3s;min-width:200px}
 .contact-card:hover{box-shadow:0 4px 20px rgba(12,34,51,.1);border-color:rgba(12,34,51,.2)}
@@ -272,6 +294,8 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   #map-container{min-height:320px}
   #gMap{min-height:320px}
   .contact-inner{grid-template-columns:1fr}
+  .life-strip{padding:3.25rem 1.5rem}
+  .life-btn{width:100%;justify-content:center}
 }
 @media(max-width:900px){
   .nav-links{display:none}
@@ -732,6 +756,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   </div>
 </section>
 
+<!-- LOCAL LIFE GUIDE STRIP -->
+<section class="life-strip">
+  <div class="life-inner reveal">
+    <div class="life-text">
+      <span class="s-label">Live Like a Local</span>
+      <h2>Ready to <em>work from paradise?</em></h2>
+      <p>Beyond the beaches — discover the cafés, dining spots, shops, pharmacies, clinics, gyms, and churches that make Calatrava an easy place to settle in and stay a while.</p>
+    </div>
+    <a href="establishments.html" class="life-btn">See our local life guide <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -753,7 +789,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <a href="https://www.youtube.com/watch?v=e5YURlx8uoM" target="_blank" rel="noopener" aria-label="YouTube">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19.1 5 12 5 12 5s-7.1 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.8.4 8.9.4 8.9.4s7.1 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.5 12 31 31 0 0 0 23 7.5zM9.75 15.5v-7l6 3.5z"/></svg>
         </a>
-        <a href="mailto:andagaotour@gmail.com" aria-label="Email Calatrava Tourism">
+        <a href="mailto:calatravatourismcouncil@gmail.com" aria-label="Email Calatrava Tourism">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
       </div>
@@ -782,7 +818,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li><a href="tel:09193350314">0919 335 0314</a></li>
         <li><a href="tel:09399154193">0939 915 4193</a></li>
         <li><a href="https://www.facebook.com/calatravatourismcouncil" target="_blank" rel="noopener">Tourism Council FB</a></li>
-        <li><a href="mailto:andagaotour@gmail.com">andagaotour@gmail.com</a></li>
+        <li><a href="mailto:calatravatourismcouncil@gmail.com">calatravatourismcouncil@gmail.com</a></li>
       </ul>
     </div>
   </div>
@@ -1087,6 +1123,24 @@ function thumbify(src) {
   return fixAssetPath(src).replace(/^assets\/destinations\/(.+)_web\.jpg$/, 'assets/thumbnails/$1_thumb.jpg');
 }
 
+// ── CARD IMAGE GALLERY (arrow overlays) ──
+// Embed the full image list on the card; arrows cycle through it in place.
+const attrJson = o => JSON.stringify(o).replace(/'/g, '&#39;');
+const CARD_ARROWS =
+  `<button class="card-nav prev" aria-label="Previous image" onclick="event.stopPropagation();navCardImg(this,-1)" onkeydown="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>` +
+  `<button class="card-nav next" aria-label="Next image" onclick="event.stopPropagation();navCardImg(this,1)" onkeydown="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>`;
+
+function navCardImg(btn, dir) {
+  const box = btn.closest('[data-images]');
+  const list = JSON.parse(box.dataset.images || '[]');
+  if (list.length < 2) return;
+  const idx = (parseInt(box.dataset.idx || '0', 10) + dir + list.length) % list.length;
+  box.dataset.idx = idx;
+  const img = box.querySelector('img');
+  img.dataset.full = list[idx];
+  img.src = thumbify(list[idx]);
+}
+
 function renderFeaturedDests(destinations) {
   const featured = destinations
     .filter(d => d.featured)
@@ -1094,14 +1148,17 @@ function renderFeaturedDests(destinations) {
   const el = document.getElementById('dest-grid');
   if (!el) return;
   el.innerHTML = featured.map((d, i) => {
-    const img = d.images && d.images[0]
-      ? `<img src="${thumbify(d.images[0])}" onerror="if(this.src.includes('_thumb'))this.src='${fixAssetPath(d.images[0])}'" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
+    const imgs = (d.images || []).map(fixAssetPath).filter(Boolean);
+    const img = imgs.length
+      ? `<img src="${thumbify(imgs[0])}" data-full="${imgs[0]}" onerror="if(this.src.includes('_thumb'))this.src=this.dataset.full" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
       : `<div class="dest-img" style="background:linear-gradient(160deg,#1A5C7A,#0C2233);min-height:300px"></div>`;
     return `<div class="dest-card" role="link" tabindex="0" aria-label="${d.name} — view details"
+      data-images='${attrJson(imgs)}' data-idx="0"
       onclick="location.href='destinations.html#${d.id}'"
-      onkeydown="if(event.key==='Enter')location.href='destinations.html#${d.id}'">
+      onkeydown="if(event.key==='Enter'&&event.target===this)location.href='destinations.html#${d.id}'">
       ${img}
       <div class="dest-overlay"></div>
+      ${imgs.length > 1 ? CARD_ARROWS : ''}
       <div class="dest-info">
         <div class="dest-type">${d.tagline || d.type}</div>
         <div class="dest-name">${d.name}</div>
@@ -1116,12 +1173,12 @@ function renderAccommodation(accommodation) {
   if (!el) return;
   const placeholderGrads = ['linear-gradient(160deg,#1E8B72,#0C2233)','linear-gradient(160deg,#1A5C7A,#0C2233)','linear-gradient(160deg,#2A8B7A,#1A5C7A)'];
   el.innerHTML = accommodation.map((a, i) => {
-    const cover = fixAssetPath(a.images?.[0] || a.image);
-    const imgHtml = cover
-      ? `<img src="${thumbify(cover)}" onerror="if(this.src.includes('_thumb'))this.src='${cover}'" alt="${a.name}" class="accom-img" loading="lazy">`
+    const imgs = ((a.images?.length ? a.images : (a.image ? [a.image] : [])) || []).map(fixAssetPath).filter(Boolean);
+    const imgHtml = imgs.length
+      ? `<img src="${thumbify(imgs[0])}" data-full="${imgs[0]}" onerror="if(this.src.includes('_thumb'))this.src=this.dataset.full" alt="${a.name}" class="accom-img" loading="lazy">`
       : `<div class="accom-ph" style="background:${placeholderGrads[i % 3]}"></div>`;
     return `<div class="accom-card reveal">
-      <div class="accom-img-wrap">${imgHtml}</div>
+      <div class="accom-img-wrap" data-images='${attrJson(imgs)}' data-idx="0">${imgHtml}${imgs.length > 1 ? CARD_ARROWS : ''}</div>
       <div class="accom-body">
         <div class="accom-type">${a.type}</div>
         <div class="accom-name">${a.name}</div>

@@ -1,0 +1,202 @@
+[
+  {
+    "name": "D'Rose Taverna",
+    "category": "dining",
+    "categoryLabel": "Bar & Restaurant",
+    "address": "Balogo, Calatrava, Romblon",
+    "phone": "+63 918 245 0717",
+    "socials": "https://www.facebook.com/d.rose.taverna",
+    "mapsUrl": "https://maps.google.com/?cid=8969241558193065298",
+    "image": ""
+  },
+  {
+    "name": "UPstairs Calatrava",
+    "category": "dining",
+    "categoryLabel": "Restaurant & Dining",
+    "address": "National Road, San Roque, Calatrava, Romblon",
+    "phone": "+63 961 814 3047",
+    "socials": "https://www.facebook.com/profile.php?id=100092258262601",
+    "mapsUrl": "https://maps.google.com/?cid=18343476972900561386",
+    "image": ""
+  },
+  {
+    "name": "Meckya Cafe",
+    "category": "cafe",
+    "categoryLabel": "Coffee Shop & Cafe",
+    "address": "MA Roxas St., Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "https://www.facebook.com/profile.php?id=61577877891790",
+    "mapsUrl": "",
+    "image": ""
+  },
+  {
+    "name": "Brew -&- Bloom Cafe",
+    "category": "cafe",
+    "categoryLabel": "Coffee Shop & Cafe",
+    "address": "At the back of, Municipal Hall Dr, Poblacion, Calatrava, Romblon",
+    "phone": "+63 920 982 7731",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=10717543630261394478",
+    "image": ""
+  },
+  {
+    "name": "Calatrava Public Market",
+    "category": "shop",
+    "categoryLabel": "Public Market & Shopping",
+    "address": "ML Quezon St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=11261299446777047013",
+    "image": ""
+  },
+  {
+    "name": "Morada Sari-Sari Store",
+    "category": "shop",
+    "categoryLabel": "Retail & Convenience Store",
+    "address": "Pagsangahan Barangay Rd, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=6954162583236652052",
+    "image": ""
+  },
+  {
+    "name": "Jewel's Convenience Store",
+    "category": "shop",
+    "categoryLabel": "Retail & Convenience Store",
+    "address": "F. Fabella St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=6646074160258335165",
+    "image": ""
+  },
+  {
+    "name": "Fetalino Drug & Medical Supplies",
+    "category": "pharmacy",
+    "categoryLabel": "Pharmacy & Medical Supplies",
+    "address": "ML Quezon St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=17984446407628422254",
+    "image": ""
+  },
+  {
+    "name": "Waves & Weights Fitness Gym",
+    "category": "gym",
+    "categoryLabel": "Fitness Center & Gym",
+    "address": "3F, Fruedas Building, B. Famini St, Poblacion, Calatrava, Romblon",
+    "phone": "+63 939 915 4193",
+    "socials": "https://www.facebook.com/WaveWeightsGymCalatrava",
+    "mapsUrl": "https://maps.app.goo.gl/ijDgpWZivRVLE5Ub9",
+    "image": ""
+  },
+  {
+    "name": "St. Michael the Archangel Catholic Parish Church",
+    "category": "church",
+    "categoryLabel": "Place of Worship / Church",
+    "address": "Don E Fetalino St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "https://www.facebook.com/profile.php?id=61579860346434",
+    "mapsUrl": "https://maps.google.com/?cid=8782234547464438145",
+    "image": ""
+  },
+  {
+    "name": "Iglesia Ni Cristo - Calatrava",
+    "category": "church",
+    "categoryLabel": "Place of Worship / Church",
+    "address": "Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "http://www.iglesianicristo.net/",
+    "mapsUrl": "",
+    "image": ""
+  },
+  {
+    "name": "San Roque Catholic Parish",
+    "category": "church",
+    "categoryLabel": "Place of Worship / Church",
+    "address": "San Roque, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=13517383046536937315",
+    "image": ""
+  },
+  {
+    "name": "MCGI - Calatrava",
+    "category": "church",
+    "categoryLabel": "Place of Worship / Church",
+    "address": "A Mabini St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=13644253027252735033",
+    "image": ""
+  },
+  {
+    "name": "Ang Dating Daan - Calatrava",
+    "category": "church",
+    "categoryLabel": "Place of Worship / Church",
+    "address": "A Mabini St, Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=2583332155329641752",
+    "image": ""
+  },
+  {
+    "name": "Calatrava Medical and Diagnostic Center",
+    "category": "clinic",
+    "categoryLabel": "Medical Clinic & Diagnostics",
+    "address": "National Road Brgy, San Roque, Calatrava, Romblon",
+    "phone": "+63 995 263 4453",
+    "socials": "https://www.facebook.com/profile.php?id=100071892286569",
+    "mapsUrl": "https://maps.google.com/?cid=7368429251125298900",
+    "image": ""
+  },
+  {
+    "name": "Calatrava Municipal Health Center",
+    "category": "clinic",
+    "categoryLabel": "Public Health Center / Clinic",
+    "address": "15 Tablas Circumferential Rd, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=13612215972845476289",
+    "image": ""
+  },
+  {
+    "name": "Linao Health Centre",
+    "category": "clinic",
+    "categoryLabel": "Public Health Center / Clinic",
+    "address": "Panguyo Linao Rd, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=2478137485050804502",
+    "image": ""
+  },
+  {
+    "name": "J&T Home-Romblon-Calatrava",
+    "category": "shop",
+    "categoryLabel": "Courier & Delivery Services",
+    "address": "Tablas Circumferential Rd, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "",
+    "image": ""
+  },
+  {
+    "name": "Emgee Salon Calatrava",
+    "category": "shop",
+    "categoryLabel": "Beauty Salon & Personal Care",
+    "address": "S Osmena St, Calatrava, Romblon",
+    "phone": "+63 926 573 3303",
+    "socials": "",
+    "mapsUrl": "https://maps.google.com/?cid=5496025957800091221",
+    "image": ""
+  },
+  {
+    "name": "Jacq and Jills Pharmacy",
+    "category": "pharmacy",
+    "categoryLabel": "Pharmacy & Convenience Store",
+    "address": "Tablas Circumferential Rd, Calatrava, Romblon",
+    "phone": "",
+    "socials": "https://www.facebook.com/JacqandJillsPharmacy",
+    "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
+    "image": ""
+  }
+]

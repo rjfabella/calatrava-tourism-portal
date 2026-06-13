@@ -2,15 +2,6 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "netlify",
-      "runtimeExecutable": "cmd",
-      "runtimeArgs": [
-        "/c",
-        "set ADMIN_PASSWORD=test-server-pw-2026&& npx --yes netlify-cli dev --port 8888 --dir D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\charming-swirles-7ef8bf --functions D:\\github\\calatrava-toursim-portal\\.claude\\worktrees\\charming-swirles-7ef8bf\\netlify\\functions"
-      ],
-      "port": 8888
-    },
-    {
       "name": "static",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "http-server", ".", "-p", "5173", "-c-1"],
