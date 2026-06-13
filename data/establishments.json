@@ -7,7 +7,8 @@
     "phone": "+63 918 245 0717",
     "socials": "https://www.facebook.com/d.rose.taverna",
     "mapsUrl": "https://maps.google.com/?cid=8969241558193065298",
-    "image": ""
+    "image": "assets/establishments/DRoseTaverna.jpg",
+    "id": "d'rose-taverna"
   },
   {
     "name": "UPstairs Calatrava",
@@ -207,6 +208,6 @@
     "phone": "0939 432 3816",
     "socials": "https://www.facebook.com/BIG1RestaurantOfficial",
     "mapsUrl": "https://maps.app.goo.gl/HYMVJSSWEz5Fm56d8",
-    "image": "/assets/establishments/Big1.jpg"
+    "image": "assets/establishments/Big1.jpg"
   }
 ]
