@@ -1,11 +1,8 @@
 {
   "name": "calatrava-tourism-portal",
   "private": true,
-  "description": "Tourism portal for Calatrava, Romblon — static site with a Netlify Functions backend for the admin editor.",
+  "description": "Tourism portal for Calatrava, Romblon — static site hosted on GitHub Pages with a browser-based admin editor that publishes via the GitHub API.",
   "scripts": {
-    "dev": "netlify dev"
-  },
-  "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "dev": "npx --yes http-server . -p 5173 -c-1"
   }
 }
