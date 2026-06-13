@@ -64,6 +64,16 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .page-hero h1 em{font-style:italic;color:var(--gl)}
 .page-hero p{font-size:15px;color:rgba(255,255,255,.78);max-width:560px;line-height:1.8}
 
+/* ── TOWN MAP ── */
+.estmap-section{max-width:1200px;margin:0 auto;padding:3.25rem 2.5rem 0}
+.estmap-head{margin-bottom:1.5rem}
+.estmap-head .s-label{display:block;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.estmap-head h2{font-family:var(--fd);font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:300;color:var(--deep);line-height:1.1}
+.estmap-head h2 em{font-style:italic;color:var(--ocean)}
+.estmap-head p{font-size:14px;color:var(--muted);margin-top:.4rem;max-width:560px;line-height:1.7}
+.estmap-frame{position:relative;height:430px;border-radius:6px;overflow:hidden;border:1px solid var(--border);box-shadow:0 14px 44px rgba(12,34,51,.12);background:var(--sand)}
+.estmap-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+
 /* ── FILTERS ── */
 .est-section{padding:3.25rem 2.5rem 5rem}
 .est-container{max-width:1200px;margin:0 auto}
@@ -207,6 +217,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p>Staying a while? Here's where the locals go — the dining spots, cafés, shops, pharmacies, clinics, gyms, and churches that make everyday life in Calatrava easy.</p>
   </div>
 </header>
+
+<!-- TOWN MAP -->
+<section class="estmap-section">
+  <div class="estmap-head">
+    <span class="s-label">Find Your Way Around</span>
+    <h2>Calatrava <em>town map</em></h2>
+    <p>Pan and zoom to explore the poblacion and surrounding barangays — tap any Google place marker for details.</p>
+  </div>
+  <div class="estmap-frame">
+    <iframe title="Interactive map of Calatrava, Romblon" src="https://www.google.com/maps?q=Calatrava,%20Romblon,%20Philippines&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  </div>
+</section>
 
 <!-- ESTABLISHMENTS -->
 <section class="est-section">
