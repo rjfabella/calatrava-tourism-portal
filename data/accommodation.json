@@ -140,7 +140,9 @@
     "facebookLabel": "Ngak-ngak Beach Resort Booking Page",
     "lat": 12.636056320711388,
     "lng": 122.08506826264458,
-    "images": [],
+    "images": [
+      "assets/accommodations/accommodations_ngakngak_main.jpg"
+    ],
     "detailsUrl": "",
     "address": "Brgy. Linao, Calatrava, Romblon"
   }
