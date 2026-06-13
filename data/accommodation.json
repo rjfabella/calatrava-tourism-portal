@@ -126,5 +126,22 @@
       "assets\\accommodations\\accommodations_liralari_main"
     ],
     "detailsUrl": ""
+  },
+  {
+    "id": "ngak-ngak-beach-resort",
+    "name": "Ngak-Ngak Beach Resort",
+    "type": "Beach Resort",
+    "barangay": "Linao",
+    "description": "Tucked away on a tranquil private shoreline in Calatrava, Ngak-Ngak Beach Resort is a peaceful tropical sanctuary featuring sea-facing balcony rooms, breathtaking sunset views, and a charming veranda restaurant serving fresh local flavors.",
+    "priceRange": "1350",
+    "phone": "",
+    "phoneLabel": "",
+    "facebook": "https://www.agoda.com/ngak-ngak-beach-resort/hotel/all/romblon-ph.html",
+    "facebookLabel": "Ngak-ngak Beach Resort Booking Page",
+    "lat": 12.636056320711388,
+    "lng": 122.08506826264458,
+    "images": [],
+    "detailsUrl": "",
+    "address": "Brgy. Linao, Calatrava, Romblon"
   }
 ]
