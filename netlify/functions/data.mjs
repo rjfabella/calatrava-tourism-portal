@@ -112,7 +112,10 @@ async function commitToGitHub(key, body) {
   const res = await fetch(api, {
     method: 'PUT',
     headers,
-    body: JSON.stringify({ message: `Admin publish: update ${path}`, content, sha, branch }),
+    // [skip netlify] stops these commits from triggering a production deploy —
+    // the live site reads this data from Blobs, so the deploy would be
+    // redundant and burns 15 credits per publish on credit-based plans.
+    body: JSON.stringify({ message: `Admin publish: update ${path} [skip netlify]`, content, sha, branch }),
   });
   return res.ok ? 'committed' : 'failed: write ' + res.status;
 }
