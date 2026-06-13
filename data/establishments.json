@@ -7,7 +7,8 @@
     "phone": "+63 918 245 0717",
     "socials": "https://www.facebook.com/d.rose.taverna",
     "mapsUrl": "https://maps.google.com/?cid=8969241558193065298",
-    "image": ""
+    "image": "assets/establishments/DRoseTaverna.jpg",
+    "id": "d'rose-taverna"
   },
   {
     "name": "UPstairs Calatrava",
@@ -198,5 +199,15 @@
     "socials": "https://www.facebook.com/JacqandJillsPharmacy",
     "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
     "image": ""
+  },
+  {
+    "id": "big1-restaurant",
+    "name": "BIG1 Restaurant",
+    "category": "dining",
+    "address": "JP Rizal St, Poblacion, Calatrava, Romblon",
+    "phone": "0939 432 3816",
+    "socials": "https://www.facebook.com/BIG1RestaurantOfficial",
+    "mapsUrl": "https://maps.app.goo.gl/HYMVJSSWEz5Fm56d8",
+    "image": "assets/establishments/Big1.jpg"
   }
 ]
