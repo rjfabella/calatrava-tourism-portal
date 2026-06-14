@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Destinations — Calatrava, Romblon</title>
-<meta name="description" content="Explore beaches, islands, and waterfalls in Calatrava, Romblon. 13 destinations across 5 barangays.">
+<meta name="description" content="Explore beaches, islands, and waterfalls in Calatrava, Romblon.">
 <!-- Social sharing (Open Graph) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Calatrava Tourism">
 <meta property="og:title" content="Destinations — Calatrava, Romblon">
-<meta property="og:description" content="Explore beaches, islands, and waterfalls in Calatrava, Romblon. 13 destinations across 5 barangays.">
+<meta property="og:description" content="Explore beaches, islands, and waterfalls in Calatrava, Romblon.">
 <meta property="og:url" content="https://rjfabella.github.io/calatrava-tourism-portal/destinations.html">
 <meta property="og:image" content="https://rjfabella.github.io/calatrava-tourism-portal/assets/destinations/Destinations_TinagongDagat1_web.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -43,6 +43,8 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .nav-cta:hover{background:var(--gold)!important}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--deep)}
+/* Collapse the (now six-item) nav to the hamburger before it gets cramped */
+@media(max-width:1100px){.nav-links{display:none}.hamburger{display:flex}}
 
 /* ── MOBILE NAV ── */
 .mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
@@ -288,8 +290,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <li><a href="destinations.html" class="active">Destinations</a></li>
     <li><a href="index.html#activities">Activities</a></li>
     <li><a href="accommodation.html">Stay</a></li>
+    <li><a href="establishments.html">Local Life</a></li>
+    <li><a href="getting-here.html">Getting Here</a></li>
     <li><a href="index.html#map">Map</a></li>
-    <li><a href="index.html#about">About</a></li>
     <li><a href="tel:09193350314" class="nav-cta">Talk to a Local Guide</a></li>
   </ul>
   <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
@@ -300,10 +303,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <!-- MOBILE NAV -->
 <nav class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">&times;</button>
-  <a href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">Home</a>
   <a href="destinations.html" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
   <a href="index.html#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
   <a href="accommodation.html" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="establishments.html" onclick="document.getElementById('mobNav').classList.remove('open')">Local Life</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
   <a href="index.html#map" onclick="document.getElementById('mobNav').classList.remove('open')">Map</a>
 </nav>
 
@@ -316,11 +320,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a href="destinations.html" aria-current="page">Destinations</a>
     </nav>
     <h1>Explore <em>Calatrava</em></h1>
-    <p>Thirteen natural destinations across five barangays — from hidden saltwater lakes and white-sand beaches to dramatic mountain waterfalls.</p>
+    <p><span id="heroCount">—</span> natural destinations across <span id="heroBarangays">—</span> barangays — from hidden saltwater lakes and white-sand beaches to dramatic mountain waterfalls.</p>
     <div class="page-hero-stats">
-      <div class="ph-stat"><strong>7</strong><span>Beaches &amp; Islands</span></div>
-      <div class="ph-stat"><strong>6</strong><span>Waterfalls</span></div>
-      <div class="ph-stat"><strong>5</strong><span>Barangays</span></div>
+      <div class="ph-stat"><strong id="statBeaches">—</strong><span>Beaches &amp; Islands</span></div>
+      <div class="ph-stat"><strong id="statFalls">—</strong><span>Waterfalls</span></div>
+      <div class="ph-stat"><strong id="statBarangays">—</strong><span>Barangays</span></div>
       <div class="ph-stat"><strong>₱20</strong><span>Env. Fee</span></div>
     </div>
   </div>
@@ -330,9 +334,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div class="filter-bar" id="filterBar">
   <div class="filter-inner">
     <div class="filter-tabs" role="tablist">
-      <button class="filter-tab active" role="tab" aria-selected="true"  data-filter="all"    onclick="filter(this,'all')">All <span class="filter-count">13</span></button>
-      <button class="filter-tab"        role="tab" aria-selected="false" data-filter="beach"  onclick="filter(this,'beach')">Beaches &amp; Islands <span class="filter-count">7</span></button>
-      <button class="filter-tab"        role="tab" aria-selected="false" data-filter="falls"  onclick="filter(this,'falls')">Waterfalls <span class="filter-count">6</span></button>
+      <button class="filter-tab active" role="tab" aria-selected="true"  data-filter="all"    onclick="filter(this,'all')">All <span class="filter-count"></span></button>
+      <button class="filter-tab"        role="tab" aria-selected="false" data-filter="beach"  onclick="filter(this,'beach')">Beaches &amp; Islands <span class="filter-count"></span></button>
+      <button class="filter-tab"        role="tab" aria-selected="false" data-filter="falls"  onclick="filter(this,'falls')">Waterfalls <span class="filter-count"></span></button>
     </div>
   </div>
 </div>
@@ -603,9 +607,23 @@ function renderGroups(destinations) {
     </div>`).join('');
 }
 
+// All destination counts are derived from the live data (data/destinations.json,
+// managed via the admin) — nothing here is hardcoded.
 function updateFilterCounts(destinations) {
-  const counts = [destinations.length, destinations.filter(d=>d.category==='beach').length, destinations.filter(d=>d.category==='falls').length];
+  const total     = destinations.length;
+  const beaches   = destinations.filter(d=>d.category==='beach').length;
+  const falls     = destinations.filter(d=>d.category==='falls').length;
+  const barangays = new Set(destinations.map(d=>d.barangay).filter(Boolean)).size;
+
+  const counts = [total, beaches, falls];
   document.querySelectorAll('.filter-count').forEach((el,i) => { if(counts[i]!==undefined) el.textContent = counts[i]; });
+
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('heroCount', total);
+  set('heroBarangays', barangays);
+  set('statBeaches', beaches);
+  set('statFalls', falls);
+  set('statBarangays', barangays);
 }
 
 // ── FILTER ──
