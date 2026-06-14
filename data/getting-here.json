@@ -9,11 +9,12 @@
       "subtitle": "Fastest option — ideal for visitors from Manila or Cebu",
       "steps": [
         {
-          "label": "Step 1 — Manila",
-          "name": "NAIA Terminal → Tugdan Airport (Tablas)",
-          "description": "Fly directly to Tugdan Airport (TBH) on Tablas Island. Several carriers operate this route; flight time is approximately 55 minutes. Book in advance — seats fill quickly during peak season and holidays.",
+          "label": "Step 1 — Clark (Pampanga)",
+          "name": "Clark International Airport (Domestic Terminal) → Tugdan Airport (Tablas)",
+          "description": "Fly into Tugdan Airport (TBH) on Tablas Island from Clark International Airport's Domestic Terminal. Sunlight Air serves this route — book online at sunlightair.ph, where you can view current schedules, compare fares, and reserve your seat in a few steps (just search Clark to Tablas/Romblon, pick your date, and pay online). Flight time is roughly 1 hour. Book in advance — seats fill quickly during peak season and holidays.",
           "tags": [
-            "~55 min flight",
+            "~1 hr flight",
+            "Book via sunlightair.ph",
             "Book ahead"
           ]
         },
@@ -94,8 +95,75 @@
           ]
         }
       ]
+    },
+    {
+      "id": "by-sea-lucena",
+      "number": "03",
+      "label": "Alternative Route",
+      "title": "By Sea from Lucena",
+      "titleEmphasis": "Sea",
+      "subtitle": "Direct to northern Tablas — the closest port to Calatrava",
+      "steps": [
+        {
+          "label": "Step 1 — Quezon Province",
+          "name": "Manila → Lucena (Dalahican) Port",
+          "description": "Travel from Metro Manila to Lucena City, Quezon, then proceed to Dalahican Port. Buses to Lucena Grand Terminal run frequently from Cubao, Buendia, and other Manila terminals; from the terminal it's a short tricycle or jeepney ride to Dalahican Port.",
+          "tags": [
+            "~3–4 hrs from Manila",
+            "Bus or private car"
+          ]
+        },
+        {
+          "label": "Step 2 — Dalahican Port",
+          "name": "Ferry to San Agustin Port (Tablas)",
+          "description": "RORO ferries sail direct from Lucena (Dalahican) to San Agustin on the northern tip of Tablas. Montenegro Shipping Lines makes the crossing in around 6 hours (an early-morning departure, roughly 3:00 AM), while Starhorse Shipping Lines takes about 9 hours (an afternoon departure, roughly 4:00 PM, arriving at dawn). Fares run from about ₱600 to ₱1,600 depending on operator and accommodation. Schedules change often — confirm the latest times and book ahead, and arrive at the terminal at least 2 hours before departure.",
+          "tags": [
+            "~6–9 hrs",
+            "Check schedules",
+            "₱600–₱1,600 fare"
+          ],
+          "highlightTag": "~6–9 hrs"
+        },
+        {
+          "label": "Step 3 — San Agustin",
+          "name": "San Agustin → Calatrava (Jeepney)",
+          "description": "San Agustin Port is the closest mainland sea gateway to Calatrava. Board a jeepney or van bound for Calatrava from the San Agustin terminal — the road hugs Tablas' scenic northern coast on the way up.",
+          "tags": [
+            "~1.5–2 hrs",
+            "₱60–₱80",
+            "Departs when full"
+          ]
+        },
+        {
+          "label": "Arrival",
+          "name": "Calatrava Poblacion",
+          "description": "You arrive at the Calatrava town center. Tricycles are on hand at the terminal for the final leg to your accommodation, resort, or chosen barangay.",
+          "tags": [
+            "Tricycles available"
+          ]
+        }
+      ]
     }
   ],
+  "vanTransport": {
+    "title": "Private Van Transport",
+    "intro": "Prefer a door-to-door transfer or a private vehicle for your group? The following local operators offer van hire for airport and port pick-ups, inter-town trips, and day tours around Calatrava. Contact them directly to arrange schedules and rates.",
+    "operators": [
+      {
+        "name": "Julie Ann Jimenez",
+        "contacts": [
+          "0951 002 0418"
+        ]
+      },
+      {
+        "name": "Jovy Menorca",
+        "contacts": [
+          "0918 378 1532",
+          "0995 820 1114"
+        ]
+      }
+    ]
+  },
   "infoBoxes": [
     {
       "id": "local-transport",
