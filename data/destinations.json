@@ -186,8 +186,8 @@
     "lng": 122.091959
   },
   {
-    "id": "cawa-cawa-falls",
-    "name": "Cawa-Cawa Falls",
+    "id": "cawa-falls",
+    "name": "Cawa Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -198,11 +198,14 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_CawacawaFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Cawa1_web.jpg",
+      "assets/destinations/Destination_Falls-Cawa2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_CawacawaFalls1_thumb.jpg",
     "lat": 12.592,
-    "lng": 122.067
+    "lng": 122.067,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "hidden-falls",
