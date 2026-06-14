@@ -125,8 +125,8 @@
     "lng": 122.096
   },
   {
-    "id": "cawi-falls",
-    "name": "Caw-i Falls",
+    "id": "kalipay-falls",
+    "name": "Kalipay Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Balogo",
@@ -136,10 +136,15 @@
     "badge": "falls",
     "featured": false,
     "featuredOrder": null,
-    "images": [],
+    "images": [
+      "assets/accommodations/Destination_Falls-Kalipay1_web.jpg",
+      "assets/accommodations/Destination_Falls-Kalipay2_web.jpg"
+    ],
     "thumbnail": null,
     "lat": 12.6,
-    "lng": 122.068
+    "lng": 122.068,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "oray-falls",
