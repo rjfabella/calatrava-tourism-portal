@@ -149,7 +149,8 @@
     "phone": "+63 995 263 4453",
     "socials": "https://www.facebook.com/profile.php?id=100071892286569",
     "mapsUrl": "https://maps.google.com/?cid=7368429251125298900",
-    "image": ""
+    "image": "assets/establishments/CMDC.jpg",
+    "id": "calatrava-medical-and-diagnostic-center"
   },
   {
     "name": "Calatrava Municipal Health Center",
