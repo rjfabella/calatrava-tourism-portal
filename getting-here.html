@@ -118,6 +118,20 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .info-box ul li{font-size:13.5px;color:var(--muted);padding-left:1rem;position:relative}
 .info-box ul li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:11px;top:2px}
 
+/* ── VAN TRANSPORT TABLE ── */
+.van-section{margin-top:4rem}
+.van-section .s-label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+.van-section h2{font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--deep);line-height:1.1;margin-bottom:.6rem}
+.van-section .van-intro{font-size:14px;line-height:1.78;color:var(--muted);max-width:760px;margin-bottom:1.75rem}
+.van-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:3px;background:var(--white)}
+.van-table{width:100%;border-collapse:collapse;font-size:14px;min-width:420px}
+.van-table th{text-align:left;background:var(--sand);color:var(--deep);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 1.4rem}
+.van-table td{padding:.95rem 1.4rem;border-top:1px solid var(--border);color:var(--text);vertical-align:top}
+.van-table td.van-name{font-family:var(--fd);font-size:1.05rem;color:var(--deep)}
+.van-table .van-contacts{display:flex;flex-direction:column;gap:.3rem}
+.van-table .van-contacts a{color:var(--ocean);text-decoration:none;font-weight:500;transition:color .3s}
+.van-table .van-contacts a:hover{color:var(--gold)}
+
 /* ── TIPS SECTION ── */
 .tips{background:var(--deep);padding:4rem 2.5rem;margin-top:0}
 .tips-inner{max-width:1200px;margin:0 auto}
@@ -265,12 +279,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <div class="route-strip-inner">
     <div class="route-item">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.7 5.9L2.3 7.3c-.4.4-.2 1 .3 1.3L10 12l-2 3H5l-1 1 3 2 2 3 1-1v-3l3-2 3.5 7.3c.3.5.9.7 1.3.3l1.4-1.4c.5-.3.8-.7.6-1.2z"/></svg>
-      <span><strong>By Air:</strong> Manila → Tugdan Airport (Tablas) — 55 min flight</span>
+      <span><strong>By Air:</strong> Clark → Tugdan Airport (Tablas) — ~1 hr flight</span>
     </div>
     <div class="route-divider"></div>
     <div class="route-item">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12l4-4M2 12l4 4M12 2v20M12 2l-4 4M12 2l4 4"/></svg>
-      <span><strong>By Sea:</strong> Batangas Port → Romblon/Odiongan — 8–12 hrs</span>
+      <span><strong>By Sea:</strong> Batangas or Lucena Port → Tablas — 6–12 hrs</span>
     </div>
     <div class="route-divider"></div>
     <div class="route-item">
@@ -430,6 +444,29 @@ function renderInfoBox(box, i) {
   </div>`;
 }
 
+function renderVanTransport(van) {
+  if (!van || !(van.operators || []).length) return '';
+  const rows = van.operators.map(op => {
+    const contacts = (op.contacts || []).map(c =>
+      `<a href="tel:${c.replace(/\s/g,'')}">${c}</a>`).join('');
+    return `<tr>
+      <td class="van-name">${op.name}</td>
+      <td><div class="van-contacts">${contacts}</div></td>
+    </tr>`;
+  }).join('');
+  return `<div class="van-section reveal">
+    <span class="s-label">${van.label || 'Getting Around'}</span>
+    <h2>${van.title || 'Private Van Transport'}</h2>
+    ${van.intro ? `<p class="van-intro">${van.intro}</p>` : ''}
+    <div class="van-table-wrap">
+      <table class="van-table">
+        <thead><tr><th>Operator</th><th>Contact Number</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
 function renderTips(tips) {
   return `<section class="tips">
     <div class="tips-inner">
@@ -463,8 +500,9 @@ function renderContactCards(contacts) {
 
     const contentEl = document.getElementById('gh-content');
     const routeHtml = (gh.routes || []).map(renderRoute).join('');
+    const vanHtml = renderVanTransport(gh.vanTransport);
     const infoHtml = `<div class="info-grid reveal">${(gh.infoBoxes || []).map(renderInfoBox).join('')}</div>`;
-    contentEl.innerHTML = routeHtml + infoHtml;
+    contentEl.innerHTML = routeHtml + vanHtml + infoHtml;
 
     // Insert tips section between content div and contact strip
     const tipsHtml = renderTips(gh.tips || []);

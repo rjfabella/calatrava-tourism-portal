@@ -128,10 +128,15 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .card-link{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ocean);border-bottom:1px solid var(--ocean);padding-bottom:1px;white-space:nowrap;transition:color .3s,border-color .3s}
 .card-link:hover{color:var(--gold);border-color:var(--gold)}
 
-/* Gallery dots */
-.card-gallery{position:absolute;bottom:10px;right:10px;display:flex;gap:4px}
-.gallery-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:background .2s}
-.gallery-dot.active{background:var(--white)}
+/* Gallery chevrons */
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:none;background:rgba(12,34,51,.45);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .25s,background .25s;z-index:2}
+.card-img-wrap:hover .gallery-nav{opacity:1}
+.gallery-nav:hover{background:rgba(12,34,51,.78)}
+.gallery-nav.prev{left:8px}
+.gallery-nav.next{right:8px}
+.gallery-nav svg{width:14px;height:14px}
+.gallery-count{position:absolute;bottom:10px;right:10px;background:rgba(12,34,51,.55);color:#fff;font-size:10px;font-weight:500;letter-spacing:.05em;padding:2px 8px;border-radius:10px;z-index:2;pointer-events:none}
+@media(hover:none){.gallery-nav{opacity:.92}}
 
 /* ── NO PHOTO NOTICE ── */
 .no-photo-notice{background:var(--sand);border:1px dashed rgba(12,34,51,.15);border-radius:3px;padding:1rem 1.5rem;font-size:13px;color:var(--muted);text-align:center;margin:1rem 0}
@@ -149,6 +154,19 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .bc-label{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
 .bc-name{font-size:14px;font-weight:500;color:var(--white);margin-bottom:.25rem}
 .bc-contact{font-size:12px;color:rgba(255,255,255,.75)}
+
+/* ── LIVE LIKE A LOCAL STRIP (same as index) ── */
+.life-strip{background:linear-gradient(120deg,var(--gl),var(--gold));padding:4.5rem 2.5rem;position:relative;overflow:hidden}
+.life-strip::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% -20%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
+.life-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2.5rem;flex-wrap:wrap;position:relative;z-index:1}
+.life-text{max-width:640px}
+.life-text .s-label{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--deep);opacity:.72;margin-bottom:.9rem;display:block}
+.life-text h2{font-family:var(--fd);font-size:clamp(2rem,3.4vw,3rem);font-weight:300;color:var(--deep);line-height:1.15;margin:.35rem 0 .65rem}
+.life-text h2 em{font-style:italic;color:var(--white)}
+.life-text p{font-size:14.5px;color:rgba(12,34,51,.8);line-height:1.75;max-width:560px}
+.life-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--deep);color:var(--white);font-family:var(--fb);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border-radius:2px;transition:background .3s,transform .3s;box-shadow:0 12px 30px rgba(12,34,51,.28)}
+.life-btn:hover{background:var(--ocean);transform:translateY(-2px)}
+.life-btn span{font-size:1.15em;line-height:1}
 
 /* ── FOOTER (same as index) ── */
 footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
@@ -193,6 +211,9 @@ footer{background:var(--deep);padding:4.5rem 2.5rem 2rem}
   .filter-inner{padding:0 1.5rem}
   .dest-section{padding:2rem 1.5rem 4rem}
   .booking-inner{grid-template-columns:1fr;gap:2rem}
+  .gallery-nav{opacity:.92}
+  .life-strip{padding:3.25rem 1.5rem}
+  .life-btn{width:100%;justify-content:center}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
   .f-brand{grid-column:1/-1}
   .page-hero{padding:7rem 1.5rem 3.5rem}
@@ -375,6 +396,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   </div>
 </div>
 
+<!-- LIVE LIKE A LOCAL STRIP -->
+<section class="life-strip">
+  <div class="life-inner reveal">
+    <div class="life-text">
+      <span class="s-label">Live Like a Local</span>
+      <h2>Ready to <em>work from paradise?</em></h2>
+      <p>Beyond the beaches — discover the cafés, dining spots, shops, pharmacies, clinics, gyms, and churches that make Calatrava an easy place to settle in and stay a while.</p>
+    </div>
+    <a href="establishments.html" class="life-btn">See our local life guide <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -505,6 +538,8 @@ function makePlaceholder(d) {
 
 // ── CARD RENDERER ──
 const locPin = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
+const chevL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+const chevR = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
 
 function renderCard(d) {
   const imgId = 'img-' + d.id;
@@ -512,11 +547,13 @@ function renderCard(d) {
   const galleryData = hasImgs ? JSON.stringify(d.images).replace(/'/g, '&#39;') : '[]';
 
   const imgHtml = hasImgs
-    ? `<img src="${d.images[0]}" alt="${d.name}" class="card-img" id="${imgId}" data-gallery='${galleryData}' loading="lazy">`
+    ? `<img src="${d.images[0]}" alt="${d.name}" class="card-img" id="${imgId}" data-gallery='${galleryData}' data-idx="0" loading="lazy">`
     : `<div class="card-no-photo" id="${imgId}">${makePlaceholder(d)}</div>`;
 
   const dotsHtml = hasImgs && d.images.length > 1
-    ? `<div class="card-gallery">${d.images.map((_, i) => `<div class="gallery-dot${i===0?' active':''}" onclick="switchImg('${imgId}',${i},this)"></div>`).join('')}</div>`
+    ? `<button class="gallery-nav prev" onclick="navImg('${imgId}',-1)" aria-label="Previous image">${chevL}</button>
+       <button class="gallery-nav next" onclick="navImg('${imgId}',1)" aria-label="Next image">${chevR}</button>
+       <span class="gallery-count">1 / ${d.images.length}</span>`
     : '';
 
   const featuredBadge = d.featured ? `<span class="card-featured">Featured</span>` : '';
@@ -587,14 +624,16 @@ function filter(btn, cat) {
 }
 
 // ── GALLERY ──
-function switchImg(imgId, idx, dot) {
+function navImg(imgId, dir) {
   const img = document.getElementById(imgId);
   if (!img || img.tagName !== 'IMG') return;
   const gallery = JSON.parse(img.dataset.gallery || '[]');
-  if (!gallery[idx]) return;
+  if (gallery.length < 2) return;
+  const idx = (parseInt(img.dataset.idx || '0', 10) + dir + gallery.length) % gallery.length;
+  img.dataset.idx = idx;
   img.src = gallery[idx];
-  dot.parentElement.querySelectorAll('.gallery-dot').forEach(d => d.classList.remove('active'));
-  dot.classList.add('active');
+  const counter = img.closest('.card-img-wrap')?.querySelector('.gallery-count');
+  if (counter) counter.textContent = `${idx + 1} / ${gallery.length}`;
 }
 
 // ── BOOKING CARDS (one per activity; opens the same pop-up as the homepage) ──
