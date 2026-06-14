@@ -119,10 +119,17 @@
     "badge": "beach",
     "featured": false,
     "featuredOrder": null,
-    "images": [],
+    "images": [
+      "assets/destinations/Destination_NgakNgak1_web.jpg",
+      "assets/destinations/Destination_NgakNgak2_web.jpg",
+      "assets/destinations/Destination_NgakNgak3_web.jpg",
+      "assets/destinations/Destination_NgakNgak4_web.jpg"
+    ],
     "thumbnail": null,
     "lat": 12.632,
-    "lng": 122.096
+    "lng": 122.096,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "kalipay-falls",
