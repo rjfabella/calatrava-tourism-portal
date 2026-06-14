@@ -106,6 +106,25 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min
 .modal-body{padding:1.5rem;overflow-y:auto}
 .modal-foot{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem;flex-shrink:0}
 
+/* ── IMAGE PICKER ── */
+#imgPicker{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+#imgPicker.open{display:flex}
+#imgPicker .modal-box{max-width:760px}
+.ip-pick-btn{align-self:flex-start;margin-bottom:.15rem}
+.ip-drop{border:2px dashed var(--border);border-radius:6px;padding:1.1rem;text-align:center;font-size:12.5px;color:var(--muted);cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:1rem}
+.ip-drop:hover,.ip-drop.drag{border-color:var(--ocean);background:#F0F7FB}
+.ip-drop strong{color:var(--deep)}
+.ip-status{font-size:12px;color:var(--muted);margin-bottom:.75rem;min-height:1em}
+.ip-status.err{color:var(--danger)}
+.ip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem}
+.ip-tile{position:relative;border:2px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--sand)}
+.ip-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.ip-tile.sel{border-color:var(--ocean)}
+.ip-badge{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--ocean);color:#fff;font-size:11px;font-weight:600;display:none;align-items:center;justify-content:center}
+.ip-tile.sel .ip-badge{display:flex}
+.ip-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:9px;padding:2px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ip-empty{grid-column:1/-1;font-size:13px;color:var(--muted);padding:2rem;text-align:center}
+
 /* ── FORM ── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .form-grid.single{grid-template-columns:1fr}
@@ -416,6 +435,28 @@ textarea{resize:vertical;min-height:80px}
   </div>
 </div>
 
+<!-- IMAGE PICKER / UPLOADER -->
+<div id="imgPicker">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="ipTitle">Photos</h3>
+      <button class="modal-close" onclick="closeImgPicker()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="file" id="ipFileInput" accept="image/*" multiple style="display:none" onchange="ipUpload(this.files); this.value=''">
+      <div class="ip-drop" id="ipDrop" onclick="document.getElementById('ipFileInput').click()">
+        <strong>Click to upload</strong> or drag &amp; drop photos here — saved to <code id="ipFolder"></code>
+      </div>
+      <div class="ip-status" id="ipStatus"></div>
+      <div class="ip-grid" id="ipGrid"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeImgPicker()">Cancel</button>
+      <button class="btn btn-primary" id="ipDone" onclick="ipApply()">Use selected</button>
+    </div>
+  </div>
+</div>
+
 <!-- HIDDEN FILE INPUT -->
 <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
 
@@ -695,6 +736,173 @@ async function publish(key) {
   // static-only mode: drafts + export, nothing to publish to
 }
 
+// ══ IMAGE PICKER / UPLOADER (publishMode 'github' only) ══
+// Browse, select, and upload photos straight into an assets/ folder via the
+// GitHub Contents API — no hand-typing of paths. Chosen paths are written back
+// into the edit form's image field; the user still hits Save to publish.
+let ipState = { folder:'', field:'', multi:true, selected:[], extra:[] };
+
+async function openImgPicker(folder, field, multi) {
+  if (publishMode !== 'github') { toast('Sign in with a GitHub token to browse & upload photos', 'error'); return; }
+  ipState = { folder, field, multi, selected:[], extra:[] };
+
+  // Pre-select whatever the field already holds; keep any out-of-folder lines aside.
+  const el = document.getElementById(field);
+  const existing = (el.value || '').split('\n').map(s => s.trim().replace(/^\/+/, '')).filter(Boolean);
+  existing.forEach(p => { (p.startsWith(folder + '/') ? ipState.selected : ipState.extra).push(p); });
+  if (!multi) ipState.selected = ipState.selected.slice(0, 1);
+
+  document.getElementById('ipTitle').textContent = multi ? 'Photos — select or upload' : 'Photo — select or upload';
+  document.getElementById('ipFolder').textContent = folder + '/';
+  document.getElementById('ipDone').textContent = multi ? 'Use selected' : 'Use photo';
+  document.getElementById('imgPicker').classList.add('open');
+  document.getElementById('ipGrid').innerHTML = '';
+  ipSetStatus('Loading photos…');
+  try {
+    const files = await ghListFolder(folder);
+    ipRender(files);
+    ipSetStatus(files.length ? `${files.length} photo${files.length !== 1 ? 's' : ''} in this folder` : '');
+  } catch (e) {
+    ipSetStatus('Could not load folder (' + e.message + ')', true);
+  }
+}
+
+function closeImgPicker() { document.getElementById('imgPicker').classList.remove('open'); }
+
+function ipSetStatus(msg, isErr) {
+  const s = document.getElementById('ipStatus');
+  s.textContent = msg || '';
+  s.classList.toggle('err', !!isErr);
+}
+
+async function ghListFolder(folder) {
+  const url = `https://api.github.com/repos/${GH_REPO}/contents/${folder}?ref=${GH_BRANCH}&t=${Date.now()}`;
+  const res = await fetch(url, { headers: ghHeaders(), cache: 'no-store' });
+  if (res.status === 404) return [];               // folder not created yet
+  if (!res.ok) throw new Error(res.status);
+  const arr = await res.json();
+  return arr
+    .filter(x => x.type === 'file' && /\.(jpe?g|png|webp|gif|svg)$/i.test(x.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function ipRender(files) {
+  const grid = document.getElementById('ipGrid');
+  if (!files.length && !ipState.selected.length) {
+    grid.innerHTML = '<div class="ip-empty">No photos here yet — drop some above to upload.</div>';
+    return;
+  }
+  const seen = new Set();
+  const tiles = [];
+  const add = (path, displayUrl, name) => {
+    if (seen.has(path)) return; seen.add(path);
+    const order = ipState.selected.indexOf(path);
+    const sel = order !== -1;
+    tiles.push(`<div class="ip-tile${sel ? ' sel' : ''}" data-path="${path}" onclick="ipToggle('${path}')">
+      <img src="${displayUrl}" alt="" loading="lazy" onerror="this.style.opacity=.25">
+      <span class="ip-badge">${ipState.multi ? (sel ? order + 1 : '') : '✓'}</span>
+      <span class="ip-name">${name}</span>
+    </div>`);
+  };
+  files.forEach(f => add(f.path, f.download_url || f.path, f.name));
+  // Pre-selected items missing from the listing (e.g. stale CDN) still show.
+  ipState.selected.forEach(p => add(p, p, p.split('/').pop()));
+  grid.innerHTML = tiles.join('');
+}
+
+function ipToggle(path) {
+  if (ipState.multi) {
+    const i = ipState.selected.indexOf(path);
+    if (i === -1) ipState.selected.push(path); else ipState.selected.splice(i, 1);
+  } else {
+    ipState.selected = ipState.selected[0] === path ? [] : [path];
+  }
+  document.querySelectorAll('#ipGrid .ip-tile').forEach(t => {
+    const order = ipState.selected.indexOf(t.dataset.path);
+    t.classList.toggle('sel', order !== -1);
+    t.querySelector('.ip-badge').textContent = ipState.multi ? (order !== -1 ? order + 1 : '') : '✓';
+  });
+}
+
+function ipApply() {
+  const el = document.getElementById(ipState.field);
+  if (ipState.multi) el.value = [...ipState.selected, ...ipState.extra].join('\n');
+  else el.value = ipState.selected[0] || '';
+  closeImgPicker();
+}
+
+// Upload dropped/selected files into the folder, then re-list and auto-select.
+async function ipUpload(fileList) {
+  const files = [...(fileList || [])].filter(f => /^image\//.test(f.type));
+  if (!files.length) return;
+  const taken = new Set([...document.querySelectorAll('#ipGrid .ip-tile')].map(t => t.dataset.path.split('/').pop().toLowerCase()));
+  let done = 0;
+  for (const file of files) {
+    const name = ipUniqueName(file.name, taken);
+    taken.add(name.toLowerCase());
+    const path = ipState.folder + '/' + name;
+    ipSetStatus(`Uploading ${name} (${++done}/${files.length})…`);
+    try {
+      const b64 = await fileToBase64(file);
+      await ghUploadFile(path, b64);
+      if (ipState.multi) { if (!ipState.selected.includes(path)) ipState.selected.push(path); }
+      else ipState.selected = [path];
+    } catch (e) {
+      ipSetStatus(`Upload of ${name} failed (${e.message})`, true);
+      return;
+    }
+  }
+  ipSetStatus('Refreshing…');
+  try {
+    ipRender(await ghListFolder(ipState.folder));
+    ipSetStatus(`Uploaded ${files.length} photo${files.length !== 1 ? 's' : ''} — now selected`);
+  } catch (e) {
+    ipRender([]);            // selected ones still show via fallback
+    ipSetStatus('Uploaded, but listing refresh failed — selections kept', true);
+  }
+}
+
+function ipUniqueName(raw, taken) {
+  let s = (raw || 'photo').trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9._-]/g, '');
+  if (!/\.[a-z0-9]{2,5}$/.test(s)) s += '.jpg';
+  if (!taken.has(s)) return s;
+  const dot = s.lastIndexOf('.'), stem = s.slice(0, dot), ext = s.slice(dot);
+  let n = 2; while (taken.has(`${stem}-${n}${ext}`)) n++;
+  return `${stem}-${n}${ext}`;
+}
+
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = () => rej(new Error('read error'));
+    r.readAsDataURL(file);
+  });
+}
+
+async function ghUploadFile(path, contentB64) {
+  let sha;
+  const cur = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, { headers: ghHeaders() });
+  if (cur.ok) sha = (await cur.json()).sha;        // overwrite if it already exists
+  else if (cur.status !== 404) throw new Error('check ' + cur.status);
+  const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { ...ghHeaders(), 'content-type': 'application/json' },
+    body: JSON.stringify({ message: `Admin upload: ${path}`, content: contentB64, sha, branch: GH_BRANCH })
+  });
+  if (res.status === 401 || res.status === 403) throw new Error('token rejected');
+  if (!res.ok) throw new Error(res.status);
+}
+
+// Drag & drop onto the picker's drop zone.
+(function () {
+  const drop = document.getElementById('ipDrop');
+  if (!drop) return;
+  ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('drag'); }));
+  drop.addEventListener('drop', e => ipUpload(e.dataTransfer.files));
+})();
+
 // ══ OPEN LOCATION CODE (Plus Codes) ══
 // Minimal decoder so staff can paste a Plus Code from Google Maps instead of
 // raw coordinates. Short codes (e.g. "J3XF+5C") are recovered against the
@@ -852,6 +1060,7 @@ function openDestModal(idx) {
         <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
       </div>
       <div class="form-group full"><label>Images (one URL per line)</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/destinations','f_images',true)">🖼 Browse / upload photos</button>` : ''}
         <textarea id="f_images" style="min-height:70px">${(d.images||[]).join('\n')}</textarea>
         <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically</span>
       </div>
@@ -979,6 +1188,7 @@ function openAccomModal(idx) {
         <span class="hint">Open Location Code from Google Maps. When filled, it overrides the latitude/longitude above on save. Short codes are resolved near Calatrava.</span>
       </div>
       <div class="form-group full"><label>Images (one path per line)</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/accommodations','f_images',true)">🖼 Browse / upload photos</button>` : ''}
         <textarea id="f_images" style="min-height:70px">${(a.images||[]).join('\n')}</textarea>
         <span class="hint">One per line, forward slashes, with extension — e.g. <code>assets/accommodations/photo_main.jpg</code>. Backslashes and missing .jpg are fixed automatically. First image shown as cover.</span>
       </div>
@@ -1048,7 +1258,9 @@ function openEstabModal(idx) {
       <div class="form-group full"><label>Google Maps link</label><input id="f_mapsUrl" value="${e.mapsUrl||''}" placeholder="https://maps.app.goo.gl/...">
         <span class="hint">Paste the place's Google Maps share link. Powers the “Directions” button (falls back to an address search if blank).</span>
       </div>
-      <div class="form-group full"><label>Image reference</label><input id="f_image" value="${e.image||''}" placeholder="assets/establishments/photo.jpg">
+      <div class="form-group full"><label>Image reference</label>
+        ${publishMode === 'github' ? `<button type="button" class="btn btn-outline btn-sm ip-pick-btn" onclick="openImgPicker('assets/establishments','f_image',false)">🖼 Browse / upload photo</button>` : ''}
+        <input id="f_image" value="${e.image||''}" placeholder="assets/establishments/photo.jpg">
         <span class="hint">Single image path under <code>assets/establishments/</code>. Forward slashes, with extension; backslashes and a missing .jpg are fixed automatically. Leave blank to show a category icon.</span>
       </div>
     </div>`;
