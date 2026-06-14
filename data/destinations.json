@@ -208,8 +208,8 @@
     "insiderTip": ""
   },
   {
-    "id": "hidden-falls",
-    "name": "Hidden Falls",
+    "id": "secretlagoon-falls",
+    "name": "Secret Lagoon Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -220,11 +220,14 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_HiddenFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-SecretLagoon1_web.jpg",
+      "assets/destinations/Destination_Falls-SecretLagoon2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_HiddenFalls1_thumb.jpg",
     "lat": 12.595,
-    "lng": 122.072
+    "lng": 122.072,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "pangulo-falls",
