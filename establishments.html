@@ -66,6 +66,16 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .page-hero h1 em{font-style:italic;color:var(--gl)}
 .page-hero p{font-size:15px;color:rgba(255,255,255,.78);max-width:560px;line-height:1.8}
 
+/* ── AERIAL STRIP (below header) ── */
+.aerial-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--deep)}
+.aerial-strip figure{position:relative;margin:0;height:300px;overflow:hidden;background:var(--sand)}
+.aerial-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.aerial-strip figure:hover img{transform:scale(1.04)}
+@media(max-width:768px){
+  .aerial-strip{grid-template-columns:1fr;gap:0}
+  .aerial-strip figure{height:220px}
+}
+
 /* ── TOWN MAP ── */
 .estmap-section{max-width:1200px;margin:0 auto;padding:3.25rem 2.5rem 0}
 .estmap-head{margin-bottom:1.5rem}
@@ -221,6 +231,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p>Staying a while? Here's where the locals go — the dining spots, cafés, shops, pharmacies, clinics, gyms, and churches that make everyday life in Calatrava easy.</p>
   </div>
 </header>
+
+<!-- AERIAL STRIP -->
+<section class="aerial-strip" aria-label="Aerial views of Calatrava">
+  <figure><img src="assets/destinations/CalatravaAerial1.jpg" alt="Aerial view of Calatrava town" loading="lazy" onerror="this.closest('figure').style.display='none'"></figure>
+  <figure><img src="assets/destinations/CalatravaAerial2.jpg" alt="Aerial view of Calatrava coastline" loading="lazy" onerror="this.closest('figure').style.display='none'"></figure>
+  <figure><img src="assets/destinations/CalatravaAerial3.jpg" alt="Aerial view of Calatrava from above" loading="lazy" onerror="this.closest('figure').style.display='none'"></figure>
+</section>
 
 <!-- TOWN MAP -->
 <section class="estmap-section">
