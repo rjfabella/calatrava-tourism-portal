@@ -39,7 +39,8 @@
     "images": [
       "assets/destinations/Destinations_LapusLapus1_web.jpg",
       "assets/destinations/Destinations_LapusLapus2_web.jpg",
-      "assets/destinations/Destinations_LapusLapus3_web.jpg"
+      "assets/destinations/Destinations_LapusLapus3_web.jpg",
+      "assets/destinations/Destinations_LapusLapus4_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_LapusLapus1_thumb.jpg",
     "lat": 12.654,
@@ -124,8 +125,8 @@
     "lng": 122.096
   },
   {
-    "id": "cawi-falls",
-    "name": "Caw-i Falls",
+    "id": "kalipay-falls",
+    "name": "Kalipay Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Balogo",
@@ -135,10 +136,15 @@
     "badge": "falls",
     "featured": false,
     "featuredOrder": null,
-    "images": [],
+    "images": [
+      "assets/accommodations/Destination_Falls-Kalipay1_web.jpg",
+      "assets/accommodations/Destination_Falls-Kalipay2_web.jpg"
+    ],
     "thumbnail": null,
     "lat": 12.6,
-    "lng": 122.068
+    "lng": 122.068,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "oray-falls",
@@ -153,15 +159,17 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_OrayFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Oray1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_OrayFalls1_thumb.jpg",
     "lat": 12.603,
-    "lng": 122.072
+    "lng": 122.072,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
-    "id": "tago-falls",
-    "name": "Tago Falls",
+    "id": "eltelon-falls",
+    "name": "El Telon Falls",
     "type": "Waterfall — Trekking",
     "tagline": "Hidden for a Reason",
     "category": "falls",
@@ -174,16 +182,17 @@
     "featured": true,
     "featuredOrder": 3,
     "images": [
-      "assets/destinations/Destination_TagoFalls1_web.jpg",
-      "assets/destinations/Destination_TagoFalls2_web.jpg"
+      "assets/destinations/Destination_Falls-ElTelon1_web.jpg",
+      "assets/destinations/Destination_Falls-ElTelon2_web.jpg",
+      "assets/destinations/Destination_Falls-ElTelon3_web.jpg"
     ],
-    "thumbnail": "assets/thumbnails/Destination_TagoFalls1_thumb.jpg",
+    "thumbnail": "assets/thumbnails/assets/destinations/Destination_Falls-ElTelon1_web.jpg",
     "lat": 12.58953,
     "lng": 122.091959
   },
   {
-    "id": "cawa-cawa-falls",
-    "name": "Cawa-Cawa Falls",
+    "id": "cawa-falls",
+    "name": "Cawa Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -194,15 +203,18 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_CawacawaFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Cawa1_web.jpg",
+      "assets/destinations/Destination_Falls-Cawa2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_CawacawaFalls1_thumb.jpg",
     "lat": 12.592,
-    "lng": 122.067
+    "lng": 122.067,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
-    "id": "hidden-falls",
-    "name": "Hidden Falls",
+    "id": "secretlagoon-falls",
+    "name": "Secret Lagoon Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -213,15 +225,18 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_HiddenFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-SecretLagoon1_web.jpg",
+      "assets/destinations/Destination_Falls-SecretLagoon2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_HiddenFalls1_thumb.jpg",
     "lat": 12.595,
-    "lng": 122.072
+    "lng": 122.072,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
-    "id": "pangulo-falls",
-    "name": "Pangulo Falls",
+    "id": "salingpaca-falls",
+    "name": "Salingpaca Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -232,10 +247,35 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destinations_PanguloFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Salingpaca1_web.jpg",
+      "assets/destinations/Destination_Falls-Salingpaca2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_PanguloFalls1_thumb.jpg",
     "lat": 12.576,
-    "lng": 122.058
+    "lng": 122.058,
+    "tagline": "",
+    "insiderTip": ""
+  },
+  {
+    "id": "tagpuan-falls",
+    "name": "Tagpuan Falls",
+    "type": "Waterfall — Trekking",
+    "tagline": "",
+    "category": "falls",
+    "barangay": "Pagsangahan",
+    "description": "About 10-minute walk from the paved road near Bulawan Resort, this is the first of a series of falls and natural pools in Brgy. Pagsangahan. Perfect for quick dips and snacks - just make sure to leave no trace.",
+    "insiderTip": "",
+    "fee": "Guide fee applies",
+    "feeNote": "Trek required",
+    "badge": "falls",
+    "featured": false,
+    "featuredOrder": null,
+    "images": [
+      "assets/destinations/Destination_Falls-Tagpuan1_web.jpg",
+      "assets/destinations/Destination_Falls-Tagpuan2_web.jpg"
+    ],
+    "thumbnail": null,
+    "lat": 12.59262,
+    "lng": 122.088
   }
 ]
