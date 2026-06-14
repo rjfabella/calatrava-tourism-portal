@@ -235,8 +235,8 @@
     "insiderTip": ""
   },
   {
-    "id": "pangulo-falls",
-    "name": "Pangulo Falls",
+    "id": "salingpaca-falls",
+    "name": "Salingpaca Falls",
     "type": "Waterfall — Trekking",
     "category": "falls",
     "barangay": "Pagsangahan",
@@ -247,27 +247,33 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destinations_PanguloFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Salingpaca1_web.jpg",
+      "assets/destinations/Destination_Falls-Salingpaca2_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_PanguloFalls1_thumb.jpg",
     "lat": 12.576,
-    "lng": 122.058
+    "lng": 122.058,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "tagpuan-falls",
     "name": "Tagpuan Falls",
-    "type": "Falls with natural pool",
+    "type": "Waterfall — Trekking",
     "tagline": "",
     "category": "falls",
     "barangay": "Pagsangahan",
     "description": "",
     "insiderTip": "",
-    "fee": "Free",
-    "feeNote": "",
+    "fee": "Guide fee applies",
+    "feeNote": "Trek required",
     "badge": "falls",
     "featured": false,
     "featuredOrder": null,
-    "images": [],
+    "images": [
+      "assets/destinations/Destination_Falls-Tagpuan1_web.jpg",
+      "assets/destinations/Destination_Falls-Tagpuan2_web.jpg"
+    ],
     "thumbnail": null,
     "lat": null,
     "lng": null
