@@ -50,6 +50,8 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:background .4s}
 .nav.scrolled .hamburger span{background:var(--deep)}
+/* Collapse the (now six-item) nav to the hamburger before it gets cramped */
+@media(max-width:1100px){.nav-links{display:none}.hamburger{display:flex}}
 
 /* ── MOBILE NAV ── */
 .mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
@@ -394,8 +396,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <li><a href="#destinations">Destinations</a></li>
     <li><a href="#activities">Activities</a></li>
     <li><a href="#accommodation">Stay</a></li>
+    <li><a href="establishments.html">Local Life</a></li>
+    <li><a href="getting-here.html">Getting Here</a></li>
     <li><a href="#map">Map</a></li>
-    <li><a href="#about">About</a></li>
     <li><a href="tel:09193350314" class="nav-cta">Talk to a Local Guide</a></li>
   </ul>
   <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobNav').classList.add('open')">
@@ -409,8 +412,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <a href="#destinations" onclick="document.getElementById('mobNav').classList.remove('open')">Destinations</a>
   <a href="#activities" onclick="document.getElementById('mobNav').classList.remove('open')">Activities</a>
   <a href="#accommodation" onclick="document.getElementById('mobNav').classList.remove('open')">Stay</a>
+  <a href="establishments.html" onclick="document.getElementById('mobNav').classList.remove('open')">Local Life</a>
+  <a href="getting-here.html" onclick="document.getElementById('mobNav').classList.remove('open')">Getting Here</a>
   <a href="#map" onclick="document.getElementById('mobNav').classList.remove('open')">Map</a>
-  <a href="#about" onclick="document.getElementById('mobNav').classList.remove('open')">About</a>
 </nav>
 
 <!-- HERO -->
