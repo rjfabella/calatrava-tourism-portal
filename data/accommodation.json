@@ -27,6 +27,7 @@
     "facebookLabel": "Cove Aurelio Facebook Page",
     "lat": 12.646437,
     "lng": 122.102937,
+    "bookingNote": "Contact the Tourism Council to arrange visits and cottage reservations.",
     "detailsUrl": ""
   },
   {
@@ -59,6 +60,7 @@
     "facebookLabel": "Balai Azinan Facebook Page",
     "lat": 12.620312,
     "lng": 122.068312,
+    "bookingNote": "Contact the Tourism Council for current rates and availability.",
     "detailsUrl": ""
   },
   {
@@ -86,6 +88,7 @@
     "facebookLabel": "Bulawan Resort Facebook Page",
     "lat": 12.6023,
     "lng": 122.0731,
+    "bookingNote": "Contact the Tourism Council for directions and current rates.",
     "detailsUrl": ""
   },
   {
@@ -138,7 +141,9 @@
     "lat": 12.636056320711388,
     "lng": 122.08506826264458,
     "images": [
-      "assets/accommodations/accommodations_ngakngak_main.jpg"
+      "assets/accommodations/accommodations_ngakngak_main.jpg",
+      "assets/accommodations/accommodations_ngakngak1.jpg",
+      "assets/accommodations/accommodations_ngakngak2.jpg"
     ],
     "detailsUrl": "",
     "address": "Brgy. Linao, Calatrava, Romblon"
