@@ -154,11 +154,13 @@
     "featured": false,
     "featuredOrder": null,
     "images": [
-      "assets/destinations/Destination_OrayFalls1_web.jpg"
+      "assets/destinations/Destination_Falls-Oray1_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destination_OrayFalls1_thumb.jpg",
     "lat": 12.603,
-    "lng": 122.072
+    "lng": 122.072,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "eltelon-falls",
