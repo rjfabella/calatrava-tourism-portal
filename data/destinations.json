@@ -92,7 +92,7 @@
   },
   {
     "id": "turtle-cove",
-    "name": "Turtle Cove",
+    "name": "Turtle Cove (Pagong ISland)",
     "type": "Beach Resort",
     "category": "beach",
     "barangay": "Linao",
@@ -105,7 +105,9 @@
     "images": [],
     "thumbnail": null,
     "lat": 12.635,
-    "lng": 122.098
+    "lng": 122.098,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "ngak-ngak",
