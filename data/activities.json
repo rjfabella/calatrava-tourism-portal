@@ -78,7 +78,7 @@
     }
   },
   {
-    "id": "snorkeling-diving",
+    "id": "snorkeling-&-diving",
     "number": "03",
     "title": "Snorkeling & Diving",
     "tagline": "Peer Into the Deep Blue",
@@ -110,6 +110,26 @@
           "href": "tel:09193350314"
         }
       ]
-    }
+    },
+    "contactPhones": [
+      {
+        "label": "Calatrava Tourism Council",
+        "number": "0919 335 0314"
+      }
+    ],
+    "contactUrls": [
+      {
+        "label": "Kantilado Freedivers",
+        "url": "https://www.facebook.com/kantiladofreedivers"
+      },
+      {
+        "label": "Sisira",
+        "url": "https://www.facebook.com/sisiraph"
+      },
+      {
+        "label": "Calatrava Tourism Council",
+        "url": "https://www.facebook.com/calatravatourismcouncil"
+      }
+    ]
   }
 ]
