@@ -232,5 +232,15 @@
     "socials": "",
     "mapsUrl": "https://maps.app.goo.gl/Msx6r3Cz33bcxFy99",
     "image": ""
+  },
+  {
+    "id": "aerobridge-tours",
+    "name": "Aerobridge Tours",
+    "category": "dining",
+    "address": "Poblacion",
+    "phone": "09199232486",
+    "socials": "",
+    "mapsUrl": "",
+    "image": ""
   }
 ]
