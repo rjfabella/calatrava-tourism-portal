@@ -712,13 +712,25 @@ function openActivityModal(id) {
   }
 
   const contactItems = [...(d.contacts || [])];
-  if (a.contactPhone) contactItems.push({
-    name: 'Contact number', role: 'Call or text to book',
-    phone: a.contactPhone, href: 'tel:' + a.contactPhone.replace(/\s/g, '')
+  // Up to 2 contact numbers and 3 booking links (admin-managed). Falls back to
+  // the legacy single contactPhone / contactUrl fields for older data.
+  const phones = a.contactPhones?.length ? a.contactPhones : (a.contactPhone ? [{ number: a.contactPhone }] : []);
+  phones.forEach(p => {
+    const num = (p.number || '').trim();
+    if (!num) return;
+    contactItems.push({
+      name: p.label || 'Contact number', role: 'Call or text to book',
+      phone: num, href: 'tel:' + num.replace(/\s/g, '')
+    });
   });
-  if (a.contactUrl) contactItems.push({
-    name: 'Booking page', role: a.contactUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''),
-    phone: '↗', href: a.contactUrl, external: true
+  const urls = a.contactUrls?.length ? a.contactUrls : (a.contactUrl ? [{ url: a.contactUrl }] : []);
+  urls.forEach(u => {
+    const url = (u.url || '').trim();
+    if (!url) return;
+    contactItems.push({
+      name: u.label || 'Booking page', role: url.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      phone: '↗', href: url, external: true
+    });
   });
   if (contactItems.length) {
     html += `<div class="act-modal-section">
