@@ -1112,6 +1112,27 @@ function openActivityModal(idx) {
   currentModalIdx = idx;
   const a = idx !== null ? data.activities[idx] : {id:'',number:'04',title:'',description:'',rate:'',credit:''};
   document.getElementById('modalTitle').textContent = idx !== null ? 'Edit Activity' : 'Add Activity';
+
+  // Contacts: up to 2 numbers and 3 links. Read the arrays, falling back to the
+  // legacy single contactPhone / contactUrl fields so older activities migrate.
+  const esc = s => String(s ?? '').replace(/"/g, '&quot;');
+  const phones = a.contactPhones?.length ? a.contactPhones : (a.contactPhone ? [{ number: a.contactPhone }] : []);
+  const urls = a.contactUrls?.length ? a.contactUrls : (a.contactUrl ? [{ url: a.contactUrl }] : []);
+  const phoneRows = [0, 1].map(i => {
+    const p = phones[i] || {};
+    return `<div style="display:flex;gap:.5rem;margin-bottom:.4rem">
+      <input id="f_phoneLabel${i}" value="${esc(p.label)}" placeholder="Label (optional) — e.g. Tourism Office" style="flex:1">
+      <input id="f_phone${i}" value="${esc(p.number)}" placeholder="0919 335 0314" style="flex:1">
+    </div>`;
+  }).join('');
+  const urlRows = [0, 1, 2].map(i => {
+    const u = urls[i] || {};
+    return `<div style="display:flex;gap:.5rem;margin-bottom:.4rem">
+      <input id="f_urlLabel${i}" value="${esc(u.label)}" placeholder="Label (optional) — e.g. Facebook Page" style="flex:1">
+      <input id="f_url${i}" value="${esc(u.url)}" placeholder="https://www.facebook.com/..." style="flex:1">
+    </div>`;
+  }).join('');
+
   document.getElementById('modalBody').innerHTML = `
     <div class="form-grid single">
       <div class="form-group"><label>Number label</label><input id="f_number" value="${a.number}" placeholder="04"></div>
@@ -1122,8 +1143,14 @@ function openActivityModal(idx) {
       <div class="form-group"><label>Description</label><textarea id="f_desc">${a.description}</textarea></div>
       <div class="form-group"><label>Rate / Price note</label><input id="f_rate" value="${a.rate}" placeholder="From ₱3,000 for 10 persons"></div>
       <div class="form-group"><label>Photo credit</label><input id="f_credit" value="${a.credit || ''}" placeholder="e.g. RJ Fabella"></div>
-      <div class="form-group"><label>Contact number</label><input id="f_contactPhone" value="${a.contactPhone || ''}" placeholder="0919 335 0314"></div>
-      <div class="form-group"><label>Contact URL</label><input id="f_contactUrl" value="${a.contactUrl || ''}" placeholder="https://www.facebook.com/..."></div>
+      <div class="form-group"><label>Contact numbers (up to 2)</label>
+        ${phoneRows}
+        <span class="hint">Each row: optional label + phone number. Leave both blank to skip.</span>
+      </div>
+      <div class="form-group"><label>Booking / contact links (up to 3)</label>
+        ${urlRows}
+        <span class="hint">Each row: optional label + URL. Leave both blank to skip.</span>
+      </div>
     </div>`;
   document.getElementById('modal').classList.add('open');
 }
@@ -1599,6 +1626,13 @@ function saveModal() {
 
   } else if (currentModalType === 'activity') {
     const existing = currentModalIdx !== null ? data.activities[currentModalIdx] : {};
+    // Collect up to 2 numbers / 3 links, keeping only rows with a value.
+    const contactPhones = [0, 1]
+      .map(i => ({ label: g('f_phoneLabel' + i), number: g('f_phone' + i) }))
+      .filter(p => p.number);
+    const contactUrls = [0, 1, 2]
+      .map(i => ({ label: g('f_urlLabel' + i), url: g('f_url' + i) }))
+      .filter(u => u.url);
     const item = {
       ...existing,
       id: g('f_title').toLowerCase().replace(/\s+/g,'-'),
@@ -1608,9 +1642,12 @@ function saveModal() {
       description: g('f_desc'),
       rate: g('f_rate'),
       credit: g('f_credit'),
-      contactPhone: g('f_contactPhone'),
-      contactUrl: g('f_contactUrl')
+      contactPhones,
+      contactUrls
     };
+    // Drop the legacy single-value fields now that arrays are the source.
+    delete item.contactPhone;
+    delete item.contactUrl;
     if (!item.title) { toast('Title is required','error'); return; }
     if (currentModalIdx !== null) data.activities[currentModalIdx] = item;
     else data.activities.push(item);

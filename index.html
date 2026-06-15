@@ -1143,7 +1143,9 @@ function navCardImg(btn, dir) {
   box.dataset.idx = idx;
   const img = box.querySelector('img');
   img.dataset.full = list[idx];
-  img.src = thumbify(list[idx]);
+  // Cards flagged data-nothumb show the configured image as-is (see
+  // renderFeaturedDests); others keep the thumbnail optimization.
+  img.src = box.dataset.nothumb ? list[idx] : thumbify(list[idx]);
 }
 
 function renderFeaturedDests(destinations) {
@@ -1154,11 +1156,14 @@ function renderFeaturedDests(destinations) {
   if (!el) return;
   el.innerHTML = featured.map((d, i) => {
     const imgs = (d.images || []).map(fixAssetPath).filter(Boolean);
+    // Render the configured image directly (not a guessed _thumb path): the
+    // admin only manages assets/destinations/, never the thumbnails folder, so
+    // a derived thumbnail can go stale and stop reflecting the config.
     const img = imgs.length
-      ? `<img src="${thumbify(imgs[0])}" data-full="${imgs[0]}" onerror="if(this.src.includes('_thumb'))this.src=this.dataset.full" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
+      ? `<img src="${imgs[0]}" alt="${d.name}, Brgy. ${d.barangay}" class="dest-img" loading="lazy">`
       : `<div class="dest-img" style="background:linear-gradient(160deg,#1A5C7A,#0C2233);min-height:300px"></div>`;
     return `<div class="dest-card" role="link" tabindex="0" aria-label="${d.name} — view details"
-      data-images='${attrJson(imgs)}' data-idx="0"
+      data-images='${attrJson(imgs)}' data-idx="0" data-nothumb="1"
       onclick="location.href='destinations.html#${d.id}'"
       onkeydown="if(event.key==='Enter'&&event.target===this)location.href='destinations.html#${d.id}'">
       ${img}
@@ -1367,13 +1372,25 @@ function openActivityModal(id) {
   }
 
   const contactItems = [...(d.contacts || [])];
-  if (a.contactPhone) contactItems.push({
-    name: 'Contact number', role: 'Call or text to book',
-    phone: a.contactPhone, href: 'tel:' + a.contactPhone.replace(/\s/g, '')
+  // Up to 2 contact numbers and 3 booking links (admin-managed). Falls back to
+  // the legacy single contactPhone / contactUrl fields for older data.
+  const phones = a.contactPhones?.length ? a.contactPhones : (a.contactPhone ? [{ number: a.contactPhone }] : []);
+  phones.forEach(p => {
+    const num = (p.number || '').trim();
+    if (!num) return;
+    contactItems.push({
+      name: p.label || 'Contact number', role: 'Call or text to book',
+      phone: num, href: 'tel:' + num.replace(/\s/g, '')
+    });
   });
-  if (a.contactUrl) contactItems.push({
-    name: 'Booking page', role: a.contactUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''),
-    phone: '↗', href: a.contactUrl, external: true
+  const urls = a.contactUrls?.length ? a.contactUrls : (a.contactUrl ? [{ url: a.contactUrl }] : []);
+  urls.forEach(u => {
+    const url = (u.url || '').trim();
+    if (!url) return;
+    contactItems.push({
+      name: u.label || 'Booking page', role: url.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      phone: '↗', href: url, external: true
+    });
   });
   if (contactItems.length) {
     html += `<div class="act-modal-section">
