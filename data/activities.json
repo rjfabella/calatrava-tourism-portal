@@ -111,12 +111,7 @@
         }
       ]
     },
-    "contactPhones": [
-      {
-        "label": "Calatrava Tourism Council",
-        "number": "0919 335 0314"
-      }
-    ],
+    "contactPhones": [],
     "contactUrls": [
       {
         "label": "Kantilado Freedivers",
