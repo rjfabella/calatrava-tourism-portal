@@ -212,5 +212,15 @@
     "socials": "https://www.facebook.com/BIG1RestaurantOfficial",
     "mapsUrl": "https://maps.app.goo.gl/HYMVJSSWEz5Fm56d8",
     "image": "assets/establishments/Big1.jpg"
+  },
+  {
+    "id": "parish-of-st.-michael-&-all-angels-(iglesia-filipina-independiente)",
+    "name": "Parish of St. Michael & All Angels (Iglesia Filipina Independiente)",
+    "category": "church",
+    "address": "Poblacion, Calatrava, Romblon",
+    "phone": "",
+    "socials": "",
+    "mapsUrl": "https://maps.app.goo.gl/b6TJP8xvvXJ7MxRPA",
+    "image": ""
   }
 ]
