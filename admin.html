@@ -14,28 +14,28 @@
   --bg:#F3F4F6;--surface:#fff;
   --fd:'Georgia',serif;--fb:'system-ui',sans-serif;
 }
-body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min-height:100vh}
+body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:15.7px;min-height:100vh}
 
 /* ── AUTH SCREEN ── */
 #authScreen{position:fixed;inset:0;background:var(--deep);display:flex;align-items:center;justify-content:center;z-index:999}
 .auth-box{background:var(--white);padding:2.5rem;border-radius:8px;width:340px}
 .auth-box h1{font-family:var(--fd);font-size:1.6rem;color:var(--deep);margin-bottom:.25rem}
-.auth-box p{font-size:12px;color:var(--muted);margin-bottom:1.75rem}
-.auth-box input{width:100%;border:1px solid var(--border);padding:.6rem .85rem;border-radius:4px;font-size:14px;margin-bottom:1rem;outline:none;transition:border-color .2s}
+.auth-box p{font-size:13.4px;color:var(--muted);margin-bottom:1.75rem}
+.auth-box input{width:100%;border:1px solid var(--border);padding:.6rem .85rem;border-radius:4px;font-size:15.7px;margin-bottom:1rem;outline:none;transition:border-color .2s}
 .auth-box input:focus{border-color:var(--ocean)}
-.auth-box button{width:100%;background:var(--deep);color:#fff;border:none;padding:.7rem;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s}
+.auth-box button{width:100%;background:var(--deep);color:#fff;border:none;padding:.7rem;border-radius:4px;font-size:14.6px;font-weight:500;letter-spacing:.05em;cursor:pointer;transition:background .2s}
 .auth-box button:hover{background:var(--ocean)}
-.auth-error{font-size:12px;color:var(--danger);margin-top:.5rem;display:none}
+.auth-error{font-size:13.4px;color:var(--danger);margin-top:.5rem;display:none}
 
 /* ── LAYOUT ── */
 #app{display:none;min-height:100vh}
 .topbar{background:var(--deep);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:90}
 .topbar-brand{display:flex;align-items:center;gap:.75rem}
 .topbar-brand span{font-family:var(--fd);font-size:1.1rem;color:var(--white)}
-.topbar-brand small{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block}
+.topbar-brand small{font-size:11.2px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;display:block}
 .topbar-actions{display:flex;align-items:center;gap:.75rem}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:4px;font-size:12px;font-weight:500;border:none;cursor:pointer;transition:all .2s;letter-spacing:.03em;text-decoration:none}
-.btn-sm{padding:.3rem .65rem;font-size:11px}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;border-radius:4px;font-size:13.4px;font-weight:500;border:none;cursor:pointer;transition:all .2s;letter-spacing:.03em;text-decoration:none}
+.btn-sm{padding:.3rem .65rem;font-size:12.3px}
 .btn-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
 .btn-ghost:hover{background:rgba(255,255,255,.2)}
 .btn-primary{background:var(--gold);color:var(--white)}
@@ -51,13 +51,13 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min
 
 /* ── SIDEBAR ── */
 .sidebar{background:var(--white);border-right:1px solid var(--border);padding:1.25rem 0}
-.sidebar-section{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1.25rem .4rem;margin-top:.5rem}
-.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.25rem;font-size:13px;color:#374151;cursor:pointer;transition:background .15s;border-left:3px solid transparent}
+.sidebar-section{font-size:11.2px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1.25rem .4rem;margin-top:.5rem}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.25rem;font-size:14.6px;color:#374151;cursor:pointer;transition:background .15s;border-left:3px solid transparent}
 .nav-item:hover{background:var(--bg)}
 .nav-item.active{background:#EFF6FF;color:var(--ocean);border-left-color:var(--ocean);font-weight:500}
 .nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6}
 .nav-item.active svg{opacity:1}
-.nav-badge{margin-left:auto;font-size:10px;background:var(--sand);color:var(--muted);padding:1px 7px;border-radius:10px;font-weight:400}
+.nav-badge{margin-left:auto;font-size:11.2px;background:var(--sand);color:var(--muted);padding:1px 7px;border-radius:10px;font-weight:400}
 .nav-item.active .nav-badge{background:var(--ocean);color:var(--white)}
 
 /* ── MAIN CONTENT ── */
@@ -67,11 +67,11 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min
 
 .page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
 .page-header h2{font-size:1.25rem;font-weight:600;color:var(--deep)}
-.page-header p{font-size:13px;color:var(--muted);margin-top:.2rem}
+.page-header p{font-size:14.6px;color:var(--muted);margin-top:.2rem}
 .page-header-actions{display:flex;gap:.5rem;flex-shrink:0}
 
 /* ── TOAST ── */
-#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--deep);color:#fff;padding:.65rem 1.1rem;border-radius:6px;font-size:13px;z-index:999;display:none;gap:.5rem;align-items:center}
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--deep);color:#fff;padding:.65rem 1.1rem;border-radius:6px;font-size:14.6px;z-index:999;display:none;gap:.5rem;align-items:center}
 #toast.show{display:flex}
 #toast.error{background:var(--danger)}
 #toast.success{background:var(--success)}
@@ -83,13 +83,13 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min
 .card-body{padding:1.25rem}
 
 .data-table{width:100%;border-collapse:collapse}
-.data-table th{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .85rem;text-align:left;background:#F9FAFB;border-bottom:1px solid var(--border)}
-.data-table td{padding:.7rem .85rem;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+.data-table th{font-size:12.3px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:.6rem .85rem;text-align:left;background:#F9FAFB;border-bottom:1px solid var(--border)}
+.data-table td{padding:.7rem .85rem;border-bottom:1px solid var(--border);font-size:14.6px;vertical-align:middle}
 .data-table tr:last-child td{border-bottom:none}
 .data-table tr:hover td{background:#FAFAFA}
 .td-img{width:44px;height:36px;object-fit:cover;border-radius:3px;background:var(--sand)}
 .td-img-ph{width:44px;height:36px;background:linear-gradient(135deg,var(--sand),#ddd);border-radius:3px;flex-shrink:0;display:inline-block}
-.badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.badge{display:inline-block;font-size:11.2px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
 .badge-beach{background:#DBEAFE;color:#1E40AF}
 .badge-falls{background:#D1FAE5;color:#065F46}
 .badge-resort{background:#FEF3C7;color:#92400E}
@@ -111,40 +111,40 @@ body{font-family:var(--fb);background:var(--bg);color:#111827;font-size:14px;min
 #imgPicker.open{display:flex}
 #imgPicker .modal-box{max-width:760px}
 .ip-pick-btn{align-self:flex-start;margin-bottom:.15rem}
-.ip-drop{border:2px dashed var(--border);border-radius:6px;padding:1.1rem;text-align:center;font-size:12.5px;color:var(--muted);cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:1rem}
+.ip-drop{border:2px dashed var(--border);border-radius:6px;padding:1.1rem;text-align:center;font-size:14px;color:var(--muted);cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:1rem}
 .ip-drop:hover,.ip-drop.drag{border-color:var(--ocean);background:#F0F7FB}
 .ip-drop strong{color:var(--deep)}
-.ip-status{font-size:12px;color:var(--muted);margin-bottom:.75rem;min-height:1em}
+.ip-status{font-size:13.4px;color:var(--muted);margin-bottom:.75rem;min-height:1em}
 .ip-status.err{color:var(--danger)}
 .ip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem}
 .ip-tile{position:relative;border:2px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--sand)}
 .ip-tile img{width:100%;height:100%;object-fit:cover;display:block}
 .ip-tile.sel{border-color:var(--ocean)}
-.ip-badge{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--ocean);color:#fff;font-size:11px;font-weight:600;display:none;align-items:center;justify-content:center}
+.ip-badge{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--ocean);color:#fff;font-size:12.3px;font-weight:600;display:none;align-items:center;justify-content:center}
 .ip-tile.sel .ip-badge{display:flex}
-.ip-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:9px;padding:2px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ip-empty{grid-column:1/-1;font-size:13px;color:var(--muted);padding:2rem;text-align:center}
+.ip-name{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;font-size:10.1px;padding:2px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ip-empty{grid-column:1/-1;font-size:14.6px;color:var(--muted);padding:2rem;text-align:center}
 
 /* ── FORM ── */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .form-grid.single{grid-template-columns:1fr}
 .form-group{display:flex;flex-direction:column;gap:.3rem}
 .form-group.full{grid-column:1/-1}
-label{font-size:12px;font-weight:500;color:#374151}
-input,select,textarea{font-family:var(--fb);font-size:13px;border:1px solid var(--border);border-radius:4px;padding:.5rem .75rem;width:100%;outline:none;transition:border-color .2s;background:var(--white)}
+label{font-size:13.4px;font-weight:500;color:#374151}
+input,select,textarea{font-family:var(--fb);font-size:14.6px;border:1px solid var(--border);border-radius:4px;padding:.5rem .75rem;width:100%;outline:none;transition:border-color .2s;background:var(--white)}
 input:focus,select:focus,textarea:focus{border-color:var(--ocean)}
 textarea{resize:vertical;min-height:80px}
-.hint{font-size:11px;color:var(--muted)}
+.hint{font-size:12.3px;color:var(--muted)}
 .form-check{display:flex;align-items:center;gap:.5rem}
 .form-check input{width:auto}
 .img-preview{width:80px;height:60px;object-fit:cover;border-radius:3px;border:1px solid var(--border);margin-top:.5rem;display:none}
 .tag-list{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
-.tag-item{font-size:11px;background:var(--sand);padding:2px 8px;border-radius:3px;display:flex;align-items:center;gap:.3rem}
-.tag-item button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:12px;line-height:1;padding:0}
+.tag-item{font-size:12.3px;background:var(--sand);padding:2px 8px;border-radius:3px;display:flex;align-items:center;gap:.3rem}
+.tag-item button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13.4px;line-height:1;padding:0}
 
 /* ── IMPORT / EXPORT SECTION ── */
 .io-strip{background:var(--deep);border-radius:6px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.io-strip p{font-size:12.5px;color:rgba(255,255,255,.7)}
+.io-strip p{font-size:14px;color:rgba(255,255,255,.7)}
 .io-strip strong{color:var(--white)}
 .io-strip-actions{display:flex;gap:.5rem}
 
@@ -152,7 +152,7 @@ textarea{resize:vertical;min-height:80px}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
 .stat-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:1.25rem}
 .stat-card-num{font-family:var(--fd);font-size:2rem;color:var(--deep);margin-bottom:.2rem}
-.stat-card-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.stat-card-label{font-size:12.3px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .stat-card-input{margin-top:.75rem}
 
 /* ── RESPONSIVE ── */
@@ -175,7 +175,7 @@ textarea{resize:vertical;min-height:80px}
     <input type="password" id="pwInput" placeholder="Admin password or GitHub token" autocomplete="current-password">
     <button onclick="doLogin()">Sign In</button>
     <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
-    <p style="font-size:11px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
+    <p style="font-size:12.3px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
   </div>
 </div>
 
@@ -274,7 +274,7 @@ textarea{resize:vertical;min-height:80px}
           <div class="card-header">
             <h3>All Destinations</h3>
             <div style="display:flex;gap:.5rem;align-items:center">
-              <select id="destFilter" onchange="renderDestTable()" style="width:auto;padding:.3rem .65rem;font-size:12px">
+              <select id="destFilter" onchange="renderDestTable()" style="width:auto;padding:.3rem .65rem;font-size:13.4px">
                 <option value="all">All categories</option>
                 <option value="beach">Beach / Island</option>
                 <option value="falls">Waterfalls</option>
@@ -589,7 +589,7 @@ function refreshDraftBanner() {
   if (!banner) {
     banner = document.createElement('div');
     banner.id = 'draftBanner';
-    banner.style.cssText = 'background:#EFF6FF;border-bottom:1px solid #BFDBFE;color:#1E40AF;padding:.75rem 1.25rem;font-size:13px;line-height:1.5;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap';
+    banner.style.cssText = 'background:#EFF6FF;border-bottom:1px solid #BFDBFE;color:#1E40AF;padding:.75rem 1.25rem;font-size:14.6px;line-height:1.5;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap';
     document.querySelector('.topbar')?.after(banner);
   }
   banner.innerHTML = `<span><strong>Unpublished drafts</strong> (saved in this browser only): ${[...draftSections].join(', ')}.</span>
@@ -617,7 +617,7 @@ function showLoadError(failed) {
     ? `Couldn't load ${failed.join(', ')}.json — browsers block fetch() on file:// URLs. Serve this folder over HTTP (e.g. <code>python -m http.server</code> or <code>npx serve</code>) and open via http://localhost.`
     : `Couldn't load ${failed.join(', ')}.json from the server. Check that the files exist under <code>data/</code>.`;
   const banner = document.createElement('div');
-  banner.style.cssText = 'background:#FEF3C7;border-bottom:1px solid #FCD34D;color:#92400E;padding:.75rem 1.25rem;font-size:13px;line-height:1.5';
+  banner.style.cssText = 'background:#FEF3C7;border-bottom:1px solid #FCD34D;color:#92400E;padding:.75rem 1.25rem;font-size:14.6px;line-height:1.5';
   banner.innerHTML = `<strong>Data not loaded.</strong> ${msg}`;
   document.querySelector('.topbar')?.after(banner);
 }
@@ -1002,7 +1002,7 @@ function renderDestTable() {
       <td><strong>${d.name}</strong></td>
       <td><span class="badge badge-${d.badge}">${d.category}</span></td>
       <td>${d.barangay}</td>
-      <td style="font-size:12px">${d.fee}</td>
+      <td style="font-size:13.4px">${d.fee}</td>
       <td><span class="badge ${d.lat && d.lng ? 'badge-yes' : 'badge-no'}" title="${d.lat && d.lng ? `${d.lat}, ${d.lng}` : 'No coordinates set'}">${d.lat && d.lng ? '📍 Set' : '—'}</span></td>
       <td><span class="badge ${d.featured ? 'badge-yes' : 'badge-no'}">${d.featured ? 'Yes' : 'No'}</span></td>
       <td>
@@ -1092,8 +1092,8 @@ function renderActivities() {
         </div>
       </div>
       <div class="card-body">
-        <p style="font-size:13px;color:var(--muted);margin-bottom:.5rem">${a.description}</p>
-        <p style="font-size:12px;color:var(--gold);font-weight:500">${a.rate}</p>
+        <p style="font-size:14.6px;color:var(--muted);margin-bottom:.5rem">${a.description}</p>
+        <p style="font-size:13.4px;color:var(--gold);font-weight:500">${a.rate}</p>
       </div>
     </div>`).join('');
 }
@@ -1163,7 +1163,7 @@ function renderAccommodation() {
   document.getElementById('accommodationList').innerHTML = items.map((a, i) => `
     <div class="card" style="margin-bottom:1rem">
       <div class="card-header">
-        <h3>${a.name} <span style="font-size:11px;color:var(--gold);font-weight:400;margin-left:.5rem">${a.type}</span></h3>
+        <h3>${a.name} <span style="font-size:12.3px;color:var(--gold);font-weight:400;margin-left:.5rem">${a.type}</span></h3>
         <div style="display:flex;gap:.5rem">
           <button class="btn btn-outline btn-sm" onclick="openAccomModal(${i})">Edit</button>
           <button class="btn btn-danger btn-sm" onclick="deleteAccom(${i})">Delete</button>
@@ -1172,10 +1172,10 @@ function renderAccommodation() {
       <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
         ${a.images?.[0] ? `<img src="${fixAssetPath(a.images[0])}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
         <div>
-          <p style="font-size:12px;color:var(--muted)">Brgy. ${a.barangay}</p>
-          <p style="font-size:13px;margin-top:.25rem">${a.description}</p>
-          <p style="font-size:11px;margin-top:.4rem;color:${a.lat && a.lng ? 'var(--success)' : 'var(--muted)'}">${a.lat && a.lng ? `📍 ${a.lat}, ${a.lng}` : '📍 No coordinates set'}</p>
-          ${a.phone || a.facebook ? `<p style="font-size:11px;margin-top:.25rem;color:var(--muted)">${a.phone ? '📞 ' + a.phone : ''}${a.phone && a.facebook ? ' · ' : ''}${a.facebook ? '🔗 ' + a.facebook : ''}</p>` : ''}
+          <p style="font-size:13.4px;color:var(--muted)">Brgy. ${a.barangay}</p>
+          <p style="font-size:14.6px;margin-top:.25rem">${a.description}</p>
+          <p style="font-size:12.3px;margin-top:.4rem;color:${a.lat && a.lng ? 'var(--success)' : 'var(--muted)'}">${a.lat && a.lng ? `📍 ${a.lat}, ${a.lng}` : '📍 No coordinates set'}</p>
+          ${a.phone || a.facebook ? `<p style="font-size:12.3px;margin-top:.25rem;color:var(--muted)">${a.phone ? '📞 ' + a.phone : ''}${a.phone && a.facebook ? ' · ' : ''}${a.facebook ? '🔗 ' + a.facebook : ''}</p>` : ''}
         </div>
       </div>
     </div>`).join('');
@@ -1235,13 +1235,13 @@ function renderEstablishments() {
   const el = document.getElementById('establishmentsList');
   if (!el) return;
   if (!items.length) {
-    el.innerHTML = `<div class="card"><div class="card-body" style="color:var(--muted);font-size:13px">No establishments yet. Click <strong>+ Add Establishment</strong> to add the first dining spot, shop, or service.</div></div>`;
+    el.innerHTML = `<div class="card"><div class="card-body" style="color:var(--muted);font-size:14.6px">No establishments yet. Click <strong>+ Add Establishment</strong> to add the first dining spot, shop, or service.</div></div>`;
     return;
   }
   el.innerHTML = items.map((e, i) => `
     <div class="card" style="margin-bottom:1rem">
       <div class="card-header">
-        <h3>${e.name || '(unnamed)'} <span style="font-size:11px;color:var(--gold);font-weight:400;margin-left:.5rem">${estabLabel(e.category)}</span></h3>
+        <h3>${e.name || '(unnamed)'} <span style="font-size:12.3px;color:var(--gold);font-weight:400;margin-left:.5rem">${estabLabel(e.category)}</span></h3>
         <div style="display:flex;gap:.5rem">
           <button class="btn btn-outline btn-sm" onclick="openEstabModal(${i})">Edit</button>
           <button class="btn btn-danger btn-sm" onclick="deleteEstab(${i})">Delete</button>
@@ -1250,9 +1250,9 @@ function renderEstablishments() {
       <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
         ${e.image ? `<img src="${fixAssetPath(e.image)}" onerror="this.style.display='none'" style="width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0">` : '<div style="width:80px;height:60px;background:var(--sand);border-radius:4px;flex-shrink:0"></div>'}
         <div>
-          ${e.address ? `<p style="font-size:12px;color:var(--muted)">${e.address}</p>` : ''}
-          <p style="font-size:11px;margin-top:.4rem;color:${e.mapsUrl ? 'var(--success)' : 'var(--muted)'}">${e.mapsUrl ? '📍 Google Maps link set' : '📍 No maps link'}</p>
-          ${e.phone || e.socials ? `<p style="font-size:11px;margin-top:.25rem;color:var(--muted)">${e.phone ? '📞 ' + e.phone : ''}${e.phone && e.socials ? ' · ' : ''}${e.socials ? '🔗 ' + e.socials : ''}</p>` : ''}
+          ${e.address ? `<p style="font-size:13.4px;color:var(--muted)">${e.address}</p>` : ''}
+          <p style="font-size:12.3px;margin-top:.4rem;color:${e.mapsUrl ? 'var(--success)' : 'var(--muted)'}">${e.mapsUrl ? '📍 Google Maps link set' : '📍 No maps link'}</p>
+          ${e.phone || e.socials ? `<p style="font-size:12.3px;margin-top:.25rem;color:var(--muted)">${e.phone ? '📞 ' + e.phone : ''}${e.phone && e.socials ? ' · ' : ''}${e.socials ? '🔗 ' + e.socials : ''}</p>` : ''}
         </div>
       </div>
     </div>`).join('');
@@ -1322,11 +1322,11 @@ function renderVideos() {
       <div class="card-body" style="display:flex;gap:1rem;align-items:flex-start">
         <img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" style="width:120px;height:68px;object-fit:cover;border-radius:4px;flex-shrink:0" alt="">
         <div>
-          <p style="font-size:12px;color:var(--muted)">${v.caption || ''}</p>
-          <p style="font-size:11px;margin-top:.35rem"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">youtube.com/watch?v=${v.id}</a></p>
+          <p style="font-size:13.4px;color:var(--muted)">${v.caption || ''}</p>
+          <p style="font-size:12.3px;margin-top:.35rem"><a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener">youtube.com/watch?v=${v.id}</a></p>
         </div>
       </div>
-    </div>`).join('') || '<p style="font-size:13px;color:var(--muted)">No videos yet — click "+ Add Video" and paste a YouTube link.</p>';
+    </div>`).join('') || '<p style="font-size:14.6px;color:var(--muted)">No videos yet — click "+ Add Video" and paste a YouTube link.</p>';
 }
 
 function moveVideo(i, dir) {
@@ -1377,7 +1377,7 @@ function renderGettingHere() {
       <div class="card-body">
         ${tips.map((t,i)=>`
           <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">
-            <div><strong style="font-size:13px">${t.title}</strong><p style="font-size:12.5px;color:var(--muted);margin-top:.25rem">${t.text}</p></div>
+            <div><strong style="font-size:14.6px">${t.title}</strong><p style="font-size:14px;color:var(--muted);margin-top:.25rem">${t.text}</p></div>
             <div style="display:flex;gap:.35rem;flex-shrink:0">
               <button class="btn btn-outline btn-sm" onclick="openTipModal(${i})">Edit</button>
               <button class="btn btn-danger btn-sm" onclick="deleteTip(${i})">×</button>
@@ -1397,7 +1397,7 @@ function renderGettingHere() {
                 <button class="btn btn-danger btn-sm" onclick="deleteInfoBox(${i})">×</button>
               </div>
             </div>
-            <ul style="padding-left:1rem;font-size:12px;color:var(--muted)">${b.items.map(it=>`<li>${it}</li>`).join('')}</ul>
+            <ul style="padding-left:1rem;font-size:13.4px;color:var(--muted)">${b.items.map(it=>`<li>${it}</li>`).join('')}</ul>
           </div>`).join('')}
       </div>
     </div>`;
@@ -1482,7 +1482,7 @@ function renderAbout() {
           ${stats.map((s,i)=>`
             <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem">
               <div style="font-family:var(--fd);font-size:1.75rem;margin-bottom:.35rem">${s.value}<sup style="font-size:.8rem">${s.suffix}</sup></div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:.5rem">${s.label}</div>
+              <div style="font-size:12.3px;color:var(--muted);margin-bottom:.5rem">${s.label}</div>
               <div class="form-group" style="margin-bottom:.4rem"><label>Value</label><input value="${s.value}" oninput="updateStat(${i},'value',this.value)"></div>
               <div class="form-group" style="margin-bottom:.4rem"><label>Suffix</label><input value="${s.suffix}" oninput="updateStat(${i},'suffix',this.value)" placeholder="hrs"></div>
               <div class="form-group"><label>Label</label><input value="${s.label}" oninput="updateStat(${i},'label',this.value)"></div>
@@ -1521,9 +1521,9 @@ function renderContact() {
         ${contacts.map((ct,i)=>`
           <div style="border:1px solid var(--border);border-radius:4px;padding:.85rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:flex-start">
             <div>
-              <span style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em">${ct.label}</span>
-              <p style="font-size:15px;font-weight:500;margin:.2rem 0">${ct.value}</p>
-              <p style="font-size:11px;color:var(--muted)">${ct.href}</p>
+              <span style="font-size:11.2px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em">${ct.label}</span>
+              <p style="font-size:16.8px;font-weight:500;margin:.2rem 0">${ct.value}</p>
+              <p style="font-size:12.3px;color:var(--muted)">${ct.href}</p>
             </div>
             <div style="display:flex;gap:.35rem;flex-shrink:0">
               <button class="btn btn-outline btn-sm" onclick="openContactModal(${i})">Edit</button>
@@ -1554,7 +1554,7 @@ function renderContact() {
           <p class="hint" style="margin-top:.4rem">⚠️ Only used in <strong>Pins</strong> mode. Restrict this key in Google Cloud Console → APIs &amp; Services → Credentials → HTTP referrers.</p>
         </div>
         <button class="btn btn-success btn-sm" style="margin-top:.25rem" onclick="saveContact()">Save Map Settings</button>
-        <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:12px;line-height:1.5;color:#92400E">
+        <div style="margin-top:.85rem;padding:.75rem .9rem;background:#FEF3C7;border:1px solid #FCD34D;border-radius:4px;font-size:13.4px;line-height:1.5;color:#92400E">
           <strong>To publish:</strong> Signed in with a GitHub token, Save commits to the repo and is live in about a minute. Without a token, changes stay in this browser only — click <strong>Export All</strong> (top bar), replace <code>data/contact.json</code> in the repo, then commit &amp; push.
         </div>
       </div>
