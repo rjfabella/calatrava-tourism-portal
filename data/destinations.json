@@ -91,25 +91,6 @@
     "lng": 122.1
   },
   {
-    "id": "turtle-cove",
-    "name": "Turtle Cove (Pagong ISland)",
-    "type": "Beach Resort",
-    "category": "beach",
-    "barangay": "Linao",
-    "description": "A beach resort set along the scenic coastline of Linao, featuring white sand, natural rock formations, and cottage facilities for day visitors. Known for its relaxed atmosphere and clean surroundings.",
-    "fee": "Rates available on-site",
-    "feeNote": "Cottages available",
-    "badge": "beach",
-    "featured": false,
-    "featuredOrder": null,
-    "images": [],
-    "thumbnail": null,
-    "lat": 12.635,
-    "lng": 122.098,
-    "tagline": "",
-    "insiderTip": ""
-  },
-  {
     "id": "ngak-ngak",
     "name": "Ngak-Ngak Beach",
     "type": "Beach Resort",
