@@ -1,0 +1,71 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Emergency hotline band — sits directly above the footer on every main page.
+   Content (the numbers) lives in each page's HTML so it still works if this
+   stylesheet fails to load; this file only handles presentation.
+   ────────────────────────────────────────────────────────────────────────── */
+.emergency {
+  background: #B3261E;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-top: 3px solid #8E1B16;
+}
+.emergency-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem 2.75rem;
+}
+.emergency-lead {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--fb, sans-serif);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.emergency-lead svg { width: 19px; height: 19px; flex-shrink: 0; }
+.emergency-nums {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 2.5rem;
+}
+.emergency-num {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-decoration: none;
+  color: #fff;
+}
+.emergency-num .en-name {
+  font-family: var(--fb, sans-serif);
+  font-size: 10px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  opacity: .88;
+  margin-bottom: 1px;
+}
+.emergency-num .en-digits {
+  font-family: var(--fb, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.emergency-num:hover .en-digits,
+.emergency-num:focus-visible .en-digits { text-decoration-color: #fff; }
+.emergency-num:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
+
+@media (max-width: 640px) {
+  .emergency { padding: .9rem 1.25rem; }
+  .emergency-inner { gap: .7rem 1.5rem; }
+  .emergency-num .en-digits { font-size: 1.15rem; }
+}
