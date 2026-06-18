@@ -40,8 +40,7 @@
     "phone": "+63 920 982 7731",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=10717543630261394478",
-    "image": "assets/establishments/BrewNBloom.jpg",
-    "id": "brew--&--bloom-cafe"
+    "image": ""
   },
   {
     "name": "Calatrava Public Market",
@@ -194,8 +193,7 @@
     "phone": "",
     "socials": "https://www.facebook.com/JacqandJillsPharmacy",
     "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
-    "image": "assets/establishments/JacqNJill.JPG",
-    "id": "jacq-and-jills-pharmacy"
+    "image": ""
   },
   {
     "id": "big1-restaurant",
@@ -226,16 +224,6 @@
     "socials": "https://www.facebook.com/profile.php?id=61590601847538",
     "mapsUrl": "https://maps.app.goo.gl/Msx6r3Cz33bcxFy99",
     "image": "assets/establishments/NSureshot.jpg"
-  },
-  {
-    "id": "aerobridge-tours",
-    "name": "Aerobridge Tours",
-    "category": "dining",
-    "address": "Poblacion",
-    "phone": "09199232486",
-    "socials": "",
-    "mapsUrl": "",
-    "image": ""
   },
   {
     "id": "makiparesbrew",
