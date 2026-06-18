@@ -1333,7 +1333,7 @@ function renderContactCards(contact) {
 // Confirms the admin toggle from data/settings.json, then wires the buttons.
 // Falls back to enabled + the municipal site if settings can't be loaded.
 (async function visitorGate() {
-  const FALLBACK_LOCAL_URL = 'https://sanagustinromblon.gov.ph/';
+  const FALLBACK_LOCAL_URL = 'https://rjfabella.github.io/calatrava-lgu/';
   let chosen = false;
   try { chosen = sessionStorage.getItem('visitorChoice') === 'tourist'; } catch(e){}
 
