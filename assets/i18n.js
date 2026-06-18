@@ -125,7 +125,12 @@
     'Explore Destinations':    { ja: '目的地を見る', ko: '여행지 둘러보기', de: 'Reiseziele entdecken', es: 'Explorar destinos', fr: 'Découvrir les destinations' },
 
     // Mobile quick bar (text sits next to an icon — translated at the text node)
-    'Facebook Page':           { ja: 'Facebook ページ', ko: '페이스북 페이지', de: 'Facebook-Seite', es: 'Página de Facebook', fr: 'Page Facebook' }
+    'Facebook Page':           { ja: 'Facebook ページ', ko: '페이스북 페이지', de: 'Facebook-Seite', es: 'Página de Facebook', fr: 'Page Facebook' },
+
+    // Emergency hotline band (numbers themselves are never translated)
+    'Emergency':               { ja: '緊急', ko: '긴급', de: 'Notfall', es: 'Emergencia', fr: 'Urgence' },
+    'National Emergency Hotline': { ja: '全国緊急ホットライン', ko: '국가 긴급 전화', de: 'Nationale Notrufnummer', es: 'Línea de Emergencia Nacional', fr: 'Numéro d’urgence national' },
+    'Calatrava Emergency Hotline': { ja: 'カラトラバ緊急ホットライン', ko: '칼라트라바 긴급 전화', de: 'Notrufnummer Calatrava', es: 'Línea de Emergencia de Calatrava', fr: 'Numéro d’urgence de Calatrava' }
   };
 
   /* ── RICH dictionary (markup, swapped via innerHTML) ───────────────────── */
@@ -172,7 +177,8 @@
     '.life-text p', '.contact-text p', '.booking-text p',
     '.breadcrumb a', '.ph-stat span',
     '.f-brand p', '.f-col h4', '.f-col ul a', '.footer-bottom p', '.footer-bottom a',
-    '.gate-title', '.actions a'
+    '.gate-title', '.actions a',
+    '.emergency-label', '.emergency-num .en-name'
   ];
   // RICH: translated via innerHTML (markup preserved/translated).
   var RICH_SELECTORS = ['h1', 'h2', '.s-title', '.life-btn', '.gate-sub', '.gate-btn'];
