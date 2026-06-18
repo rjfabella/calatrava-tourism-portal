@@ -40,7 +40,8 @@
     "phone": "+63 920 982 7731",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=10717543630261394478",
-    "image": ""
+    "image": "assets/establishments/BrewNBloom.jpg",
+    "id": "brew--&--bloom-cafe"
   },
   {
     "name": "Calatrava Public Market",
@@ -193,7 +194,8 @@
     "phone": "",
     "socials": "https://www.facebook.com/JacqandJillsPharmacy",
     "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
-    "image": ""
+    "image": "assets/establishments/JacqNJill.JPG",
+    "id": "jacq-and-jills-pharmacy"
   },
   {
     "id": "big1-restaurant",
