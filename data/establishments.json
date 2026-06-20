@@ -234,5 +234,15 @@
     "socials": "https://www.facebook.com/profile.php?id=100084948729342",
     "mapsUrl": "https://maps.app.goo.gl/skdtZaspuUNDmZrP6",
     "image": "assets/establishments/MakiPares.jpg"
+  },
+  {
+    "id": "ciolyn-mountain-resort",
+    "name": "CioLyn Mountain Resort",
+    "category": "dining",
+    "address": "Sitio Cawa-cawa, Pagsangahan, Calatrava, Romblon",
+    "phone": "0953 300 3531",
+    "socials": "https://www.facebook.com/profile.php?id=61591121484421",
+    "mapsUrl": "https://maps.app.goo.gl/TebdYfyRadCuBD8F8",
+    "image": "assets/establishments/Ciolyn.jpg"
   }
 ]
