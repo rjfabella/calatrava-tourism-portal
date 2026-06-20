@@ -339,8 +339,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 Municipality of Calatrava, Romblon. All rights reserved.</p>
-    <p>Republic of the Philippines &nbsp;|&nbsp; Developed by <a href="https://rjfabella.github.io/rj-portfolio/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">RJ Fabella</a></p>
-    <a href="admin.html" style="color:rgba(255,255,255,.12);font-size:11.2px;letter-spacing:.08em;text-decoration:none;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.12)'">Staff Portal</a>
+    <p>Republic of the Philippines</p>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="color:rgba(255,255,255,.12);font-size:11.2px;letter-spacing:.08em;">Developed by <a href="https://rjfabella.github.io/rj-portfolio/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='inherit'">RJ Fabella</a></span>
+      <span style="color:rgba(255,255,255,.12);font-size:11.2px;">|</span>
+      <a href="admin.html" style="color:rgba(255,255,255,.12);font-size:11.2px;letter-spacing:.08em;text-decoration:none;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.12)'">Staff Portal</a>
+    </div>
   </div>
 </footer>
 
@@ -369,7 +373,8 @@ const ICONS = {
   pharmacy:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
   clinic:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
   gym:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>`,
-  church:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M9 5h6"/><path d="m12 8 7 4v10H5V12Z"/><path d="M9 22v-5a3 3 0 0 1 6 0v5"/></svg>`
+  church:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M9 5h6"/><path d="m12 8 7 4v10H5V12Z"/><path d="M9 22v-5a3 3 0 0 1 6 0v5"/></svg>`,
+  events:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
 };
 const CATEGORIES = {
   dining:  { label:'Dining',   color:'#C2603E' },
@@ -378,9 +383,10 @@ const CATEGORIES = {
   pharmacy:{ label:'Pharmacy', color:'#2E8B57' },
   clinic:  { label:'Clinic',   color:'#C0455B' },
   gym:     { label:'Gym',      color:'#5E6B8B' },
-  church:  { label:'Church',   color:'#7A5C9E' }
+  church:  { label:'Church',   color:'#7A5C9E' },
+  events:  { label:'Events Place', color:'#D4A86A' }
 };
-const CAT_ORDER = ['dining','cafe','shop','pharmacy','clinic','gym','church'];
+const CAT_ORDER = ['dining','cafe','shop','pharmacy','clinic','gym','church','events'];
 const OTHER = { label:'Place', color:'#4A6572' };
 const catInfo = c => CATEGORIES[c] || OTHER;
 const catIcon = c => ICONS[c] || ICONS.shop;
