@@ -86,7 +86,7 @@ body{font-family:var(--fb);background:var(--cream);color:var(--text);overflow-x:
 /* ── MOBILE NAV ── */
 .mob-nav{position:fixed;inset:0;background:var(--deep);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;display:none}
 .mob-nav.open{display:flex}
-.mob-nav a{font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
+.mob-nav a{font-family:var(--fd);font-size:clamp(1.8rem,6vw,2.8rem);font-weight:300;color:rgba(255,255,255,.85);text-decoration:none;transition:color .3s}
 .mob-nav a:hover{color:var(--gl)}
 .mob-close{position:absolute;top:1.5rem;right:2rem;font-size:2rem;color:rgba(255,255,255,.75);cursor:pointer;background:none;border:none;font-family:var(--fb);transition:color .3s}
 .mob-close:hover{color:var(--white)}
