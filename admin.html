@@ -176,8 +176,17 @@ textarea{resize:vertical;min-height:80px}
     <button onclick="doLogin()">Sign In</button>
     <p class="auth-error" id="authErr">Incorrect password. Try again.</p>
     <p style="font-size:12.3px;color:rgba(255,255,255,.45);margin-top:1rem;line-height:1.6">On GitHub Pages hosting: paste a fine-grained GitHub token (Contents read &amp; write) the first time — it's remembered on this device, then the admin password works as usual.</p>
+    <div id="adminVisitCounter" style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(0,0,0,0.1);font-size:13.4px;color:var(--deep);font-weight:500;">
+      Public Site Visits: <span id="adminVisitCount">...</span>
+    </div>
   </div>
 </div>
+<script>
+  fetch('https://api.counterapi.dev/v1/calatrava-tourism-portal/visits')
+    .then(r => r.ok ? r.json() : {count: 0})
+    .then(d => { document.getElementById('adminVisitCount').innerText = d.count || 0; })
+    .catch(e => { document.getElementById('adminVisitCounter').style.display = 'none'; });
+</script>
 
 <!-- TOAST -->
 <div id="toast"></div>
