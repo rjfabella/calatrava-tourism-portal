@@ -87,8 +87,10 @@
       "assets/destinations/Destinations_CoveAurelio4_web.jpg"
     ],
     "thumbnail": "assets/thumbnails/Destinations_CoveAurelio1_thumb.jpg",
-    "lat": 12.638,
-    "lng": 122.1
+    "lat": 12.646422686075823,
+    "lng": 122.1029459933054,
+    "tagline": "",
+    "insiderTip": ""
   },
   {
     "id": "ngak-ngak",
