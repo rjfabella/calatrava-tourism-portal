@@ -40,7 +40,8 @@
     "phone": "+63 920 982 7731",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=10717543630261394478",
-    "image": ""
+    "image": "assets/establishments/BrewNBloom.jpg",
+    "id": "brew--&--bloom-cafe"
   },
   {
     "name": "Calatrava Public Market",
@@ -153,7 +154,8 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=13612215972845476289",
-    "image": ""
+    "image": "assets/establishments/CalatravaHealthCenter.JPG",
+    "id": "calatrava-municipal-health-center"
   },
   {
     "name": "Linao Health Centre",
