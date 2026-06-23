@@ -82,8 +82,7 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=17984446407628422254",
-    "image": "assets/establishments/FetalinoDrug.JPG",
-    "id": "fetalino-drug-&-medical-supplies"
+    "image": ""
   },
   {
     "name": "Waves & Weights Fitness Gym",
@@ -124,7 +123,8 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=13517383046536937315",
-    "image": ""
+    "image": "assets/establishments/SanRoqueChapel.JPG",
+    "id": "san-roque-catholic-parish"
   },
   {
     "name": "MCGI - Calatrava",
@@ -155,7 +155,8 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=13612215972845476289",
-    "image": ""
+    "image": "assets/establishments/CalatravaHealthCenter.JPG",
+    "id": "calatrava-municipal-health-center"
   },
   {
     "name": "Linao Health Centre",
@@ -195,8 +196,7 @@
     "phone": "",
     "socials": "https://www.facebook.com/JacqandJillsPharmacy",
     "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
-    "image": "assets/establishments/JacqNJill.JPG",
-    "id": "jacq-and-jills-pharmacy"
+    "image": ""
   },
   {
     "id": "big1-restaurant",
