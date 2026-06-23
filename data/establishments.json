@@ -82,7 +82,8 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=17984446407628422254",
-    "image": ""
+    "image": "assets/establishments/FetalinoDrug.JPG",
+    "id": "fetalino-drug-&-medical-supplies"
   },
   {
     "name": "Waves & Weights Fitness Gym",
@@ -154,8 +155,7 @@
     "phone": "",
     "socials": "",
     "mapsUrl": "https://maps.google.com/?cid=13612215972845476289",
-    "image": "assets/establishments/CalatravaHealthCenter.JPG",
-    "id": "calatrava-municipal-health-center"
+    "image": ""
   },
   {
     "name": "Linao Health Centre",
@@ -195,7 +195,8 @@
     "phone": "",
     "socials": "https://www.facebook.com/JacqandJillsPharmacy",
     "mapsUrl": "https://maps.app.goo.gl/qJUrBFZo3rUx6fWB9",
-    "image": ""
+    "image": "assets/establishments/JacqNJill.JPG",
+    "id": "jacq-and-jills-pharmacy"
   },
   {
     "id": "big1-restaurant",
