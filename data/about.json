@@ -32,9 +32,9 @@
     },
     {
       "id": "travel",
-      "value": "2",
-      "suffix": "hrs",
-      "label": "from Tablas Airport"
+      "value": "10",
+      "suffix": "+",
+      "label": "Dive Spots"
     }
   ],
   "tabs": [
