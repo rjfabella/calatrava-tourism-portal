@@ -26,15 +26,15 @@
     },
     {
       "id": "envfee",
-      "value": "₱20",
+      "value": "10",
       "suffix": "",
-      "label": "Env. Fee"
+      "label": "Snorkeling & Dive Spots"
     },
     {
       "id": "travel",
-      "value": "10",
-      "suffix": "+",
-      "label": "Dive Spots"
+      "value": "₱20-25",
+      "suffix": "",
+      "label": "Environmental Fee"
     }
   ],
   "tabs": [
